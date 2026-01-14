@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Événements & Marchés — Usagi Délice";
+const description =
+  "Retrouvez nos événements et collaborations autour des takoyaki. Les emplacements varient : consultez Instagram pour les infos à jour.";
+
+const festivals = [
+  "Japan Fes (Paris)",
+  "Rice Market — Europe Times (2024 & 2025)",
+  "Noël à La Villette",
+  "Hanami de Sceaux",
+  "Fête de la Mi-Automne à Belleville (2025)",
+];
+
+const collabs = [
+  "UNIQLO Bastille — événement d’ouverture",
+  "Tang Frères — collaboration en cours",
+];
+
+const placeholders = [
+  { src: "/media/event-1.jpg", label: "Media de remplacement — sera remplacé" },
+  { src: "/media/event-2.jpg", label: "Media de remplacement — sera remplacé" },
+  { src: "/media/event-3.jpg", label: "Media de remplacement — sera remplacé" },
+  { src: "/media/event-4.jpg", label: "Media de remplacement — sera remplacé" },
+  { src: "/media/event-5.jpg", label: "Media de remplacement — sera remplacé" },
+  { src: "/media/event-6.jpg", label: "Media de remplacement — sera remplacé" },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="card page">
+    <h1>Événements & Marchés</h1>
+    <p class="lead">
+      Ici, vous trouverez une vue claire de nos festivals, collaborations, et un espace média. Les informations de dates
+      et lieux évoluent selon les événements.
+    </p>
+
+    <section class="section">
+      <h2>Festivals & événements</h2>
+      <ul class="clean-list">
+        {festivals.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Collaborations</h2>
+      <ul class="clean-list">
+        {collabs.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Photos & vidéos</h2>
+      <p class="note">
+        Grille avec fichiers de remplacement (à remplacer par de vraies photos/vidéos).
+        <br />
+        Chemins utilisés : <code>/media/event-1.jpg</code> à <code>/media/event-6.jpg</code>
+      </p>
+
+      <div class="grid grid-3" style="margin-top: 12px;">
+        {placeholders.map((m, i) => (
+          <figure class="media-tile">
+            <img src={m.src} alt={`Événement — média ${i + 1}`} loading="lazy" />
+            <figcaption class="media-caption">{m.label}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Où nous trouver</h2>
+      <p>
+        Nos emplacements varient selon les événements. Pour connaître les dates et lieux à jour, consultez Instagram.
+      </p>
+      <a class="btn" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
+        Voir sur Instagram
+      </a>
+    </section>
+  </article>
+</BaseLayout>

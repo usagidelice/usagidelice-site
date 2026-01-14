@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Culture & Osaka — Usagi Délice";
+const description =
+  "Un aperçu de la culture des takoyaki : origines populaires à Osaka, esprit de la street food, et pourquoi cette bouchée est si emblématique.";
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="card page">
+    <h1>Culture & Osaka</h1>
+    <p class="lead">
+      Les takoyaki font partie de ces aliments “du quotidien” qui racontent une ville : Osaka, conviviale, gourmande, et
+      généreuse.
+    </p>
+
+    <h2>Street food à partager</h2>
+    <p>
+      Les takoyaki se dégustent souvent à plusieurs : on discute, on rit, on fait attention à la chaleur… et on y revient.
+      Cette simplicité, c’est l’âme de la street food.
+    </p>
+
+    <h2>Un classique du Kansai</h2>
+    <p>
+      Osaka est connue pour sa culture culinaire populaire. Les takoyaki y occupent une place à part : une bouchée
+      réconfortante, préparée minute, qui réunit tout le monde autour d’une plaque.
+    </p>
+
+    <h2>Pourquoi c’est si bon tout juste préparé</h2>
+    <p>
+      La magie se joue à la cuisson : l’extérieur prend une légère tenue, l’intérieur reste fondant, et l’ensemble se
+      savoure chaud, dès la sortie. C’est une expérience autant qu’un goût.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn" href="/evenements">Voir nos événements</a>
+      <a class="btn btn-secondary" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
+        Suivre sur Instagram
+      </a>
+    </div>
+  </article>
+</BaseLayout>

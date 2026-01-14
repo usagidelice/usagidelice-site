@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Galerie (Instagram) — Usagi Délice";
+const description =
+  "Galerie Usagi Délice : espace Instagram pour photos et vidéos autour des takoyaki. Remplacez le bloc embed par l’intégration officielle.";
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="card page">
+    <h1>Galerie</h1>
+    <p class="lead">
+      Cet espace est prévu pour afficher Instagram (embed officiel) ou une grille simple. Remplacez le code ci-dessous
+      par votre embed.
+    </p>
+
+    <section class="section">
+      <h2>Embed Instagram</h2>
+      <div class="note">
+        👉 Remplacer ici par le code embed officiel Instagram (ou un plugin/front script si besoin).
+        <br />
+        Exemple : coller le code fourni par Instagram, ou intégrer une grille statique que vous mettez à jour.
+      </div>
+
+      <!-- =========================================================
+           PLACEHOLDER EMBED
+           Remplacez ce bloc par votre embed Instagram officiel.
+           ========================================================= -->
+      <div class="card" style="margin-top: 12px; padding: 16px;">
+        <p style="margin:0; font-weight: 750; color: var(--muted);">
+          [Instagram embed à insérer ici]
+        </p>
+        <p class="help" style="margin-top: 8px;">
+          Compte : <a href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">@usagidelice</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Grille simple (option)</h2>
+      <p class="help">
+        Si vous préférez une grille sans embed, vous pouvez remplacer par des images dans <code>/public/media/</code>.
+      </p>
+
+      <div class="grid grid-3" style="margin-top: 12px;">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <figure class="media-tile">
+            <img src={`/media/insta-${i + 1}.jpg`} alt={`Galerie — image ${i + 1}`} loading="lazy" />
+            <figcaption class="media-caption">Image de remplacement — sera remplacée</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Usagi Délice — Takoyaki d’Osaka à Paris";
+const description =
+  "Découvrez Usagi Délice : takoyaki faits maison, préparés sur place, avec une identité kawaii et chaleureuse. Suivez nos événements et collaborations sur Instagram.";
+
+const eventsIntro =
+  "Nous participons régulièrement à des événements culturels japonais à Paris et en Île-de-France. Au fil des années, nous avons eu le plaisir de rencontrer un large public autour de nos takoyaki faits maison, préparés sur place.";
+
+const eventsList = [
+  "Japan Fes (Paris)",
+  "Rice Market — organisé par Europe Times (2024 & 2025)",
+  "Noël à La Villette",
+  "Hanami de Sceaux",
+  "Fête de la Mi-Automne à Belleville (2025)",
+  "UNIQLO Bastille — événement d’ouverture",
+  "Tang Frères — collaboration en cours",
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="hero">
+    <div class="card hero-inner">
+      <div class="hero-top">
+        <span class="kicker">Takoyaki • Osaka • Paris</span>
+        <h1 class="hero-title">Takoyaki faits maison, préparés sur place.</h1>
+        <p class="hero-sub">
+          Usagi Délice propose des takoyaki inspirés de la street food d’Osaka : une pâte légère, une cuisson minute, et
+          un esprit chaleureux — le tout dans un univers kawaii rouge & crème.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="/evenements">Voir les événements</a>
+          <a class="btn btn-secondary" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
+            Suivre sur Instagram
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-badges">
+        <div class="badge">
+          <strong>100% focus Takoyaki</strong>
+          <span>Un site simple et clair, centré sur notre spécialité.</span>
+        </div>
+        <div class="badge">
+          <strong>Identité visuelle signature</strong>
+          <span>Crème, rouge, lignes kawaii — fidèle au logo.</span>
+        </div>
+        <div class="badge">
+          <strong>Infos à jour</strong>
+          <span>Les dates et lieux varient : Instagram est la référence.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card page">
+      <h2 class="section-title">Événements & collaborations</h2>
+      <p class="lead">{eventsIntro}</p>
+
+      <div style="height: 12px"></div>
+
+      <ul class="clean-list">
+        {eventsList.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <div style="height: 14px"></div>
+
+      <a class="btn" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
+        Suivre sur Instagram
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid grid-2">
+      <div class="card page">
+        <h2>Notre histoire</h2>
+        <p>
+          Usagi Délice est né d’une passion pour les takoyaki : le geste, la cuisson minute, et la convivialité d’une
+          street food servie chaude, tout juste sortie des plaques.
+        </p>
+        <a class="btn btn-secondary" href="/notre-histoire">Découvrir</a>
+      </div>
+
+      <div class="card page">
+        <h2>Culture & Osaka</h2>
+        <p>
+          Les takoyaki sont un symbole populaire d’Osaka : simples, généreux, et faits pour être partagés. On vous raconte
+          l’esprit derrière cette bouchée iconique.
+        </p>
+        <a class="btn btn-secondary" href="/culture">Explorer</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

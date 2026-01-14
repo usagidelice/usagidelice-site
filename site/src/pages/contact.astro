@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Contact — Usagi Délice";
+const description =
+  "Contactez Usagi Délice (takoyaki d’Osaka à Paris). Formulaire UI sans backend, email et Instagram, plus une FAQ courte.";
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="card page">
+    <h1>Contact</h1>
+    <p class="lead">
+      Une question sur nos événements ou collaborations ? Écrivez-nous — et pour les infos les plus récentes, Instagram
+      reste la référence.
+    </p>
+
+    <section class="section grid grid-2">
+      <div class="card form" style="box-shadow:none;">
+        <h2 style="margin-top:0;">Formulaire</h2>
+
+        <!-- UI only: no backend -->
+        <form onsubmit="event.preventDefault(); alert('Merci ! Ce formulaire est uniquement une interface (sans envoi).');">
+          <div class="field">
+            <label for="name">Nom</label>
+            <input id="name" name="name" autocomplete="name" placeholder="Votre nom" />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.com" />
+          </div>
+
+          <div class="field">
+            <label for="subject">Sujet</label>
+            <input id="subject" name="subject" placeholder="Événement, collaboration, question..." />
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Votre message..."></textarea>
+            <div class="help">Ce formulaire est une interface (sans backend). Utilisez l’email pour un contact direct.</div>
+          </div>
+
+          <button class="btn" type="submit">Envoyer</button>
+        </form>
+      </div>
+
+      <div class="card form" style="box-shadow:none;">
+        <h2 style="margin-top:0;">Coordonnées</h2>
+        <p style="margin-top: 0;">
+          Email : <a href="mailto:contact@usagidelice.fr">contact@usagidelice.fr</a>
+          <br />
+          Instagram :
+          <a href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">instagram.com/usagidelice</a>
+        </p>
+
+        <div class="note">
+          Les dates & lieux changent selon les événements.
+          <br />
+          Pour les infos à jour : Instagram.
+        </div>
+
+        <div style="height: 12px;"></div>
+        <a class="btn" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
+          Voir Instagram
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>FAQ</h2>
+      <div class="grid">
+        <div class="card form" style="box-shadow:none;">
+          <strong>Où vous trouver ?</strong>
+          <p class="help" style="margin-bottom:0;">
+            Nos emplacements varient selon les événements. Consultez Instagram pour les dates et lieux à jour.
+          </p>
+        </div>
+
+        <div class="card form" style="box-shadow:none;">
+          <strong>Participez-vous à des événements japonais ?</strong>
+          <p class="help" style="margin-bottom:0;">
+            Oui, nous participons à différents événements culturels. La page Événements liste les principaux.
+          </p>
+        </div>
+
+        <div class="card form" style="box-shadow:none;">
+          <strong>Proposez-vous des collaborations ?</strong>
+          <p class="help" style="margin-bottom:0;">
+            Oui. Pour une demande, envoyez un message par email avec vos informations (date, lieu, format souhaité).
+          </p>
+        </div>
+
+        <div class="card form" style="box-shadow:none;">
+          <strong>Peut-on utiliser le formulaire du site ?</strong>
+          <p class="help" style="margin-bottom:0;">
+            Le formulaire est une interface (sans envoi). Pour nous contacter, utilisez l’email ou Instagram.
+          </p>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

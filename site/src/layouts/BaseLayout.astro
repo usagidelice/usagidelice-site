@@ -1,0 +1,56 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const {
+  title = "Usagi Délice — Takoyaki d’Osaka à Paris",
+  description = "Usagi Délice : takoyaki faits maison, préparés sur place, dans l’esprit de la street food d’Osaka à Paris.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, "https://usagidelice.fr").toString();
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta name="theme-color" content="#C23B32" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Usagi Délice" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://usagidelice.fr/logo.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preload" href="/logo.png" as="image" />
+
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <Header />
+
+    <main id="contenu" class="container" tabindex="-1">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

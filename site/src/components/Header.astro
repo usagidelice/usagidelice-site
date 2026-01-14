@@ -1,0 +1,76 @@
+---
+const nav = [
+  { href: "/", label: "Accueil" },
+  { href: "/notre-histoire", label: "Notre histoire" },
+  { href: "/culture", label: "Culture" },
+  { href: "/evenements", label: "Événements" },
+  { href: "/galerie", label: "Galerie" },
+  { href: "/contact", label: "Contact" },
+];
+
+const pathname = Astro.url.pathname;
+const isActive = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+---
+
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Aller à l’accueil">
+      <img class="brand-logo" src="/logo.png" alt="Logo Usagi Délice" width="44" height="44" loading="eager" />
+      <span class="brand-name">Usagi Délice</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-nav-toggle
+    >
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Navigation principale" data-nav>
+      <ul class="nav-list">
+        {nav.map((item) => (
+          <li>
+            <a class={`nav-link ${isActive(item.href) ? "active" : ""}`} href={item.href}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="nav-cta">
+        <a class="btn btn-small" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
+          Instagram
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <script is:inline>
+    const btn = document.querySelector("[data-nav-toggle]");
+    const nav = document.querySelector("[data-nav]");
+    if (btn && nav) {
+      const close = () => {
+        nav.classList.remove("open");
+        btn.setAttribute("aria-expanded", "false");
+      };
+      btn.addEventListener("click", () => {
+        const open = nav.classList.toggle("open");
+        btn.setAttribute("aria-expanded", String(open));
+      });
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") close();
+      });
+      // Fermer si on clique un lien (mobile)
+      nav.addEventListener("click", (e) => {
+        const a = e.target.closest("a");
+        if (a && nav.classList.contains("open")) close();
+      });
+    }
+  </script>
+</header>

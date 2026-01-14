@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Notre histoire — Usagi Délice";
+const description =
+  "Découvrez l’histoire d’Usagi Délice : un univers kawaii rouge & crème, et une passion pour les takoyaki d’Osaka préparés sur place à Paris.";
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="card page">
+    <h1>Notre histoire</h1>
+    <p class="lead">
+      Usagi Délice, c’est une envie simple : partager des takoyaki préparés minute, dans une ambiance chaleureuse et
+      artisanale.
+    </p>
+
+    <h2>Une spécialité, un geste</h2>
+    <p>
+      Les takoyaki demandent du rythme et de la précision : la pâte, la cuisson, le retournement, puis le dressage. Nous
+      aimons ce côté vivant — on voit le produit se faire, et on le déguste tout chaud.
+    </p>
+
+    <h2>Une identité visuelle fidèle au logo</h2>
+    <p>
+      Notre univers est volontairement épuré : fond crème, rouge chaleureux, traits kawaii et une sensation “fait main”.
+      Cette cohérence visuelle est la même sur le stand, en photo, et ici sur le site.
+    </p>
+
+    <h2>Le lien avec Paris</h2>
+    <p>
+      Nous rencontrons le public au fil des événements : des moments simples où l’on échange, où l’on explique, et où
+      chacun découvre (ou redécouvre) le plaisir des takoyaki.
+    </p>
+
+    <div class="note">
+      Pour les infos les plus récentes (dates, lieux, photos), Instagram est la référence :
+      <a href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer"> @usagidelice</a>.
+    </div>
+  </article>
+</BaseLayout>
