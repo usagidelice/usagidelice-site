@@ -20,13 +20,19 @@ const eventsList = [
   "Tang Frères — collaboration en cours",
 ];
 
+// 主视觉背景图
 const heroImg = "/hero.webp";
+
+// 视觉断点图（随便换成你喜欢的那张）
+const breakImg = "/gallery/3.webp";
 ---
 
 <BaseLayout title={title} description={description}>
-  <!-- 动感顶部带（你原来是 kicker，这里升级成“滚动带”） -->
+  <!-- 顶部动感带 -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
+      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
+      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
       <span class="marquee__item">Takoyaki • Osaka • Paris</span>
       <span class="marquee__item">Takoyaki • Osaka • Paris</span>
       <span class="marquee__item">Takoyaki • Osaka • Paris</span>
@@ -36,71 +42,64 @@ const heroImg = "/hero.webp";
     </div>
   </div>
 
-  <!-- HERO：大图 + stickers + 左文案右画面 -->
-  <section class="hero bg-film">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <Reveal delay={0}>
-          <h1 class="hero-title">Takoyaki faits maison, préparés sur place.</h1>
-        </Reveal>
+  <!-- JAPANFES 级 HERO：全屏背景图 + 文案叠加 -->
+  <section class="hero-full">
+    <img
+      class="hero-bg"
+      src={heroImg}
+      alt="Takoyaki Usagi Délice"
+      loading="eager"
+      decoding="async"
+    />
 
-        <Reveal delay={90}>
-          <p class="hero-sub">
-            Usagi Délice propose des takoyaki inspirés de la street food d’Osaka
-            : une pâte légère, une cuisson minute, et un esprit chaleureux — le
-            tout dans un univers kawaii rouge & crème.
-          </p>
-        </Reveal>
+    <div class="hero-overlay">
+      <Reveal>
+        <span class="hero-kicker">Street food japonaise • Osaka • Paris</span>
+      </Reveal>
 
-        <Reveal delay={160}>
-          <div class="hero-actions">
-            <a class="btn" href="/evenements">Voir les événements</a>
-            <a
-              class="btn btn-secondary"
-              href="https://www.instagram.com/usagidelice/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Suivre sur Instagram
-            </a>
-          </div>
-        </Reveal>
+      <Reveal delay={80}>
+        <h1 class="hero-title">
+          Takoyaki d’Osaka,<br />
+          faits à la minute à Paris
+        </h1>
+      </Reveal>
 
-        <Reveal delay={220}>
-          <div class="hero-badges">
-            <div class="badge">
-              <strong>100% focus Takoyaki</strong>
-              <span>Un site simple et clair, centré sur notre spécialité.</span>
-            </div>
-            <div class="badge">
-              <strong>Identité visuelle signature</strong>
-              <span>Crème, rouge, lignes kawaii — fidèle au logo.</span>
-            </div>
-            <div class="badge">
-              <strong>Infos à jour</strong>
-              <span
-                >Les dates et lieux varient : Instagram est la référence.</span
-              >
-            </div>
-          </div>
-        </Reveal>
-      </div>
+      <Reveal delay={140}>
+        <p class="hero-sub">
+          Pâte légère, cuisson minute, toppings maison.<br />
+          Une bouchée authentique, servie chaude, dans un univers kawaii rouge & crème.
+        </p>
+      </Reveal>
 
-      <div class="hero-right">
-        <Reveal delay={120}>
-          <div class="hero-imageWrap">
-            <img
-              class="hero-image"
-              src={heroImg}
-              alt="Takoyaki Usagi Délice"
-              loading="eager"
-            />
-            <div class="sticker s1">Cuisson minute</div>
-            <div class="sticker s2">Pâte légère</div>
-            <div class="sticker s3">Osaka vibe</div>
-          </div>
-        </Reveal>
-      </div>
+      <Reveal delay={200}>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/evenements">Où nous trouver</a>
+          <a class="btn btn-ghost" href="/menu">Menu & prix</a>
+          <a
+            class="btn btn-ghost"
+            href="https://www.instagram.com/usagidelice/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Instagram
+          </a>
+        </div>
+      </Reveal>
+
+      <Reveal delay={260}>
+        <div class="hero-pills">
+          <span class="pill">Fait main</span>
+          <span class="pill">Cuisson minute</span>
+          <span class="pill">Osaka vibe</span>
+        </div>
+      </Reveal>
+    </div>
+
+    <!-- 小贴纸层（更“活”） -->
+    <div class="hero-stickers" aria-hidden="true">
+      <div class="sticker s1">Servi chaud</div>
+      <div class="sticker s2">Toppings maison</div>
+      <div class="sticker s3">100% Takoyaki</div>
     </div>
   </section>
 
@@ -120,20 +119,40 @@ const heroImg = "/hero.webp";
 
           <div style="height: 14px"></div>
 
-          <a
-            class="btn"
-            href="https://www.instagram.com/usagidelice/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Suivre sur Instagram
-          </a>
+          <div class="actions-row">
+            <a class="btn btn-secondary" href="/evenements"
+              >Voir le calendrier</a
+            >
+            <a
+              class="btn"
+              href="https://www.instagram.com/usagidelice/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Suivre sur Instagram
+            </a>
+          </div>
         </div>
       </Reveal>
     </div>
   </section>
 
-  <!-- Galerie：横向胶片条 -->
+  <!-- 视觉断点：整屏图片（强冲击） -->
+  <section class="visual-break">
+    <img
+      src={breakImg}
+      alt="Takoyaki cuisson minute"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="visual-break__overlay"></div>
+
+    <Reveal>
+      <span class="visual-word">Fait à la minute</span>
+    </Reveal>
+  </section>
+
+  <!-- Galerie：横向胶片条（你需要把 GalleryStrip 调成整屏高度，下面会提示） -->
   <GalleryStrip />
 
   <!-- 2 cards -->
@@ -168,45 +187,6 @@ const heroImg = "/hero.webp";
   </section>
 
   <style>
-    /* 背景不空：轻纹理+淡红渐变 */
-    .bg-film {
-      position: relative;
-      isolation: isolate;
-    }
-    .bg-film::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(
-          1200px 600px at 10% -10%,
-          rgba(194, 59, 50, 0.12),
-          transparent 55%
-        ),
-        radial-gradient(
-          900px 500px at 90% 10%,
-          rgba(194, 59, 50, 0.08),
-          transparent 60%
-        ),
-        radial-gradient(
-          900px 600px at 20% 90%,
-          rgba(194, 59, 50, 0.06),
-          transparent 60%
-        );
-      pointer-events: none;
-      z-index: -2;
-    }
-    .bg-film::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
-      mix-blend-mode: multiply;
-      opacity: 0.22;
-      pointer-events: none;
-      z-index: -1;
-    }
-
     /* marquee 动感带 */
     .marquee {
       overflow: hidden;
@@ -223,9 +203,10 @@ const heroImg = "/hero.webp";
       will-change: transform;
     }
     .marquee__item {
-      font-weight: 800;
+      font-weight: 900;
       color: rgba(194, 59, 50, 0.92);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
     }
     @keyframes m {
       from {
@@ -236,79 +217,169 @@ const heroImg = "/hero.webp";
       }
     }
 
-    /* Hero：左文右图，大图冲击 */
-    .hero {
-      padding: 1.2rem 1.1rem 2.2rem;
-    }
-    .hero-inner {
-      max-width: 1140px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 1.2rem;
-      align-items: center;
-      min-height: 78vh;
-    }
-    .hero-title {
-      font-size: clamp(2rem, 4.2vw, 3.4rem);
-      line-height: 1.04;
-      margin: 0 0 0.75rem;
-    }
-    .hero-sub {
-      margin: 0 0 1.1rem;
-      color: rgba(29, 29, 31, 0.78);
-      font-size: clamp(1rem, 1.45vw, 1.2rem);
-      max-width: 56ch;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.05rem;
+    /* ===== HERO 全屏背景 ===== */
+    .hero-full {
+      position: relative;
+      min-height: 92vh;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
     }
 
-    /* 右侧大图 + sticker */
-    .hero-imageWrap {
-      position: relative;
-      border-radius: 26px;
-      overflow: hidden;
-      border: 1px solid rgba(194, 59, 50, 0.25);
-      box-shadow: 0 26px 70px rgba(29, 29, 31, 0.14);
-      transform: translateZ(0);
-    }
-    .hero-image {
+    .hero-bg {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: 72vh;
-      max-height: 560px;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+    }
+
+    /* 暗角+渐变罩层：保证文字可读，同时保留食物质感 */
+    .hero-full::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          900px 500px at 20% 20%,
+          rgba(0, 0, 0, 0.15),
+          transparent 60%
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.45),
+          rgba(0, 0, 0, 0.15) 40%,
+          rgba(0, 0, 0, 0.7)
+        );
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: relative;
+      z-index: 2;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: clamp(3.5rem, 7vh, 6.2rem) 1.1rem 2.8rem;
+      color: #fff;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      margin: 0 0 1rem;
+      text-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+      max-width: 60ch;
+      opacity: 0.95;
+      margin: 0 0 1.6rem;
+      text-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+
+    /* pills */
+    .hero-pills {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+    }
+    .pill {
+      display: inline-flex;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(246, 235, 221, 0.14);
+      backdrop-filter: blur(10px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    /* stickers（角落漂浮贴纸） */
+    .hero-stickers {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .sticker {
+      position: absolute;
+      padding: 0.55rem 0.75rem;
+      border-radius: 16px;
+      background: rgba(246, 235, 221, 0.82);
+      border: 1px solid rgba(194, 59, 50, 0.28);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      font-weight: 900;
+      color: rgba(194, 59, 50, 0.96);
+      backdrop-filter: blur(10px);
+      transform: rotate(-2deg);
+    }
+    .s1 {
+      left: 16px;
+      top: 18px;
+    }
+    .s2 {
+      right: 18px;
+      top: 22px;
+      transform: rotate(2deg);
+    }
+    .s3 {
+      right: 18px;
+      bottom: 18px;
+      transform: rotate(-3deg);
+    }
+
+    /* ===== 视觉断点 ===== */
+    .visual-break {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+      margin: 0;
+    }
+    .visual-break img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
       transform: scale(1.02);
     }
-    .sticker {
+    .visual-break__overlay {
       position: absolute;
-      padding: 0.5rem 0.7rem;
-      border-radius: 14px;
-      background: rgba(246, 235, 221, 0.82);
-      border: 1px solid rgba(194, 59, 50, 0.25);
-      box-shadow: 0 16px 36px rgba(29, 29, 31, 0.12);
-      font-weight: 900;
-      color: rgba(194, 59, 50, 0.95);
-      backdrop-filter: blur(8px);
-      transform: rotate(-2deg);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.38);
+      z-index: 1;
     }
-    .s1 {
-      left: 12px;
-      top: 12px;
-    }
-    .s2 {
-      right: 14px;
-      top: 16px;
-      transform: rotate(2deg);
-    }
-    .s3 {
-      left: 14px;
-      bottom: 14px;
-      transform: rotate(3deg);
+    .visual-word {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(2rem, 6vw, 5.2rem);
+      font-weight: 950;
+      color: #fff;
+      z-index: 2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
     }
 
     /* 页面容器 */
@@ -318,7 +389,14 @@ const heroImg = "/hero.webp";
       padding: 0 1.1rem;
     }
 
-    /* reveal 动画 */
+    .actions-row {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-top: 0.6rem;
+    }
+
+    /* reveal 动画（你已在组件里加了观察器，这里是样式） */
     .reveal {
       opacity: 0;
       transform: translateY(14px);
@@ -333,17 +411,17 @@ const heroImg = "/hero.webp";
     }
 
     @media (max-width: 900px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-      .hero-image {
-        height: 52vh;
-      }
       .marquee__track {
         animation-duration: 14s;
       }
+      .hero-overlay {
+        padding-top: 3.6rem;
+      }
+      .visual-break {
+        height: 70vh;
+      }
     }
+
     @media (prefers-reduced-motion: reduce) {
       .marquee__track {
         animation: none;

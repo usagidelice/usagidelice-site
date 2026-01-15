@@ -6,6 +6,7 @@
    Visual feel: clean, warm, modern, hand-crafted (kawaii line art)
 ========================================================= */
 
+/* ===== Brand tokens & layout tokens (single source of truth) ===== */
 :root {
   --bg: #f6ebdd;
   --paper: #fff7ef;
@@ -21,12 +22,15 @@
   --radius: 18px;
   --radius-sm: 12px;
 
-  --container: 1040px;
+  /* Layout */
+  --page-max: 1140px;
+  --page-pad: 1.1rem;
 
-  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
-    "Segoe UI Emoji";
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
+/* ===== Base reset ===== */
 *,
 *::before,
 *::after {
@@ -36,20 +40,32 @@
 html,
 body {
   height: 100%;
+  width: 100%;
+  overflow-x: hidden; /* 兜底：防止 full-bleed / 100vw 造成横向滚动条 */
 }
 
 body {
   margin: 0;
-  background: radial-gradient(1200px 800px at 20% 0%, rgba(194, 59, 50, 0.06), transparent 60%),
-    radial-gradient(900px 700px at 90% 10%, rgba(194, 59, 50, 0.04), transparent 55%),
+  background: radial-gradient(
+      1200px 800px at 20% 0%,
+      rgba(194, 59, 50, 0.06),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 700px at 90% 10%,
+      rgba(194, 59, 50, 0.04),
+      transparent 55%
+    ),
     var(--bg);
   color: var(--ink);
   font-family: var(--font);
   line-height: 1.55;
 }
 
-img {
+img,
+video {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -61,25 +77,49 @@ a:hover {
   text-decoration: underline;
 }
 
+/* ===== Layout utilities ===== */
 .container {
-  width: min(var(--container), calc(100% - 32px));
+  max-width: var(--page-max);
   margin-inline: auto;
+  padding-inline: var(--page-pad);
 }
 
+/* 统一 section 的上下节奏：避免“散乱” */
+.section {
+  padding: 2.4rem 0;
+}
+
+/* 老代码里有 page-wrap：让它等价于 container，保持一致 */
+.page-wrap {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* full-bleed：改成更稳的写法（不强制 100vw，减少横向溢出） */
+.full-bleed {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+.full-bleed > * {
+  max-width: none;
+}
+
+/* ===== Accessibility ===== */
 .skip-link {
   position: absolute;
-  left: 12px;
-  top: 12px;
+  left: -999px;
+  top: 8px;
   background: var(--paper);
   color: var(--ink);
-  padding: 10px 12px;
+  padding: 0.6rem 0.8rem;
   border-radius: 10px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  transform: translateY(-200%);
+  z-index: 9999;
 }
 .skip-link:focus {
-  transform: translateY(0);
+  left: 10px;
 }
 
 /* ---------- Header ---------- */
@@ -87,9 +127,30 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 50;
+  position: sticky;
   backdrop-filter: blur(8px);
   background: rgba(246, 235, 221, 0.78);
   border-bottom: 1px solid var(--border);
+  /* 关键：让 mobile 下拉菜单的 absolute 参照 header */
+  position: sticky;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background: rgba(246, 235, 221, 0.78);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background: rgba(246, 235, 221, 0.78);
+  border-bottom: 1px solid var(--border);
+  position: relative; /* ✅ 真正需要的是这一句 */
 }
 
 .header-inner {
@@ -141,18 +202,19 @@ a:hover {
   margin: 2px 0;
 }
 
-/* Nav (mobile first: hidden panel) */
+/* Nav (mobile first) */
 .site-nav {
   position: absolute;
   left: 0;
   right: 0;
-  top: 72px;
+  top: 100%; /* ✅ 不要写死 72px，跟着 header 高度走 */
   padding: 14px;
   display: none;
 }
 .site-nav.open {
   display: block;
 }
+
 .site-nav > .nav-list,
 .site-nav > .nav-cta {
   background: var(--paper);
@@ -160,6 +222,7 @@ a:hover {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
+
 .nav-list {
   list-style: none;
   margin: 0;
@@ -167,6 +230,7 @@ a:hover {
   display: grid;
   gap: 2px;
 }
+
 .nav-link {
   display: flex;
   padding: 12px 12px;
@@ -179,7 +243,7 @@ a:hover {
   text-decoration: none;
 }
 .nav-link.active {
-  background: rgba(194, 59, 50, 0.10);
+  background: rgba(194, 59, 50, 0.1);
   color: var(--red);
 }
 
@@ -287,10 +351,6 @@ a:hover {
   box-shadow: var(--shadow);
 }
 
-.section {
-  margin: 22px 0;
-}
-
 .section-title {
   font-size: 1.25rem;
   margin: 0 0 10px;
@@ -350,7 +410,16 @@ a:hover {
   border-radius: 12px;
 }
 
-/* ---------- Hero ---------- */
+/* 如果你 Header 用了 btn-ghost（我给你的 header 会用到） */
+.btn-ghost {
+  background: rgba(255, 247, 239, 0.6);
+  color: var(--red);
+}
+.btn-ghost:hover {
+  background: rgba(194, 59, 50, 0.08);
+}
+
+/* ---------- Hero (旧版保留：如果你已换成 hero-full，也不影响) ---------- */
 .hero {
   padding: 22px 0 6px;
 }
