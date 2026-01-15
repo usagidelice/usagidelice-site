@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Reveal from "../components/Reveal.astro";
+import GalleryStrip from "../components/GalleryStrip.astro";
 
 const title = "Usagi Délice — Takoyaki d’Osaka à Paris";
 const description =
@@ -17,82 +19,335 @@ const eventsList = [
   "UNIQLO Bastille — événement d’ouverture",
   "Tang Frères — collaboration en cours",
 ];
+
+const heroImg = "/hero.webp";
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="hero">
-    <div class="card hero-inner">
-      <div class="hero-top">
-        <span class="kicker">Takoyaki • Osaka • Paris</span>
-        <h1 class="hero-title">Takoyaki faits maison, préparés sur place.</h1>
-        <p class="hero-sub">
-          Usagi Délice propose des takoyaki inspirés de la street food d’Osaka : une pâte légère, une cuisson minute, et
-          un esprit chaleureux — le tout dans un univers kawaii rouge & crème.
-        </p>
+  <!-- 动感顶部带（你原来是 kicker，这里升级成“滚动带”） -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
+      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
+      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
+      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
+      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
+      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
+    </div>
+  </div>
 
-        <div class="hero-actions">
-          <a class="btn" href="/evenements">Voir les événements</a>
-          <a class="btn btn-secondary" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
+  <!-- HERO：大图 + stickers + 左文案右画面 -->
+  <section class="hero bg-film">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <Reveal delay={0}>
+          <h1 class="hero-title">Takoyaki faits maison, préparés sur place.</h1>
+        </Reveal>
+
+        <Reveal delay={90}>
+          <p class="hero-sub">
+            Usagi Délice propose des takoyaki inspirés de la street food d’Osaka
+            : une pâte légère, une cuisson minute, et un esprit chaleureux — le
+            tout dans un univers kawaii rouge & crème.
+          </p>
+        </Reveal>
+
+        <Reveal delay={160}>
+          <div class="hero-actions">
+            <a class="btn" href="/evenements">Voir les événements</a>
+            <a
+              class="btn btn-secondary"
+              href="https://www.instagram.com/usagidelice/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Suivre sur Instagram
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={220}>
+          <div class="hero-badges">
+            <div class="badge">
+              <strong>100% focus Takoyaki</strong>
+              <span>Un site simple et clair, centré sur notre spécialité.</span>
+            </div>
+            <div class="badge">
+              <strong>Identité visuelle signature</strong>
+              <span>Crème, rouge, lignes kawaii — fidèle au logo.</span>
+            </div>
+            <div class="badge">
+              <strong>Infos à jour</strong>
+              <span
+                >Les dates et lieux varient : Instagram est la référence.</span
+              >
+            </div>
+          </div>
+        </Reveal>
+      </div>
+
+      <div class="hero-right">
+        <Reveal delay={120}>
+          <div class="hero-imageWrap">
+            <img
+              class="hero-image"
+              src={heroImg}
+              alt="Takoyaki Usagi Délice"
+              loading="eager"
+            />
+            <div class="sticker s1">Cuisson minute</div>
+            <div class="sticker s2">Pâte légère</div>
+            <div class="sticker s3">Osaka vibe</div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- Événements -->
+  <section class="section">
+    <div class="page-wrap">
+      <Reveal>
+        <div class="card page">
+          <h2 class="section-title">Événements & collaborations</h2>
+          <p class="lead">{eventsIntro}</p>
+
+          <div style="height: 12px"></div>
+
+          <ul class="clean-list">
+            {eventsList.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <div style="height: 14px"></div>
+
+          <a
+            class="btn"
+            href="https://www.instagram.com/usagidelice/"
+            target="_blank"
+            rel="noreferrer"
+          >
             Suivre sur Instagram
           </a>
         </div>
-      </div>
-
-      <div class="hero-badges">
-        <div class="badge">
-          <strong>100% focus Takoyaki</strong>
-          <span>Un site simple et clair, centré sur notre spécialité.</span>
-        </div>
-        <div class="badge">
-          <strong>Identité visuelle signature</strong>
-          <span>Crème, rouge, lignes kawaii — fidèle au logo.</span>
-        </div>
-        <div class="badge">
-          <strong>Infos à jour</strong>
-          <span>Les dates et lieux varient : Instagram est la référence.</span>
-        </div>
-      </div>
+      </Reveal>
     </div>
   </section>
 
+  <!-- Galerie：横向胶片条 -->
+  <GalleryStrip />
+
+  <!-- 2 cards -->
   <section class="section">
-    <div class="card page">
-      <h2 class="section-title">Événements & collaborations</h2>
-      <p class="lead">{eventsIntro}</p>
+    <div class="page-wrap">
+      <div class="grid grid-2">
+        <Reveal>
+          <div class="card page">
+            <h2>Notre histoire</h2>
+            <p>
+              Usagi Délice est né d’une passion pour les takoyaki : le geste, la
+              cuisson minute, et la convivialité d’une street food servie
+              chaude, tout juste sortie des plaques.
+            </p>
+            <a class="btn btn-secondary" href="/notre-histoire">Découvrir</a>
+          </div>
+        </Reveal>
 
-      <div style="height: 12px"></div>
-
-      <ul class="clean-list">
-        {eventsList.map((item) => <li>{item}</li>)}
-      </ul>
-
-      <div style="height: 14px"></div>
-
-      <a class="btn" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
-        Suivre sur Instagram
-      </a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="grid grid-2">
-      <div class="card page">
-        <h2>Notre histoire</h2>
-        <p>
-          Usagi Délice est né d’une passion pour les takoyaki : le geste, la cuisson minute, et la convivialité d’une
-          street food servie chaude, tout juste sortie des plaques.
-        </p>
-        <a class="btn btn-secondary" href="/notre-histoire">Découvrir</a>
-      </div>
-
-      <div class="card page">
-        <h2>Culture & Osaka</h2>
-        <p>
-          Les takoyaki sont un symbole populaire d’Osaka : simples, généreux, et faits pour être partagés. On vous raconte
-          l’esprit derrière cette bouchée iconique.
-        </p>
-        <a class="btn btn-secondary" href="/culture">Explorer</a>
+        <Reveal delay={120}>
+          <div class="card page">
+            <h2>Culture & Osaka</h2>
+            <p>
+              Les takoyaki sont un symbole populaire d’Osaka : simples,
+              généreux, et faits pour être partagés. On vous raconte l’esprit
+              derrière cette bouchée iconique.
+            </p>
+            <a class="btn btn-secondary" href="/culture">Explorer</a>
+          </div>
+        </Reveal>
       </div>
     </div>
   </section>
+
+  <style>
+    /* 背景不空：轻纹理+淡红渐变 */
+    .bg-film {
+      position: relative;
+      isolation: isolate;
+    }
+    .bg-film::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          1200px 600px at 10% -10%,
+          rgba(194, 59, 50, 0.12),
+          transparent 55%
+        ),
+        radial-gradient(
+          900px 500px at 90% 10%,
+          rgba(194, 59, 50, 0.08),
+          transparent 60%
+        ),
+        radial-gradient(
+          900px 600px at 20% 90%,
+          rgba(194, 59, 50, 0.06),
+          transparent 60%
+        );
+      pointer-events: none;
+      z-index: -2;
+    }
+    .bg-film::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* marquee 动感带 */
+    .marquee {
+      overflow: hidden;
+      border-top: 1px solid rgba(194, 59, 50, 0.22);
+      border-bottom: 1px solid rgba(194, 59, 50, 0.22);
+      background: rgba(246, 235, 221, 0.55);
+    }
+    .marquee__track {
+      display: flex;
+      gap: 2.2rem;
+      white-space: nowrap;
+      animation: m 18s linear infinite;
+      padding: 0.55rem 0;
+      will-change: transform;
+    }
+    .marquee__item {
+      font-weight: 800;
+      color: rgba(194, 59, 50, 0.92);
+      letter-spacing: 0.02em;
+    }
+    @keyframes m {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Hero：左文右图，大图冲击 */
+    .hero {
+      padding: 1.2rem 1.1rem 2.2rem;
+    }
+    .hero-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.2rem;
+      align-items: center;
+      min-height: 78vh;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 4.2vw, 3.4rem);
+      line-height: 1.04;
+      margin: 0 0 0.75rem;
+    }
+    .hero-sub {
+      margin: 0 0 1.1rem;
+      color: rgba(29, 29, 31, 0.78);
+      font-size: clamp(1rem, 1.45vw, 1.2rem);
+      max-width: 56ch;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.05rem;
+    }
+
+    /* 右侧大图 + sticker */
+    .hero-imageWrap {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(194, 59, 50, 0.25);
+      box-shadow: 0 26px 70px rgba(29, 29, 31, 0.14);
+      transform: translateZ(0);
+    }
+    .hero-image {
+      width: 100%;
+      height: 72vh;
+      max-height: 560px;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+    }
+    .sticker {
+      position: absolute;
+      padding: 0.5rem 0.7rem;
+      border-radius: 14px;
+      background: rgba(246, 235, 221, 0.82);
+      border: 1px solid rgba(194, 59, 50, 0.25);
+      box-shadow: 0 16px 36px rgba(29, 29, 31, 0.12);
+      font-weight: 900;
+      color: rgba(194, 59, 50, 0.95);
+      backdrop-filter: blur(8px);
+      transform: rotate(-2deg);
+    }
+    .s1 {
+      left: 12px;
+      top: 12px;
+    }
+    .s2 {
+      right: 14px;
+      top: 16px;
+      transform: rotate(2deg);
+    }
+    .s3 {
+      left: 14px;
+      bottom: 14px;
+      transform: rotate(3deg);
+    }
+
+    /* 页面容器 */
+    .page-wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.1rem;
+    }
+
+    /* reveal 动画 */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition:
+        opacity 0.55s ease,
+        transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition-delay: var(--d, 0ms);
+    }
+    .reveal.is-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-image {
+        height: 52vh;
+      }
+      .marquee__track {
+        animation-duration: 14s;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee__track {
+        animation: none;
+      }
+    }
+  </style>
 </BaseLayout>
