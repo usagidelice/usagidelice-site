@@ -17,7 +17,7 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
   Astro.props;
 ---
 
-<header class="site-header">
+<header class="site-header" data-header>
   <div class="container header-inner">
     <a class="brand" href="/" aria-label={`${brandName} — Accueil`}>
       <img
@@ -35,37 +35,110 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
     </nav>
 
     <div class="header-actions">
-      <a class="btn primary" href="/evenements#prochaines-dates">Nous trouver</a
-      >
+      <!-- Desktop only -->
+      <a class="btn primary only-desktop" href="/evenements#prochaines-dates">
+        Nous trouver
+      </a>
 
-      <details class="mobile-nav">
-        <summary class="menu-btn" aria-label="Ouvrir le menu"> ☰ </summary>
-        <div class="mobile-drawer container" role="menu">
-          {
-            nav.map((item) => (
-              <a href={item.href} role="menuitem">
-                {item.label}
-              </a>
-            ))
-          }
-        </div>
-      </details>
+      <!-- Mobile menu button -->
+      <button
+        class="menu-btn"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        data-menu-btn
+      >
+        ☰
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" data-mobile-drawer>
+    <div class="container" role="menu" aria-label="Menu mobile">
+      {
+        nav.map((item) => (
+          <a href={item.href} role="menuitem">
+            {item.label}
+          </a>
+        ))
+      }
     </div>
   </div>
 </header>
 
+<script is:inline>
+  (() => {
+    const header = document.querySelector("[data-header]");
+    const btn = document.querySelector("[data-menu-btn]");
+    const drawer = document.querySelector("[data-mobile-drawer]");
+    if (!header || !btn || !drawer) return;
+
+    const setOpen = (open) => {
+      drawer.style.display = open ? "block" : "none";
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+
+    const isOpen = () => drawer.style.display === "block";
+
+    // initial state
+    setOpen(false);
+
+    // toggle on button
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      setOpen(!isOpen());
+    });
+
+    // close when clicking a link
+    drawer.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+
+    // close on outside click
+    document.addEventListener("click", (e) => {
+      if (!isOpen()) return;
+      const t = e.target;
+      if (t instanceof Node && (drawer.contains(t) || btn.contains(t))) return;
+      setOpen(false);
+    });
+
+    // close on scroll (your requirement)
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (isOpen()) setOpen(false);
+      },
+      { passive: true },
+    );
+
+    // close on ESC
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+  })();
+</script>
+
 <style>
-  details.mobile-nav {
-    position: relative;
-  }
-  details.mobile-nav > summary {
-    list-style: none;
-    cursor: pointer;
-  }
-  details.mobile-nav > summary::-webkit-details-marker {
+  /* Desktop-only helper */
+  .only-desktop {
     display: none;
   }
-  details.mobile-nav[open] .mobile-drawer {
-    display: block;
+  @media (min-width: 980px) {
+    .only-desktop {
+      display: inline-flex;
+    }
+  }
+
+  /* Mobile drawer base hidden (JS controls display) */
+  .mobile-drawer {
+    display: none;
+  }
+
+  /* Ensure header is the positioning context for the absolute drawer (your global.css uses top: var(--header-h)) */
+  .site-header {
+    position: sticky;
+    top: 0;
   }
 </style>
