@@ -8,6 +8,12 @@ import { events } from "../data/events";
 const title = "Usagi Délice — Takoyaki d’Osaka à Paris";
 const description =
   "Takoyaki faits maison, préparés sur place. Retrouvez Usagi Délice sur les marchés et événements à Paris & Île-de-France.";
+
+const upcomingEvents = events.filter((e) => e.status !== "past").slice(0, 3);
+
+const upcomingEventsMore = events
+  .filter((e) => e.status !== "past")
+  .slice(0, 5);
 ---
 
 <BaseLayout title={title} description={description}>
@@ -17,82 +23,50 @@ const description =
       <div
         class="bg parallax"
         data-parallax="hero"
-        style="background-image:url('/images/hero-bg.png')"
+        style="--hero-bg:url('/images/hero-bg.png'); --hero-bg-mobile:url('/images/hero-bg-mobile.png');"
+        aria-hidden="true"
       >
       </div>
+
       <div class="container content">
         <div class="hero-split">
-          <div>
-            <!-- Apple-like: hero title can be revealed, but very gently -->
-            <h1 class="h1" data-reveal data-kind="text" data-delay="0">
+          <!-- Left copy -->
+          <div class="hero-left" data-reveal data-kind="text" data-delay="0">
+            <h1 class="h1">
               Takoyaki d’Osaka<br />faits maison à Paris
             </h1>
 
-            <p class="lead" data-reveal data-kind="text" data-delay="80">
+            <p class="lead">
               Street food japonaise authentique, préparée sur place à Paris et
               en Île-de-France.
             </p>
-
-            <div class="cta-row" data-reveal data-kind="text" data-delay="150">
-              <a class="btn primary" href="#produits">Nos produits</a>
-              <a class="btn ghost" href="#dates">Prochaines dates</a>
-            </div>
-
-            <div
-              class="chips"
-              style="margin-top:14px;"
-              data-reveal
-              data-kind="text"
-              data-delay="230"
-            >
-              <span class="chip">⭐ Artisan</span>
-              <span class="chip">Préparation minute</span>
-              <span class="chip">Esprit festival</span>
-            </div>
           </div>
 
-          <!-- Apple-like: panel is “media” weight -->
+          <!-- Right panel -->
           <aside
             class="hero-panel"
             data-reveal
             data-kind="media"
             data-delay="120"
           >
-            <div class="badge" data-reveal data-kind="text" data-delay="160">
-              Prochaines dates
-            </div>
+            <div class="badge">Prochaines dates</div>
 
-            <!-- IMPORTANT: no nested reveal per item inside the panel.
-                 Instead: reveal the whole list container once, to avoid jitter. -->
-            <div
-              style="margin-top:12px; display:grid; gap:10px;"
-              data-reveal
-              data-kind="text"
-              data-delay="220"
-            >
+            <div style="margin-top:12px; display:grid; gap:10px;">
               {
-                events
-                  .filter((e) => e.status !== "past")
-                  .slice(0, 3)
-                  .map((e) => (
-                    <div>
-                      <div style="font-weight:800; letter-spacing:-0.01em;">
-                        {e.title}
-                      </div>
-                      <div class="small">
-                        🗓️ {e.dateLabel} · 📍 {e.location}
-                      </div>
+                upcomingEvents.map((e) => (
+                  <div>
+                    <div style="font-weight:800; letter-spacing:-0.01em;">
+                      {e.title}
                     </div>
-                  ))
+                    <div class="small">
+                      🗓️ {e.dateLabel} · 📍 {e.location}
+                    </div>
+                  </div>
+                ))
               }
             </div>
 
-            <div
-              style="margin-top:14px;"
-              data-reveal
-              data-kind="text"
-              data-delay="300"
-            >
+            <div style="margin-top:14px;">
               <a class="btn primary" href="/evenements#prochaines-dates">
                 Voir toutes les dates
               </a>
@@ -149,12 +123,12 @@ const description =
               class="media parallax"
               data-parallax="media"
               style="background-image:url('/images/histoire-bg.jpg')"
+              aria-hidden="true"
             >
             </div>
           </div>
         </div>
 
-        <!-- Apple-like Layer 2: highlights row -->
         <div
           class="highlights"
           style="margin-top:18px;"
@@ -217,7 +191,6 @@ const description =
           qualité et l’authenticité.
         </p>
 
-        <!-- Layer 2: feature cards -->
         <div class="feature-row" style="margin-top:16px;">
           <div class="feature-card" data-reveal data-kind="card" data-delay="0">
             <div class="feature-kicker">Signature</div>
@@ -255,7 +228,6 @@ const description =
           </div>
         </div>
 
-        <!-- Cards grid: stagger by wrapper only -->
         <div class="grid cols-3" style="margin-top:16px;">
           {
             products.map((p, i) => (
@@ -356,43 +328,22 @@ const description =
             data-kind="media"
             data-delay="120"
           >
-            <div
-              class="panel-title"
-              data-reveal
-              data-kind="text"
-              data-delay="160"
-            >
-              À venir
-            </div>
+            <div class="panel-title">À venir</div>
 
-            <!-- Again: reveal container once (no nested reveal per item) -->
-            <div
-              class="panel-list"
-              data-reveal
-              data-kind="text"
-              data-delay="220"
-            >
+            <div class="panel-list" style="margin-top:10px;">
               {
-                events
-                  .filter((e) => e.status !== "past")
-                  .slice(0, 5)
-                  .map((e) => (
-                    <div class="panel-item">
-                      <div class="panel-item-title">{e.title}</div>
-                      <div class="small">
-                        🗓️ {e.dateLabel} · 📍 {e.location}
-                      </div>
+                upcomingEventsMore.map((e) => (
+                  <div class="panel-item">
+                    <div class="panel-item-title">{e.title}</div>
+                    <div class="small">
+                      🗓️ {e.dateLabel} · 📍 {e.location}
                     </div>
-                  ))
+                  </div>
+                ))
               }
             </div>
 
-            <div
-              style="margin-top:14px;"
-              data-reveal
-              data-kind="text"
-              data-delay="300"
-            >
+            <div style="margin-top:14px;">
               <a class="btn primary" href="/evenements#prochaines-dates">
                 Toutes les dates
               </a>
@@ -400,7 +351,6 @@ const description =
           </div>
         </div>
 
-        <!-- Full cards grid (stagger wrappers) -->
         <div class="grid cols-3" style="margin-top:16px;">
           {
             events
@@ -575,21 +525,9 @@ const description =
             data-kind="media"
             data-delay="120"
           >
-            <div
-              class="panel-title"
-              data-reveal
-              data-kind="text"
-              data-delay="160"
-            >
-              Contact direct
-            </div>
+            <div class="panel-title">Contact direct</div>
 
-            <div
-              class="panel-list"
-              data-reveal
-              data-kind="text"
-              data-delay="220"
-            >
+            <div class="panel-list" style="margin-top:10px;">
               <div class="panel-item">
                 <div class="panel-item-title">Email</div>
                 <div class="small">contact@usagidelice.fr</div>
@@ -606,12 +544,7 @@ const description =
               </div>
             </div>
 
-            <div
-              style="margin-top:14px;"
-              data-reveal
-              data-kind="text"
-              data-delay="300"
-            >
+            <div style="margin-top:14px;">
               <a class="btn primary" href="/contact">Ouvrir le formulaire</a>
             </div>
           </div>

@@ -25,7 +25,7 @@
   --header-h: 72px;
 
   /* =========================================================
-     Section rhythm tokens (reduce excessive whitespace)
+     Section rhythm tokens
   ========================================================= */
   --section-top: 52px;
   --section-bottom: 44px;
@@ -44,6 +44,7 @@
 * {
   box-sizing: border-box;
 }
+
 html {
   color-scheme: light;
 }
@@ -51,6 +52,7 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family:
@@ -105,11 +107,6 @@ img {
   border-bottom: 1px solid rgba(42, 31, 31, 0.08);
 }
 
-/* make header a positioning context for the drawer */
-.site-header {
-  position: sticky;
-}
-
 .header-inner {
   height: 100%;
   display: flex;
@@ -145,7 +142,7 @@ img {
 .nav a {
   padding: 8px 10px;
   border-radius: 999px;
-  white-space: nowrap; /* extra safety */
+  white-space: nowrap;
 }
 .nav a:hover {
   background: rgba(255, 255, 255, 0.55);
@@ -181,12 +178,11 @@ img {
 }
 
 /* =========================================================
-   Mobile drawer (new Header structure)
-   <div class="mobile-drawer"><div class="container">...</div></div>
+   Mobile drawer
 ========================================================= */
 
 .mobile-drawer {
-  display: none; /* JS toggles this */
+  display: none;
   position: absolute;
   top: var(--header-h);
   left: 0;
@@ -256,7 +252,7 @@ img {
 }
 
 /* =========================================================
-   Apple-like sections (UPDATED rhythm)
+   Apple-like sections
 ========================================================= */
 
 .apple-page {
@@ -277,29 +273,6 @@ img {
   }
   .apple-section {
     scroll-snap-align: start;
-  }
-}
-
-/* Optional density presets */
-.section-tight {
-  padding-top: calc(var(--header-h) + 42px);
-  padding-bottom: 40px;
-}
-@media (min-width: 1024px) {
-  .section-tight {
-    padding-top: calc(var(--header-h) + 50px);
-    padding-bottom: 48px;
-  }
-}
-
-.section-dense {
-  padding-top: calc(var(--header-h) + 36px);
-  padding-bottom: 36px;
-}
-@media (min-width: 1024px) {
-  .section-dense {
-    padding-top: calc(var(--header-h) + 44px);
-    padding-bottom: 44px;
   }
 }
 
@@ -430,7 +403,7 @@ img {
 }
 
 /* =========================================================
-   SECTION BACKGROUND
+   Section background helper
 ========================================================= */
 
 .section-bg {
@@ -442,6 +415,7 @@ img {
   inset: 0;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   transform: scale(1.03);
   filter: saturate(0.95) contrast(0.95);
 }
@@ -463,57 +437,128 @@ img {
   );
   pointer-events: none;
 }
-.histoire-bg {
-  align-content: end;
-}
 
 /* =========================================================
-   Hero
+   Hero — single, consistent system
 ========================================================= */
 
 .hero {
   position: relative;
   overflow: hidden;
 }
+
+/* Background image comes from inline CSS variables */
 .hero .bg {
   position: absolute;
   inset: 0;
+
+  background-image: var(--hero-bg);
   background-size: cover;
   background-position: center;
-  transform: scale(1.02);
+  background-repeat: no-repeat;
+
+  filter: saturate(0.98) contrast(0.92) brightness(1.04);
 }
+
+/* Desktop hero parallax only */
+.hero .bg.parallax[data-parallax="hero"] {
+  transform: translate3d(0, var(--py, 0px), 0) scale(1.02);
+}
+
+/* Readability overlay (soft, no box) */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(246, 235, 221, 0.94) 0%,
-    rgba(246, 235, 221, 0.74) 46%,
-    rgba(246, 235, 221, 0.34) 72%,
-    rgba(246, 235, 221, 0.18) 100%
-  );
   pointer-events: none;
+
+  background:
+    radial-gradient(
+      920px 540px at 26% 42%,
+      rgba(246, 235, 221, 0.78) 0%,
+      rgba(246, 235, 221, 0.46) 44%,
+      rgba(246, 235, 221, 0.1) 72%,
+      rgba(246, 235, 221, 0) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(246, 235, 221, 0.52) 0%,
+      rgba(246, 235, 221, 0.16) 48%,
+      rgba(246, 235, 221, 0) 74%
+    );
 }
+
 .hero .content {
   position: relative;
   padding: 10px 0;
 }
+
 .hero-split {
   display: grid;
   gap: 18px;
   align-items: end;
 }
+
 @media (min-width: 980px) {
   .hero-split {
     grid-template-columns: 1.15fr 0.85fr;
   }
 }
+
+/* Left text wrapper (for your new index.astro structure) */
+.hero-left {
+  max-width: 58ch;
+}
+
+/* Right panel is intentionally a card */
 .hero-panel {
   background: rgba(255, 247, 239, 0.78);
   border: 1px solid rgba(42, 31, 31, 0.1);
   border-radius: 24px;
   padding: 18px;
+}
+
+/* Text readability via soft shadow (no ugly cards) */
+.hero .h1 {
+  text-shadow: 0 2px 18px rgba(246, 235, 221, 0.65);
+}
+.hero .lead {
+  text-shadow: 0 1px 14px rgba(246, 235, 221, 0.58);
+}
+
+/* Mobile hero rules (only here, no duplicates elsewhere) */
+@media (max-width: 720px) {
+  .hero-left {
+    max-width: 100%;
+  }
+
+  .hero .bg {
+    background-image: var(--hero-bg-mobile, var(--hero-bg));
+    background-position: 50% 20%;
+  }
+
+  /* Disable hero parallax on phones (prevents weird jumps / crops) */
+  .hero .bg.parallax[data-parallax="hero"] {
+    transform: none;
+  }
+
+  /* Vertical wash works better for mobile legibility */
+  .hero::before {
+    background: linear-gradient(
+      180deg,
+      rgba(246, 235, 221, 0.82) 0%,
+      rgba(246, 235, 221, 0.6) 40%,
+      rgba(246, 235, 221, 0.34) 70%,
+      rgba(246, 235, 221, 0.14) 100%
+    );
+  }
+
+  .hero .h1 {
+    text-shadow: 0 2px 22px rgba(246, 235, 221, 0.72);
+  }
+  .hero .lead {
+    text-shadow: 0 1px 16px rgba(246, 235, 221, 0.65);
+  }
 }
 
 /* =========================================================
@@ -577,7 +622,7 @@ img {
   .btn {
     transition: none;
   }
-  .hero .bg {
+  .hero .bg.parallax[data-parallax="hero"] {
     transform: none;
   }
   .section-bg .bg {
@@ -592,7 +637,7 @@ img {
 }
 
 /* =========================================================
-   Apple-like "Layer 2" fillers
+   Apple-like Layer 2 helpers
 ========================================================= */
 
 .cta-row {
@@ -618,7 +663,7 @@ img {
   color: rgba(42, 31, 31, 0.82);
 }
 
-/* subtle background tones (use per-section) */
+/* subtle background tones */
 .tone-a {
   background:
     radial-gradient(
@@ -702,7 +747,7 @@ img {
   font-size: 14px;
 }
 
-/* Feature row (products) */
+/* Feature row */
 .feature-row {
   margin-top: 16px;
   display: grid;
@@ -741,7 +786,7 @@ img {
   font-size: 14px;
 }
 
-/* Panel card (dates/contact right side) */
+/* Panel card */
 .panel-card {
   border-radius: 24px;
   padding: 18px;
@@ -830,11 +875,10 @@ img {
 }
 
 /* =========================================================
-   Subtle Parallax
+   Subtle Parallax (media only)
 ========================================================= */
 
 .parallax {
-  transform: translate3d(0, var(--py, 0px), 0);
   will-change: transform;
 }
 .parallax[data-parallax="media"] {
@@ -842,17 +886,16 @@ img {
 }
 
 /* =========================================================
-   MOBILE PATCH — Final cleanup for phone layout
+   MOBILE PATCH — layout stability
 ========================================================= */
 
-/* Safer overflow control */
 html,
 body {
   width: 100%;
   overflow-x: hidden;
 }
 
-/* Prevent flex/grid children from overflowing */
+/* Prevent flex/grid children overflow */
 .container,
 .header-inner,
 .split,
@@ -862,7 +905,7 @@ body {
   min-width: 0;
 }
 
-/* Long text protection (CONTENT only, not nav links) */
+/* Long text protection (CONTENT only) */
 main p,
 main .small,
 main h1,
@@ -881,7 +924,6 @@ main h6,
   word-break: break-word;
 }
 
-/* Mobile rules */
 @media (max-width: 720px) {
   .apple-section {
     min-height: auto;
@@ -931,28 +973,24 @@ main h6,
     line-height: 1.08;
     margin-bottom: 12px;
   }
-
   .h2 {
     font-size: 22px;
     line-height: 1.15;
   }
-
   .lead {
     font-size: 16px;
     line-height: 1.55;
     margin-bottom: 16px;
   }
 
-  /* Hero */
+  /* Hero layout */
   .hero .content {
     padding: 6px 0;
   }
-
   .hero-split {
     grid-template-columns: 1fr;
     align-items: start;
   }
-
   .hero-panel {
     padding: 16px;
     border-radius: 20px;
@@ -983,7 +1021,6 @@ main h6,
   .card .pad {
     padding: 14px;
   }
-
   .card h3 {
     font-size: 16px;
     line-height: 1.2;
