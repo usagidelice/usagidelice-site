@@ -53,8 +53,16 @@ body {
 }
 body {
   margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
   color: var(--ink);
   background: var(--bg);
   text-rendering: optimizeLegibility;
@@ -178,7 +186,9 @@ img {
   border-radius: 999px;
   border: 1px solid rgba(42, 31, 31, 0.12);
   background: rgba(255, 255, 255, 0.68);
-  transition: transform 160ms var(--ease), background 160ms var(--ease);
+  transition:
+    transform 160ms var(--ease),
+    background 160ms var(--ease);
   font-weight: 700;
 }
 
@@ -526,8 +536,9 @@ img {
 }
 
 .kbd {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
   font-size: 12px;
   padding: 2px 6px;
   border-radius: 6px;
@@ -596,7 +607,8 @@ img {
 
 /* subtle background tones (use per-section) */
 .tone-a {
-  background: radial-gradient(
+  background:
+    radial-gradient(
       1200px 600px at 18% 12%,
       rgba(194, 59, 50, 0.1),
       transparent 58%
@@ -608,7 +620,8 @@ img {
     );
 }
 .tone-b {
-  background: radial-gradient(
+  background:
+    radial-gradient(
       1100px 600px at 80% 10%,
       rgba(194, 59, 50, 0.08),
       transparent 60%
@@ -616,7 +629,8 @@ img {
     linear-gradient(180deg, rgba(255, 247, 239, 0), rgba(255, 247, 239, 0.55));
 }
 .tone-c {
-  background: radial-gradient(
+  background:
+    radial-gradient(
       1000px 560px at 22% 14%,
       rgba(194, 59, 50, 0.07),
       transparent 62%
@@ -772,7 +786,9 @@ img {
 [data-reveal] {
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity 520ms var(--ease), transform 640ms var(--ease);
+  transition:
+    opacity 520ms var(--ease),
+    transform 640ms var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
@@ -837,4 +853,207 @@ img {
 /* Optional: make media parallax feel smoother */
 .parallax[data-parallax="media"] {
   transform: translate3d(0, var(--py, 0px), 0) scale(1.01);
+}
+
+/* =========================================================
+   MOBILE PATCH — Final cleanup for phone layout
+   Paste at the very end of global.css
+========================================================= */
+
+/* Safer overflow control (prevents horizontal mess) */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent flex/grid children from overflowing */
+.container,
+.header-inner,
+.split,
+.hero-split,
+.grid,
+.footer-grid {
+  min-width: 0;
+}
+
+/* Ensure any long content won't blow up layout */
+/* Ensure long text won't blow up layout (CONTENT only, not nav links) */
+main p,
+main .small,
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+.card p,
+.card h3,
+.panel-card,
+.panel-item,
+.feature-text,
+.mini-text {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ---------- Mobile layout rules ---------- */
+@media (max-width: 720px) {
+  /* 1) Section rhythm on mobile:
+        DO NOT force 100svh (mobile safari address bar causes chaos) */
+  .apple-section {
+    min-height: auto;
+    padding: calc(var(--header-h) + 22px) 0 28px;
+  }
+
+  /* 2) Container padding slightly tighter */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* 3) Header: keep it stable and prevent squeeze */
+  .site-header {
+    backdrop-filter: blur(10px);
+  }
+
+  .header-inner {
+    gap: 10px;
+  }
+
+  /* Brand shouldn't reserve too much space on mobile */
+  .brand {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .brand img {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .brand .name {
+    font-size: 14px;
+    line-height: 1.1;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Buttons in header should not grow too large */
+  .header-actions .btn {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .menu-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Mobile drawer spacing */
+  .mobile-drawer {
+    padding: 10px 0 16px;
+  }
+  .mobile-drawer a {
+    padding: 12px 0;
+    font-size: 15px;
+  }
+
+  /* 4) Typography: tighten for phone */
+  .h1 {
+    font-size: 30px;
+    line-height: 1.08;
+    margin-bottom: 12px;
+  }
+
+  .h2 {
+    font-size: 22px;
+    line-height: 1.15;
+  }
+
+  .lead {
+    font-size: 16px;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  /* 5) Hero: always single column on phone */
+  .hero .content {
+    padding: 6px 0;
+  }
+
+  .hero-split {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .hero-panel {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  /* 6) Split sections: stack cleanly */
+  .split {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  /* Media card should not be too tall on phone */
+  .media-card {
+    min-height: 200px;
+    aspect-ratio: 16 / 10;
+    border-radius: 20px;
+  }
+
+  /* 7) Grids: force one column */
+  .grid,
+  .grid.cols-3,
+  .highlights,
+  .feature-row,
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 8) Cards: reduce padding + prevent header line breaking weirdly */
+  .card .pad {
+    padding: 14px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .badge {
+    padding: 7px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* EventCard header row (you set .header in component style)
+     This helps when title is long */
+  .card .header,
+  .header {
+    align-items: flex-start;
+  }
+
+  /* 9) Footer: keep it compact and readable */
+  .site-footer {
+    padding: 22px 0;
+  }
+  .footer-grid {
+    gap: 10px;
+  }
+}
+
+/* Desktop nav must never break words */
+@media (min-width: 721px) {
+  .nav a {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
 }
