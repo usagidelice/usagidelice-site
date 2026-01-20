@@ -1,0 +1,60 @@
+---
+import type { EventItem } from "../data/events";
+
+interface Props {
+  item: EventItem;
+}
+
+const { item } = Astro.props as Props;
+
+/** status → 文案映射，避免三元地狱 */
+const STATUS_LABELS: Record<EventItem["status"], string> = {
+  upcoming: "À venir",
+  regular: "Rendez-vous régulier",
+  past: "Passé",
+};
+
+const statusLabel = STATUS_LABELS[item.status];
+---
+
+<article class="card">
+  <div class="pad">
+    <div class="header">
+      <h3 class="title">{item.title}</h3>
+      <span class={`badge badge--${item.status}`}>
+        {statusLabel}
+      </span>
+    </div>
+
+    <p class="meta">
+      🗓️ {item.dateLabel} · 📍 {item.location}
+    </p>
+
+    <p class="description">
+      {item.description}
+    </p>
+  </div>
+</article>
+
+<style>
+  .header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .title {
+    margin: 0;
+  }
+
+  .meta {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  .description {
+    margin-top: 10px;
+  }
+</style>

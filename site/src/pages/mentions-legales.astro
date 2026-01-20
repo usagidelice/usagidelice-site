@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "Mentions légales — Usagi Délice";
+const description = "Informations légales du site Usagi Délice.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="apple-section">
+    <div class="container">
+      <span class="badge">Mentions légales</span>
+      <h1 class="h1" style="margin-top:14px;">Informations</h1>
+      <p class="lead" style="max-width:76ch;">
+        Remplissez les champs ci-dessous avec vos informations (statut, SIRET, adresse professionnelle, hébergeur, etc.).
+        Si vous voulez, vous me donnez vos infos et je te le complète proprement.
+      </p>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="pad">
+          <h2 class="h2">Éditeur du site</h2>
+          <p class="small">Nom / Raison sociale : …</p>
+          <p class="small">Statut : Auto-entrepreneur</p>
+          <p class="small">SIRET : …</p>
+          <p class="small">Email : contact@usagidelice.fr</p>
+          <div class="hr"></div>
+          <h2 class="h2">Hébergement</h2>
+          <p class="small">Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA (à adapter si besoin).</p>
+          <div class="hr"></div>
+          <h2 class="h2">Crédits</h2>
+          <p class="small">Textes & visuels : Usagi Délice. Photos : …</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

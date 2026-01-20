@@ -1,59 +1,168 @@
 ---
-import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
 
 const {
   title = "Usagi Délice — Takoyaki d’Osaka à Paris",
   description = "Usagi Délice : takoyaki faits maison, préparés sur place, dans l’esprit de la street food d’Osaka à Paris.",
-} = Astro.props;
+  canonical,
+  ogImage = "/images/og.jpg",
+} = Astro.props as Props;
 
-const canonical = new URL(
-  Astro.url.pathname,
-  "https://usagidelice.fr"
-).toString();
+// ✅ safest canonical (no Astro.url typing dependency)
+const canonicalUrl =
+  canonical ??
+  (typeof Astro !== "undefined" && (Astro as any).url
+    ? new URL((Astro as any).url.pathname, "https://usagidelice.fr").toString()
+    : "https://usagidelice.fr/");
 ---
 
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="canonical" href={canonicalUrl} />
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
 
-    <meta name="theme-color" content="#C23B32" />
-    <meta name="color-scheme" content="light" />
-
-    <!-- Open Graph -->
-    <meta property="og:site_name" content="Usagi Délice" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content="https://usagidelice.fr/logo.png" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="preload" href="/logo.png" as="image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
 
-  <body class="site">
-    <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <body>
+    <Header logoSrc="/images/logo.png" brandName="Usagi Délice" />
 
-    <Header />
-
-    <!-- 关键：main 不再固定 container，让页面可以 full-bleed -->
-    <main id="contenu" tabindex="-1">
+    <main>
       <slot />
     </main>
 
-    <Footer />
+    <Footer
+      instagramUrl="https://www.instagram.com/usagidelice"
+      email="contact@usagidelice.fr"
+    />
+
+    <!-- ✅ Scroll reveal (Apple-like): typed, astro-check safe -->
+    <script>
+      (() => {
+        const prefersReduced =
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // ✅ typed elements so `.style` is valid
+        const els = Array.from(
+          document.querySelectorAll<HTMLElement>("[data-reveal]"),
+        );
+
+        if (prefersReduced) {
+          els.forEach((el) => el.classList.add("is-in"));
+          return;
+        }
+
+        for (const el of els) {
+          const d = el.getAttribute("data-delay");
+          if (d) el.style.setProperty("--reveal-delay", `${Number(d)}ms`);
+        }
+
+        // ✅ typed params to avoid implicit any
+        const revealNow = (el: HTMLElement) => el.classList.add("is-in");
+
+        const isInViewport = (el: HTMLElement) => {
+          const r = el.getBoundingClientRect();
+          const vh =
+            window.innerHeight || document.documentElement.clientHeight;
+          return r.top < vh * 0.75 && r.bottom > 0;
+        };
+
+        els.forEach((el) => {
+          if (isInViewport(el)) revealNow(el);
+        });
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              // entry.target is Element → cast to HTMLElement for revealNow
+              revealNow(entry.target as HTMLElement);
+              io.unobserve(entry.target);
+            }
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -10% 0px" },
+        );
+
+        els.forEach((el) => {
+          if (!el.classList.contains("is-in")) io.observe(el);
+        });
+      })();
+    </script>
+
+    <!-- ✅ Optional parallax (only affects elements with data-parallax attr) -->
+    <script>
+      (() => {
+        const prefersReduced =
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (prefersReduced) return;
+
+        // ✅ typed elements so `.style` is valid
+        const items = Array.from(
+          document.querySelectorAll<HTMLElement>("[data-parallax]"),
+        );
+        if (!items.length) return;
+
+        let ticking = false;
+
+        const update = () => {
+          ticking = false;
+
+          const vh =
+            window.innerHeight || document.documentElement.clientHeight;
+
+          for (const el of items) {
+            const type = el.getAttribute("data-parallax") || "media";
+            const r = el.getBoundingClientRect();
+
+            const center = r.top + r.height / 2;
+            const p = (center - vh / 2) / (vh / 2);
+
+            const range = type === "hero" ? 18 : type === "media" ? 14 : 10;
+            const y = Math.max(-range, Math.min(range, -p * range));
+
+            el.style.setProperty("--py", `${y}px`);
+          }
+        };
+
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(update);
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+
+        update();
+      })();
+    </script>
   </body>
 </html>

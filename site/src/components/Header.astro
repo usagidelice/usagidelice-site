@@ -1,314 +1,71 @@
 ---
-type NavItem = { href: string; label: string };
+export interface Props {
+  logoSrc?: string;
+  brandName?: string;
+}
 
-const nav: NavItem[] = [
+const nav = [
   { href: "/", label: "Accueil" },
-  { href: "/menu", label: "Menu & prix" },
+  { href: "/notre-histoire", label: "Notre histoire" },
+  { href: "/nos-produits", label: "Nos produits" },
   { href: "/evenements", label: "Événements" },
   { href: "/galerie", label: "Galerie" },
-  { href: "/notre-histoire", label: "Notre histoire" },
-  { href: "/culture", label: "Culture" },
-  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Contact / collaboration" },
 ];
 
-const pathname: string = Astro.url.pathname;
-
-const isActive = (href: string): boolean => {
-  if (href === "/") return pathname === "/";
-  return pathname.startsWith(href);
-};
+const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
+  Astro.props;
 ---
 
-<header class="site-header" data-header>
+<header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="Aller à l’accueil">
+    <a class="brand" href="/" aria-label={`${brandName} — Accueil`}>
       <img
-        class="brand-logo"
-        src="/logo.png"
-        alt="Logo Usagi Délice"
-        width="44"
-        height="44"
+        src={logoSrc}
+        alt={`${brandName} logo`}
+        width="38"
+        height="38"
         loading="eager"
       />
-      <span class="brand-name">Usagi Délice</span>
+      <span class="name">{brandName}</span>
     </a>
 
-    <!-- Desktop CTA -->
-    <div class="header-cta">
-      <a class="btn btn-primary btn-small" href="/evenements">Où nous trouver</a
-      >
-      <a
-        class="btn btn-ghost btn-small"
-        href="https://www.instagram.com/usagidelice/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Instagram
-      </a>
-    </div>
+    <nav class="nav" aria-label="Navigation principale">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
 
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      data-nav-toggle
-    >
-      <span class="nav-toggle-line" aria-hidden="true"></span>
-      <span class="nav-toggle-line" aria-hidden="true"></span>
-      <span class="nav-toggle-line" aria-hidden="true"></span>
-    </button>
+    <div class="header-actions">
+      <a class="btn primary" href="/evenements#prochaines-dates">Nous trouver</a
+      >
 
-    <nav
-      class="site-nav"
-      id="site-nav"
-      aria-label="Navigation principale"
-      data-nav
-    >
-      <ul class="nav-list">
-        {
-          nav.map((item: NavItem) => (
-            <li>
-              <a
-                class={`nav-link ${isActive(item.href) ? "active" : ""}`}
-                href={item.href}
-              >
+      <details class="mobile-nav">
+        <summary class="menu-btn" aria-label="Ouvrir le menu"> ☰ </summary>
+        <div class="mobile-drawer container" role="menu">
+          {
+            nav.map((item) => (
+              <a href={item.href} role="menuitem">
                 {item.label}
               </a>
-            </li>
-          ))
-        }
-      </ul>
-
-      <!-- Mobile CTA -->
-      <div class="nav-cta">
-        <a class="btn btn-primary" href="/evenements">Où nous trouver</a>
-        <a class="btn btn-ghost" href="/menu">Menu & prix</a>
-        <a
-          class="btn btn-ghost"
-          href="https://www.instagram.com/usagidelice/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Instagram
-        </a>
-      </div>
-    </nav>
+            ))
+          }
+        </div>
+      </details>
+    </div>
   </div>
-
-  <script is:inline>
-    /** @type {HTMLElement | null} */
-    const header = document.querySelector("[data-header]");
-    /** @type {HTMLButtonElement | null} */
-    const btn = document.querySelector("[data-nav-toggle]");
-    /** @type {HTMLElement | null} */
-    const navEl = document.querySelector("[data-nav]");
-
-    // Sticky shadow / blur on scroll
-    const onScroll = () => {
-      if (!header) return;
-      header.classList.toggle("is-scrolled", window.scrollY > 8);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    // Mobile menu toggle
-    if (btn && navEl) {
-      const close = () => {
-        navEl.classList.remove("open");
-        btn.setAttribute("aria-expanded", "false");
-        document.documentElement.classList.remove("nav-open");
-      };
-
-      btn.addEventListener("click", () => {
-        const open = navEl.classList.toggle("open");
-        btn.setAttribute("aria-expanded", String(open));
-        document.documentElement.classList.toggle("nav-open", open);
-      });
-
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") close();
-      });
-
-      // Close on link click (mobile)
-      navEl.addEventListener("click", (e) => {
-        const a = e.target && e.target.closest ? e.target.closest("a") : null;
-        if (a && navEl.classList.contains("open")) close();
-      });
-
-      // Close on resize to desktop
-      window.addEventListener("resize", () => {
-        if (window.innerWidth >= 920) close();
-      });
-    }
-  </script>
-
-  <style>
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(246, 235, 221, 0.62);
-      border-bottom: 1px solid rgba(194, 59, 50, 0.18);
-      backdrop-filter: blur(10px);
-      transition:
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-    }
-    .site-header.is-scrolled {
-      background: rgba(246, 235, 221, 0.78);
-      box-shadow: 0 18px 45px rgba(29, 29, 31, 0.1);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.9rem;
-      padding: 0.75rem 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      text-decoration: none;
-      color: inherit;
-      min-width: 0;
-    }
-    .brand-logo {
-      display: block;
-      border-radius: 12px;
-    }
-    .brand-name {
-      font-weight: 900;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
-    }
-
-    .header-cta {
-      display: flex;
-      gap: 0.55rem;
-      align-items: center;
-    }
-
-    .site-nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .nav-list {
-      list-style: none;
-      display: flex;
-      gap: 0.25rem;
-      padding: 0;
-      margin: 0;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.55rem 0.75rem;
-      border-radius: 999px;
-      text-decoration: none;
-      color: rgba(29, 29, 31, 0.86);
-      font-weight: 800;
-      border: 1px solid transparent;
-      transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        border-color 0.2s ease;
-    }
-    .nav-link:hover {
-      background: rgba(194, 59, 50, 0.08);
-      transform: translateY(-1px);
-      border-color: rgba(194, 59, 50, 0.18);
-    }
-    .nav-link.active {
-      background: rgba(194, 59, 50, 0.12);
-      border-color: rgba(194, 59, 50, 0.22);
-      color: rgba(194, 59, 50, 0.98);
-    }
-
-    .nav-toggle {
-      display: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      border: 1px solid rgba(194, 59, 50, 0.25);
-      background: rgba(246, 235, 221, 0.72);
-      box-shadow: 0 10px 22px rgba(29, 29, 31, 0.08);
-      cursor: pointer;
-    }
-    .nav-toggle-line {
-      display: block;
-      height: 2px;
-      margin: 6px 10px;
-      background: rgba(194, 59, 50, 0.92);
-      border-radius: 999px;
-    }
-
-    .nav-cta {
-      display: none;
-      gap: 0.6rem;
-      padding: 0.9rem 0.9rem 0.2rem;
-      border-top: 1px solid rgba(194, 59, 50, 0.18);
-    }
-
-    @media (max-width: 920px) {
-      .header-cta {
-        display: none;
-      }
-      .nav-toggle {
-        display: block;
-      }
-
-      .site-nav {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 100%;
-        background: rgba(246, 235, 221, 0.92);
-        border-bottom: 1px solid rgba(194, 59, 50, 0.18);
-        box-shadow: 0 22px 55px rgba(29, 29, 31, 0.14);
-        backdrop-filter: blur(12px);
-        transform: translateY(-6px);
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          opacity 0.2s ease,
-          transform 0.2s ease;
-        display: block;
-      }
-
-      .site-nav.open {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-      }
-
-      .nav-list {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.2rem;
-        padding: 0.8rem;
-      }
-      .nav-link {
-        justify-content: space-between;
-        padding: 0.85rem 0.9rem;
-        border-radius: 14px;
-        border-color: rgba(194, 59, 50, 0.14);
-        background: rgba(246, 235, 221, 0.55);
-      }
-      .nav-cta {
-        display: grid;
-      }
-    }
-
-    :global(html.nav-open) {
-      overflow: hidden;
-    }
-  </style>
 </header>
+
+<style>
+  details.mobile-nav {
+    position: relative;
+  }
+  details.mobile-nav > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  details.mobile-nav > summary::-webkit-details-marker {
+    display: none;
+  }
+  details.mobile-nav[open] .mobile-drawer {
+    display: block;
+  }
+</style>

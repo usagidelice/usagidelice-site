@@ -1,103 +1,75 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-const title = "Contact — Usagi Délice";
-const description =
-  "Contactez Usagi Délice (takoyaki d’Osaka à Paris). Formulaire UI sans backend, email et Instagram, plus une FAQ courte.";
+const title = "Contact & collaboration — Usagi Délice";
+const description = "Contactez Usagi Délice pour une collaboration, un événement, un marché ou une demande d’information.";
+
+// Option: connect this form to Formspree or another provider.
+// Replace FORM_ACTION with your endpoint.
+const FORM_ACTION = "https://formspree.io/f/xxxxxxxx";
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="card page">
-    <h1>Contact</h1>
-    <p class="lead">
-      Une question sur nos événements ou collaborations ? Écrivez-nous — et pour les infos les plus récentes, Instagram
-      reste la référence.
-    </p>
+  <section class="apple-section">
+    <div class="container">
+      <span class="badge">Contact / collaboration</span>
+      <h1 class="h1" style="margin-top:14px;">Parlons de votre événement</h1>
+      <p class="lead" style="max-width:72ch;">
+        Marché, festival, entreprise, événement privé… Envoyez-nous le lieu, la date et le format. Nous vous répondons rapidement.
+      </p>
 
-    <section class="section grid grid-2">
-      <div class="card form" style="box-shadow:none;">
-        <h2 style="margin-top:0;">Formulaire</h2>
+      <div class="grid" style="grid-template-columns: 1fr; gap:18px; margin-top:18px;">
+        <div class="card">
+          <div class="pad">
+            <h2 class="h2">Formulaire</h2>
+            <p class="small">Astro = site statique. Pour recevoir les messages, connectez le formulaire (Formspree, Zoho, etc.).</p>
 
-        <!-- UI only: no backend -->
-        <form onsubmit="event.preventDefault(); alert('Merci ! Ce formulaire est uniquement une interface (sans envoi).');">
-          <div class="field">
-            <label for="name">Nom</label>
-            <input id="name" name="name" autocomplete="name" placeholder="Votre nom" />
+            <form method="POST" action={FORM_ACTION} style="display:grid; gap:12px; max-width: 720px;">
+              <label>
+                <div class="small" style="margin-bottom:6px; font-weight:700;">Nom</div>
+                <input name="name" required placeholder="Votre nom" style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);" />
+              </label>
+
+              <label>
+                <div class="small" style="margin-bottom:6px; font-weight:700;">Email</div>
+                <input type="email" name="email" required placeholder="vous@email.com" style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);" />
+              </label>
+
+              <label>
+                <div class="small" style="margin-bottom:6px; font-weight:700;">Type de demande</div>
+                <select name="type" style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);">
+                  <option value="evenement">Événement / festival</option>
+                  <option value="marche">Marché</option>
+                  <option value="entreprise">Entreprise</option>
+                  <option value="prive">Événement privé</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </label>
+
+              <label>
+                <div class="small" style="margin-bottom:6px; font-weight:700;">Message</div>
+                <textarea name="message" required rows="6" placeholder="Date, lieu, horaires, nombre de personnes, contraintes..." style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);"></textarea>
+              </label>
+
+              <button class="btn primary" type="submit" style="justify-self:start;">Envoyer</button>
+            </form>
           </div>
+        </div>
 
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.com" />
+        <div class="card">
+          <div class="pad">
+            <h2 class="h2">Contact direct</h2>
+            <p class="lead" style="margin:0; max-width:80ch;">
+              Si vous préférez, écrivez-nous directement :
+            </p>
+            <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+              <a class="btn ghost" href="mailto:contact@usagidelice.fr">contact@usagidelice.fr</a>
+              <a class="btn primary" href="https://www.instagram.com/usagidelice" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
           </div>
-
-          <div class="field">
-            <label for="subject">Sujet</label>
-            <input id="subject" name="subject" placeholder="Événement, collaboration, question..." />
-          </div>
-
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Votre message..."></textarea>
-            <div class="help">Ce formulaire est une interface (sans backend). Utilisez l’email pour un contact direct.</div>
-          </div>
-
-          <button class="btn" type="submit">Envoyer</button>
-        </form>
+        </div>
       </div>
 
-      <div class="card form" style="box-shadow:none;">
-        <h2 style="margin-top:0;">Coordonnées</h2>
-        <p style="margin-top: 0;">
-          Email : <a href="mailto:contact@usagidelice.fr">contact@usagidelice.fr</a>
-          <br />
-          Instagram :
-          <a href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">instagram.com/usagidelice</a>
-        </p>
-
-        <div class="note">
-          Les dates & lieux changent selon les événements.
-          <br />
-          Pour les infos à jour : Instagram.
-        </div>
-
-        <div style="height: 12px;"></div>
-        <a class="btn" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
-          Voir Instagram
-        </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>FAQ</h2>
-      <div class="grid">
-        <div class="card form" style="box-shadow:none;">
-          <strong>Où vous trouver ?</strong>
-          <p class="help" style="margin-bottom:0;">
-            Nos emplacements varient selon les événements. Consultez Instagram pour les dates et lieux à jour.
-          </p>
-        </div>
-
-        <div class="card form" style="box-shadow:none;">
-          <strong>Participez-vous à des événements japonais ?</strong>
-          <p class="help" style="margin-bottom:0;">
-            Oui, nous participons à différents événements culturels. La page Événements liste les principaux.
-          </p>
-        </div>
-
-        <div class="card form" style="box-shadow:none;">
-          <strong>Proposez-vous des collaborations ?</strong>
-          <p class="help" style="margin-bottom:0;">
-            Oui. Pour une demande, envoyez un message par email avec vos informations (date, lieu, format souhaité).
-          </p>
-        </div>
-
-        <div class="card form" style="box-shadow:none;">
-          <strong>Peut-on utiliser le formulaire du site ?</strong>
-          <p class="help" style="margin-bottom:0;">
-            Le formulaire est une interface (sans envoi). Pour nous contacter, utilisez l’email ou Instagram.
-          </p>
-        </div>
-      </div>
-    </section>
-  </article>
+    </div>
+  </section>
 </BaseLayout>

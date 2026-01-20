@@ -1,81 +1,78 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventCard from '../components/EventCard.astro';
+import { events } from '../data/events';
 
-const title = "Événements & Marchés — Usagi Délice";
-const description =
-  "Retrouvez nos événements et collaborations autour des takoyaki. Les emplacements varient : consultez Instagram pour les infos à jour.";
+const title = "Événements — Usagi Délice";
+const description = "Prochaines dates, marchés et événements : retrouvez Usagi Délice à Paris & Île-de-France.";
 
-const festivals = [
-  "Japan Fes (Paris)",
-  "Rice Market — Europe Times (2024 & 2025)",
-  "Noël à La Villette",
-  "Hanami de Sceaux",
-  "Fête de la Mi-Automne à Belleville (2025)",
-];
-
-const collabs = [
-  "UNIQLO Bastille — événement d’ouverture",
-  "Tang Frères — collaboration en cours",
-];
-
-const placeholders = [
-  { src: "/media/event-1.jpg", label: "Media de remplacement — sera remplacé" },
-  { src: "/media/event-2.jpg", label: "Media de remplacement — sera remplacé" },
-  { src: "/media/event-3.jpg", label: "Media de remplacement — sera remplacé" },
-  { src: "/media/event-4.jpg", label: "Media de remplacement — sera remplacé" },
-  { src: "/media/event-5.jpg", label: "Media de remplacement — sera remplacé" },
-  { src: "/media/event-6.jpg", label: "Media de remplacement — sera remplacé" },
-];
+const upcoming = events.filter(e => e.status === 'upcoming');
+const regular = events.filter(e => e.status === 'regular');
+const past = events.filter(e => e.status === 'past');
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="card page">
-    <h1>Événements & Marchés</h1>
-    <p class="lead">
-      Ici, vous trouverez une vue claire de nos festivals, collaborations, et un espace média. Les informations de dates
-      et lieux évoluent selon les événements.
-    </p>
-
-    <section class="section">
-      <h2>Festivals & événements</h2>
-      <ul class="clean-list">
-        {festivals.map((item) => <li>{item}</li>)}
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Collaborations</h2>
-      <ul class="clean-list">
-        {collabs.map((item) => <li>{item}</li>)}
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Photos & vidéos</h2>
-      <p class="note">
-        Grille avec fichiers de remplacement (à remplacer par de vraies photos/vidéos).
-        <br />
-        Chemins utilisés : <code>/media/event-1.jpg</code> à <code>/media/event-6.jpg</code>
+  <section class="apple-section">
+    <div class="container">
+      <span class="badge">Événements</span>
+      <h1 class="h1" style="margin-top:14px;">Nous trouver</h1>
+      <p class="lead" style="max-width:72ch;">
+        Nous sommes un stand itinérant. Voici nos rendez-vous réguliers et nos prochaines dates annoncées.
+        Pour les mises à jour de dernière minute, Instagram est le plus rapide.
       </p>
 
-      <div class="grid grid-3" style="margin-top: 12px;">
-        {placeholders.map((m, i) => (
-          <figure class="media-tile">
-            <img src={m.src} alt={`Événement — média ${i + 1}`} loading="lazy" />
-            <figcaption class="media-caption">{m.label}</figcaption>
-          </figure>
-        ))}
+      <div class="card" style="margin-top:18px;">
+        <div class="pad" style="display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+          <div>
+            <h2 class="h2" style="margin:0;">Instagram</h2>
+            <p class="small" style="margin:6px 0 0;">Infos & stories en temps réel</p>
+          </div>
+          <a class="btn primary" href="https://www.instagram.com/usagidelice" target="_blank" rel="noopener noreferrer">@usagidelice</a>
+        </div>
       </div>
-    </section>
 
-    <section class="section">
-      <h2>Où nous trouver</h2>
-      <p>
-        Nos emplacements varient selon les événements. Pour connaître les dates et lieux à jour, consultez Instagram.
-      </p>
-      <a class="btn" href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">
-        Voir sur Instagram
-      </a>
-    </section>
-  </article>
+      <div id="prochaines-dates" style="margin-top:26px;"></div>
+      <h2 class="h2">Prochaines dates</h2>
+      <p class="lead" style="margin-top:6px; max-width:72ch;">Événements et marchés annoncés.</p>
+      <div class="grid cols-3" style="margin-top:14px;">
+        {(upcoming.length ? upcoming : [{
+          title: 'À annoncer',
+          dateLabel: 'Prochainement',
+          location: 'Paris & Île-de-France',
+          status: 'upcoming',
+          description: "Suivez-nous sur Instagram : on publie les prochaines dates dès qu’elles sont confirmées."
+        }]).map((e) => <EventCard item={e as any} />)}
+      </div>
+
+      <div style="margin-top:26px;"></div>
+      <h2 class="h2">Rendez-vous réguliers</h2>
+      <p class="lead" style="margin-top:6px; max-width:72ch;">Nos marchés habituels.</p>
+      <div class="grid cols-3" style="margin-top:14px;">
+        {regular.map((e) => <EventCard item={e} />)}
+      </div>
+
+      {past.length ? (
+        <>
+          <div style="margin-top:26px;"></div>
+          <h2 class="h2">Déjà passés</h2>
+          <div class="grid cols-3" style="margin-top:14px;">
+            {past.map((e) => <EventCard item={e} />)}
+          </div>
+        </>
+      ) : null}
+
+      <div class="card" style="margin-top:26px;">
+        <div class="pad">
+          <h2 class="h2">Vous organisez un événement ?</h2>
+          <p class="lead" style="margin:0; max-width:80ch;">
+            Festival, marché, entreprise, événement privé… envoyez-nous le lieu, la date et le nombre de personnes estimé.
+          </p>
+          <div style="margin-top:14px;">
+            <a class="btn primary" href="/contact">Contact / collaboration</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 </BaseLayout>

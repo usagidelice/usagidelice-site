@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+
+const title = "Nos produits — Usagi Délice";
+const description = "Découvrez nos spécialités : takoyaki, ebi-yaki et okonomiyaki. Une street food d’Osaka, faite maison et préparée sur place.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="apple-section">
+    <div class="container">
+      <span class="badge">Nos produits</span>
+      <h1 class="h1" style="margin-top:14px;">Une carte courte, authentique</h1>
+      <p class="lead" style="max-width:72ch;">
+        Nous ne mettons pas de prix sur le site : nos formats peuvent varier selon les événements.
+        En revanche, la qualité reste la même : recette maison, cuisson minute, toppings japonais classiques.
+      </p>
+
+      <div class="grid cols-3" style="margin-top:18px;">
+        {products.map((p) => <ProductCard product={p} />)}
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="pad">
+          <h2 class="h2">Toppings & options</h2>
+          <p class="lead" style="margin:0; max-width:80ch;">
+            Sauce takoyaki, mayonnaise japonaise, aonori, copeaux de bonite… et selon les événements, quelques variations.
+            Si vous avez une demande spécifique (allergènes, événement privé), contactez-nous.
+          </p>
+          <div style="margin-top:14px;">
+            <a class="btn primary" href="/contact">Nous contacter</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

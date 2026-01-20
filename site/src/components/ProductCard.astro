@@ -1,0 +1,36 @@
+---
+import type { Product } from "../data/products";
+
+export interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props as Props;
+---
+
+<article class="card">
+  {
+    product.image ? (
+      <img
+        src={product.image}
+        alt={product.name}
+        loading="lazy"
+        width="1200"
+        height="800"
+      />
+    ) : null
+  }
+
+  <div class="pad">
+    <h3>{product.name}</h3>
+    <p><strong>{product.subtitle}</strong></p>
+
+    <div class="hr"></div>
+
+    <p>{product.description}</p>
+
+    <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+      {product.highlights.map((h) => <span class="badge">{h}</span>)}
+    </div>
+  </div>
+</article>

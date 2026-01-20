@@ -1,431 +1,622 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Reveal from "../components/Reveal.astro";
-import GalleryStrip from "../components/GalleryStrip.astro";
+import ProductCard from "../components/ProductCard.astro";
+import EventCard from "../components/EventCard.astro";
+import { products } from "../data/products";
+import { events } from "../data/events";
 
 const title = "Usagi Délice — Takoyaki d’Osaka à Paris";
 const description =
-  "Découvrez Usagi Délice : takoyaki faits maison, préparés sur place, avec une identité kawaii et chaleureuse. Suivez nos événements et collaborations sur Instagram.";
-
-const eventsIntro =
-  "Nous participons régulièrement à des événements culturels japonais à Paris et en Île-de-France. Au fil des années, nous avons eu le plaisir de rencontrer un large public autour de nos takoyaki faits maison, préparés sur place.";
-
-const eventsList = [
-  "Japan Fes (Paris)",
-  "Rice Market — organisé par Europe Times (2024 & 2025)",
-  "Noël à La Villette",
-  "Hanami de Sceaux",
-  "Fête de la Mi-Automne à Belleville (2025)",
-  "UNIQLO Bastille — événement d’ouverture",
-  "Tang Frères — collaboration en cours",
-];
-
-// 主视觉背景图
-const heroImg = "/hero.webp";
-
-// 视觉断点图（随便换成你喜欢的那张）
-const breakImg = "/gallery/3.webp";
+  "Takoyaki faits maison, préparés sur place. Retrouvez Usagi Délice sur les marchés et événements à Paris & Île-de-France.";
 ---
 
 <BaseLayout title={title} description={description}>
-  <!-- 顶部动感带 -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
-      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
-      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
-      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
-      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
-      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
-      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
-      <span class="marquee__item">Takoyaki • Osaka • Paris</span>
-    </div>
-  </div>
-
-  <!-- JAPANFES 级 HERO：全屏背景图 + 文案叠加 -->
-  <section class="hero-full">
-    <img
-      class="hero-bg"
-      src={heroImg}
-      alt="Takoyaki Usagi Délice"
-      loading="eager"
-      decoding="async"
-    />
-
-    <div class="hero-overlay">
-      <Reveal>
-        <span class="hero-kicker">Street food japonaise • Osaka • Paris</span>
-      </Reveal>
-
-      <Reveal delay={80}>
-        <h1 class="hero-title">
-          Takoyaki d’Osaka,<br />
-          faits à la minute à Paris
-        </h1>
-      </Reveal>
-
-      <Reveal delay={140}>
-        <p class="hero-sub">
-          Pâte légère, cuisson minute, toppings maison.<br />
-          Une bouchée authentique, servie chaude, dans un univers kawaii rouge & crème.
-        </p>
-      </Reveal>
-
-      <Reveal delay={200}>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/evenements">Où nous trouver</a>
-          <a class="btn btn-ghost" href="/menu">Menu & prix</a>
-          <a
-            class="btn btn-ghost"
-            href="https://www.instagram.com/usagidelice/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Instagram
-          </a>
-        </div>
-      </Reveal>
-
-      <Reveal delay={260}>
-        <div class="hero-pills">
-          <span class="pill">Fait main</span>
-          <span class="pill">Cuisson minute</span>
-          <span class="pill">Osaka vibe</span>
-        </div>
-      </Reveal>
-    </div>
-
-    <!-- 小贴纸层（更“活”） -->
-    <div class="hero-stickers" aria-hidden="true">
-      <div class="sticker s1">Servi chaud</div>
-      <div class="sticker s2">Toppings maison</div>
-      <div class="sticker s3">100% Takoyaki</div>
-    </div>
-  </section>
-
-  <!-- Événements -->
-  <section class="section">
-    <div class="page-wrap">
-      <Reveal>
-        <div class="card page">
-          <h2 class="section-title">Événements & collaborations</h2>
-          <p class="lead">{eventsIntro}</p>
-
-          <div style="height: 12px"></div>
-
-          <ul class="clean-list">
-            {eventsList.map((item) => <li>{item}</li>)}
-          </ul>
-
-          <div style="height: 14px"></div>
-
-          <div class="actions-row">
-            <a class="btn btn-secondary" href="/evenements"
-              >Voir le calendrier</a
-            >
-            <a
-              class="btn"
-              href="https://www.instagram.com/usagidelice/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Suivre sur Instagram
-            </a>
-          </div>
-        </div>
-      </Reveal>
-    </div>
-  </section>
-
-  <!-- 视觉断点：整屏图片（强冲击） -->
-  <section class="visual-break">
-    <img
-      src={breakImg}
-      alt="Takoyaki cuisson minute"
-      loading="lazy"
-      decoding="async"
-    />
-    <div class="visual-break__overlay"></div>
-
-    <Reveal>
-      <span class="visual-word">Fait à la minute</span>
-    </Reveal>
-  </section>
-
-  <!-- Galerie：横向胶片条（你需要把 GalleryStrip 调成整屏高度，下面会提示） -->
-  <GalleryStrip />
-
-  <!-- 2 cards -->
-  <section class="section">
-    <div class="page-wrap">
-      <div class="grid grid-2">
-        <Reveal>
-          <div class="card page">
-            <h2>Notre histoire</h2>
-            <p>
-              Usagi Délice est né d’une passion pour les takoyaki : le geste, la
-              cuisson minute, et la convivialité d’une street food servie
-              chaude, tout juste sortie des plaques.
-            </p>
-            <a class="btn btn-secondary" href="/notre-histoire">Découvrir</a>
-          </div>
-        </Reveal>
-
-        <Reveal delay={120}>
-          <div class="card page">
-            <h2>Culture & Osaka</h2>
-            <p>
-              Les takoyaki sont un symbole populaire d’Osaka : simples,
-              généreux, et faits pour être partagés. On vous raconte l’esprit
-              derrière cette bouchée iconique.
-            </p>
-            <a class="btn btn-secondary" href="/culture">Explorer</a>
-          </div>
-        </Reveal>
+  <div class="apple-page">
+    <!-- HERO -->
+    <section class="apple-section hero" id="accueil">
+      <div
+        class="bg parallax"
+        data-parallax="hero"
+        style="background-image:url('/images/hero-bg.png')"
+      >
       </div>
-    </div>
-  </section>
+      <div class="container content">
+        <div class="hero-split">
+          <div>
+            <!-- Apple-like: hero title can be revealed, but very gently -->
+            <h1 class="h1" data-reveal data-kind="text" data-delay="0">
+              Takoyaki d’Osaka<br />faits maison à Paris
+            </h1>
 
-  <style>
-    /* marquee 动感带 */
-    .marquee {
-      overflow: hidden;
-      border-top: 1px solid rgba(194, 59, 50, 0.22);
-      border-bottom: 1px solid rgba(194, 59, 50, 0.22);
-      background: rgba(246, 235, 221, 0.55);
-    }
-    .marquee__track {
-      display: flex;
-      gap: 2.2rem;
-      white-space: nowrap;
-      animation: m 18s linear infinite;
-      padding: 0.55rem 0;
-      will-change: transform;
-    }
-    .marquee__item {
-      font-weight: 900;
-      color: rgba(194, 59, 50, 0.92);
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-    @keyframes m {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
-    }
+            <p class="lead" data-reveal data-kind="text" data-delay="80">
+              Street food japonaise authentique, préparée sur place à Paris et
+              en Île-de-France.
+            </p>
 
-    /* ===== HERO 全屏背景 ===== */
-    .hero-full {
-      position: relative;
-      min-height: 92vh;
-      width: 100%;
-      overflow: hidden;
-      background: #000;
-    }
+            <div class="cta-row" data-reveal data-kind="text" data-delay="150">
+              <a class="btn primary" href="#produits">Nos produits</a>
+              <a class="btn ghost" href="#dates">Prochaines dates</a>
+            </div>
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.03);
-    }
+            <div
+              class="chips"
+              style="margin-top:14px;"
+              data-reveal
+              data-kind="text"
+              data-delay="230"
+            >
+              <span class="chip">⭐ Artisan</span>
+              <span class="chip">Préparation minute</span>
+              <span class="chip">Esprit festival</span>
+            </div>
+          </div>
 
-    /* 暗角+渐变罩层：保证文字可读，同时保留食物质感 */
-    .hero-full::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(
-          900px 500px at 20% 20%,
-          rgba(0, 0, 0, 0.15),
-          transparent 60%
-        ),
-        linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.45),
-          rgba(0, 0, 0, 0.15) 40%,
-          rgba(0, 0, 0, 0.7)
-        );
-      z-index: 1;
-    }
+          <!-- Apple-like: panel is “media” weight -->
+          <aside
+            class="hero-panel"
+            data-reveal
+            data-kind="media"
+            data-delay="120"
+          >
+            <div class="badge" data-reveal data-kind="text" data-delay="160">
+              Prochaines dates
+            </div>
 
-    .hero-overlay {
-      position: relative;
-      z-index: 2;
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: clamp(3.5rem, 7vh, 6.2rem) 1.1rem 2.8rem;
-      color: #fff;
-    }
+            <!-- IMPORTANT: no nested reveal per item inside the panel.
+                 Instead: reveal the whole list container once, to avoid jitter. -->
+            <div
+              style="margin-top:12px; display:grid; gap:10px;"
+              data-reveal
+              data-kind="text"
+              data-delay="220"
+            >
+              {
+                events
+                  .filter((e) => e.status !== "past")
+                  .slice(0, 3)
+                  .map((e) => (
+                    <div>
+                      <div style="font-weight:800; letter-spacing:-0.01em;">
+                        {e.title}
+                      </div>
+                      <div class="small">
+                        🗓️ {e.dateLabel} · 📍 {e.location}
+                      </div>
+                    </div>
+                  ))
+              }
+            </div>
 
-    .hero-kicker {
-      display: inline-block;
-      margin-bottom: 1rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      opacity: 0.9;
-    }
+            <div
+              style="margin-top:14px;"
+              data-reveal
+              data-kind="text"
+              data-delay="300"
+            >
+              <a class="btn primary" href="/evenements#prochaines-dates">
+                Voir toutes les dates
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
-    .hero-title {
-      font-size: clamp(2.4rem, 5vw, 4.4rem);
-      line-height: 1.02;
-      margin: 0 0 1rem;
-      text-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
-    }
+    <!-- HISTOIRE -->
+    <section class="apple-section tone-a" id="histoire">
+      <div class="container">
+        <div class="split">
+          <div>
+            <span class="badge" data-reveal data-kind="text" data-delay="0"
+              >Notre histoire</span
+            >
 
-    .hero-sub {
-      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-      max-width: 60ch;
-      opacity: 0.95;
-      margin: 0 0 1.6rem;
-      text-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
-    }
+            <h2
+              class="h2"
+              style="margin-top:14px;"
+              data-reveal
+              data-kind="text"
+              data-delay="80"
+            >
+              Un stand japonais artisanal, inspiré d’Osaka
+            </h2>
 
-    .hero-actions {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.2rem;
-    }
+            <p
+              class="lead"
+              style="max-width:62ch;"
+              data-reveal
+              data-kind="text"
+              data-delay="140"
+            >
+              Usagi Délice est né de l’envie de faire découvrir le vrai goût du
+              takoyaki : cuisson sur place, recette maison, et toppings japonais
+              classiques.
+            </p>
 
-    /* pills */
-    .hero-pills {
-      display: flex;
-      gap: 0.55rem;
-      flex-wrap: wrap;
-      margin-top: 0.4rem;
-    }
-    .pill {
-      display: inline-flex;
-      padding: 0.45rem 0.75rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(246, 235, 221, 0.14);
-      backdrop-filter: blur(10px);
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
+            <div class="cta-row" data-reveal data-kind="text" data-delay="220">
+              <a class="btn ghost" href="/notre-histoire">Découvrir</a>
+              <a class="btn primary" href="#dates">Nous trouver</a>
+            </div>
+          </div>
 
-    /* stickers（角落漂浮贴纸） */
-    .hero-stickers {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .sticker {
-      position: absolute;
-      padding: 0.55rem 0.75rem;
-      border-radius: 16px;
-      background: rgba(246, 235, 221, 0.82);
-      border: 1px solid rgba(194, 59, 50, 0.28);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
-      font-weight: 900;
-      color: rgba(194, 59, 50, 0.96);
-      backdrop-filter: blur(10px);
-      transform: rotate(-2deg);
-    }
-    .s1 {
-      left: 16px;
-      top: 18px;
-    }
-    .s2 {
-      right: 18px;
-      top: 22px;
-      transform: rotate(2deg);
-    }
-    .s3 {
-      right: 18px;
-      bottom: 18px;
-      transform: rotate(-3deg);
-    }
+          <div
+            class="media-card"
+            data-reveal
+            data-kind="media"
+            data-delay="140"
+          >
+            <div
+              class="media parallax"
+              data-parallax="media"
+              style="background-image:url('/images/histoire-bg.jpg')"
+            >
+            </div>
+          </div>
+        </div>
 
-    /* ===== 视觉断点 ===== */
-    .visual-break {
-      position: relative;
-      height: 80vh;
-      overflow: hidden;
-      margin: 0;
-    }
-    .visual-break img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transform: scale(1.02);
-    }
-    .visual-break__overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.38);
-      z-index: 1;
-    }
-    .visual-word {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(2rem, 6vw, 5.2rem);
-      font-weight: 950;
-      color: #fff;
-      z-index: 2;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
-    }
+        <!-- Apple-like Layer 2: highlights row -->
+        <div
+          class="highlights"
+          style="margin-top:18px;"
+          data-reveal
+          data-kind="card"
+          data-delay="220"
+        >
+          <div class="mini-card">
+            <div class="mini-kicker">Artisanal</div>
+            <div class="mini-title">Préparé sur place</div>
+            <div class="mini-text">
+              Cuisson minute et service chaud, comme au Japon.
+            </div>
+          </div>
 
-    /* 页面容器 */
-    .page-wrap {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 1.1rem;
-    }
+          <div class="mini-card">
+            <div class="mini-kicker">Recette</div>
+            <div class="mini-title">Style Osaka</div>
+            <div class="mini-text">
+              Pâte légère, cœur fondant, toppings japonais classiques.
+            </div>
+          </div>
 
-    .actions-row {
-      display: flex;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-      margin-top: 0.6rem;
-    }
+          <div class="mini-card">
+            <div class="mini-kicker">Paris</div>
+            <div class="mini-title">Marchés & événements</div>
+            <div class="mini-text">
+              Présent en Île-de-France selon le calendrier des marchés.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    /* reveal 动画（你已在组件里加了观察器，这里是样式） */
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition:
-        opacity 0.55s ease,
-        transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
-      transition-delay: var(--d, 0ms);
-    }
-    .reveal.is-in {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    <!-- PRODUITS -->
+    <section class="apple-section tone-b" id="produits">
+      <div class="container">
+        <span class="badge" data-reveal data-kind="text" data-delay="0"
+          >Nos produits</span
+        >
 
-    @media (max-width: 900px) {
-      .marquee__track {
-        animation-duration: 14s;
-      }
-      .hero-overlay {
-        padding-top: 3.6rem;
-      }
-      .visual-break {
-        height: 70vh;
-      }
-    }
+        <h2
+          class="h2"
+          style="margin-top:14px;"
+          data-reveal
+          data-kind="text"
+          data-delay="80"
+        >
+          Street food d’Osaka, préparée à la minute
+        </h2>
 
-    @media (prefers-reduced-motion: reduce) {
-      .marquee__track {
-        animation: none;
-      }
-    }
-  </style>
+        <p
+          class="lead"
+          style="max-width:66ch;"
+          data-reveal
+          data-kind="text"
+          data-delay="140"
+        >
+          Takoyaki, Ebi-yaki, Okonomiyaki… Une carte courte, concentrée sur la
+          qualité et l’authenticité.
+        </p>
+
+        <!-- Layer 2: feature cards -->
+        <div class="feature-row" style="margin-top:16px;">
+          <div class="feature-card" data-reveal data-kind="card" data-delay="0">
+            <div class="feature-kicker">Signature</div>
+            <div class="feature-title">Takoyaki</div>
+            <div class="feature-text">
+              Doré à l’extérieur, fondant à l’intérieur — sauce, mayo, aonori &
+              katsuobushi.
+            </div>
+          </div>
+
+          <div
+            class="feature-card"
+            data-reveal
+            data-kind="card"
+            data-delay="90"
+          >
+            <div class="feature-kicker">Osaka</div>
+            <div class="feature-title">Okonomiyaki</div>
+            <div class="feature-text">
+              Une autre spécialité d’Osaka, généreuse et réconfortante.
+            </div>
+          </div>
+
+          <div
+            class="feature-card"
+            data-reveal
+            data-kind="card"
+            data-delay="180"
+          >
+            <div class="feature-kicker">Option</div>
+            <div class="feature-title">Ebi-yaki</div>
+            <div class="feature-text">
+              Alternative crevette, même esprit “street food” et cuisson minute.
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards grid: stagger by wrapper only -->
+        <div class="grid cols-3" style="margin-top:16px;">
+          {
+            products.map((p, i) => (
+              <div data-reveal data-kind="media" data-delay={i * 70}>
+                <ProductCard product={p} />
+              </div>
+            ))
+          }
+        </div>
+
+        <div
+          class="cta-row"
+          style="margin-top:18px;"
+          data-reveal
+          data-kind="text"
+          data-delay="240"
+        >
+          <a class="btn primary" href="/nos-produits">Voir la page produits</a>
+          <a class="btn ghost" href="#galerie">Voir des photos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATES -->
+    <section class="apple-section tone-c" id="dates">
+      <div class="container">
+        <div class="split">
+          <div>
+            <span class="badge" data-reveal data-kind="text" data-delay="0"
+              >Nous trouver</span
+            >
+
+            <h2
+              class="h2"
+              style="margin-top:14px;"
+              data-reveal
+              data-kind="text"
+              data-delay="80"
+            >
+              Prochaines dates & marchés
+            </h2>
+
+            <p
+              class="lead"
+              style="max-width:60ch;"
+              data-reveal
+              data-kind="text"
+              data-delay="140"
+            >
+              Nous sommes souvent sur les marchés (Vincennes, Paris 16e) et sur
+              des événements japonais (matsuri, hanami…).
+            </p>
+
+            <div class="highlights highlights-2" style="margin-top:14px;">
+              <div
+                class="mini-card"
+                data-reveal
+                data-kind="card"
+                data-delay="0"
+              >
+                <div class="mini-kicker">Marché</div>
+                <div class="mini-title">Vincennes</div>
+                <div class="mini-text">
+                  Retrouvez-nous régulièrement (selon planning).
+                </div>
+              </div>
+
+              <div
+                class="mini-card"
+                data-reveal
+                data-kind="card"
+                data-delay="90"
+              >
+                <div class="mini-kicker">Marché</div>
+                <div class="mini-title">Paris 16e</div>
+                <div class="mini-text">
+                  Président Wilson — stand artisan, service rapide.
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="cta-row"
+              style="margin-top:16px;"
+              data-reveal
+              data-kind="text"
+              data-delay="220"
+            >
+              <a class="btn ghost" href="/evenements">Voir la page événements</a
+              >
+              <a class="btn primary" href="#contact">Collaborer</a>
+            </div>
+          </div>
+
+          <div
+            class="panel-card"
+            data-reveal
+            data-kind="media"
+            data-delay="120"
+          >
+            <div
+              class="panel-title"
+              data-reveal
+              data-kind="text"
+              data-delay="160"
+            >
+              À venir
+            </div>
+
+            <!-- Again: reveal container once (no nested reveal per item) -->
+            <div
+              class="panel-list"
+              data-reveal
+              data-kind="text"
+              data-delay="220"
+            >
+              {
+                events
+                  .filter((e) => e.status !== "past")
+                  .slice(0, 5)
+                  .map((e) => (
+                    <div class="panel-item">
+                      <div class="panel-item-title">{e.title}</div>
+                      <div class="small">
+                        🗓️ {e.dateLabel} · 📍 {e.location}
+                      </div>
+                    </div>
+                  ))
+              }
+            </div>
+
+            <div
+              style="margin-top:14px;"
+              data-reveal
+              data-kind="text"
+              data-delay="300"
+            >
+              <a class="btn primary" href="/evenements#prochaines-dates">
+                Toutes les dates
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full cards grid (stagger wrappers) -->
+        <div class="grid cols-3" style="margin-top:16px;">
+          {
+            events
+              .filter((e) => e.status !== "past")
+              .map((e, i) => (
+                <div data-reveal data-kind="media" data-delay={i * 70}>
+                  <EventCard item={e} />
+                </div>
+              ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section class="apple-section tone-a" id="galerie">
+      <div class="container">
+        <span class="badge" data-reveal data-kind="text" data-delay="0"
+          >Galerie</span
+        >
+
+        <h2
+          class="h2"
+          style="margin-top:14px;"
+          data-reveal
+          data-kind="text"
+          data-delay="80"
+        >
+          Ambiance, cuisine, événements
+        </h2>
+
+        <p
+          class="lead"
+          style="max-width:66ch;"
+          data-reveal
+          data-kind="text"
+          data-delay="140"
+        >
+          Quelques photos pour sentir l’esprit du stand : préparation minute,
+          marchés, festivals, et bons moments.
+        </p>
+
+        <div class="gallery-grid" style="margin-top:16px;">
+          <div class="card g1" data-reveal data-kind="media" data-delay="0">
+            <img
+              src="/images/gallery-1.jpg"
+              alt="Usagi Délice — stand"
+              loading="lazy"
+              width="1400"
+              height="900"
+            />
+          </div>
+
+          <div class="card g2" data-reveal data-kind="media" data-delay="90">
+            <img
+              src="/images/gallery-2.jpg"
+              alt="Usagi Délice — takoyaki"
+              loading="lazy"
+              width="1200"
+              height="900"
+            />
+          </div>
+
+          <div class="card g3" data-reveal data-kind="media" data-delay="180">
+            <img
+              src="/images/gallery-3.jpg"
+              alt="Usagi Délice — cuisson"
+              loading="lazy"
+              width="1200"
+              height="900"
+            />
+          </div>
+
+          <div class="card g4" data-reveal data-kind="media" data-delay="270">
+            <img
+              src="/images/gallery-4.jpg"
+              alt="Usagi Délice — événement"
+              loading="lazy"
+              width="1200"
+              height="900"
+            />
+          </div>
+        </div>
+
+        <div
+          class="cta-row"
+          style="margin-top:18px;"
+          data-reveal
+          data-kind="text"
+          data-delay="220"
+        >
+          <a class="btn primary" href="/galerie">Voir toute la galerie</a>
+          <a class="btn ghost" href="#contact">Nous contacter</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="apple-section tone-b" id="contact">
+      <div class="container">
+        <div class="split">
+          <div>
+            <span class="badge" data-reveal data-kind="text" data-delay="0"
+              >Collaboration</span
+            >
+
+            <h2
+              class="h2"
+              style="margin-top:14px;"
+              data-reveal
+              data-kind="text"
+              data-delay="80"
+            >
+              Vous organisez un événement ?
+            </h2>
+
+            <p
+              class="lead"
+              style="max-width:62ch;"
+              data-reveal
+              data-kind="text"
+              data-delay="140"
+            >
+              Marché, festival, entreprise, événement privé… Dites-nous la date,
+              le lieu et le format — on vous répond rapidement.
+            </p>
+
+            <div class="cta-row" data-reveal data-kind="text" data-delay="220">
+              <a class="btn primary" href="/contact">Nous contacter</a>
+              <a
+                class="btn ghost"
+                href="https://www.instagram.com/usagidelice"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Voir Instagram
+              </a>
+            </div>
+
+            <div class="highlights highlights-2" style="margin-top:16px;">
+              <div
+                class="mini-card"
+                data-reveal
+                data-kind="card"
+                data-delay="0"
+              >
+                <div class="mini-kicker">Réponse</div>
+                <div class="mini-title">Rapide</div>
+                <div class="mini-text">
+                  On revient vers vous avec une proposition claire.
+                </div>
+              </div>
+
+              <div
+                class="mini-card"
+                data-reveal
+                data-kind="card"
+                data-delay="90"
+              >
+                <div class="mini-kicker">Format</div>
+                <div class="mini-title">Flexible</div>
+                <div class="mini-text">
+                  Stand, prestation, événement d’entreprise…
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="panel-card"
+            data-reveal
+            data-kind="media"
+            data-delay="120"
+          >
+            <div
+              class="panel-title"
+              data-reveal
+              data-kind="text"
+              data-delay="160"
+            >
+              Contact direct
+            </div>
+
+            <div
+              class="panel-list"
+              data-reveal
+              data-kind="text"
+              data-delay="220"
+            >
+              <div class="panel-item">
+                <div class="panel-item-title">Email</div>
+                <div class="small">contact@usagidelice.fr</div>
+              </div>
+
+              <div class="panel-item">
+                <div class="panel-item-title">Instagram</div>
+                <div class="small">@usagidelice</div>
+              </div>
+
+              <div class="panel-item">
+                <div class="panel-item-title">Zone</div>
+                <div class="small">Paris & Île-de-France</div>
+              </div>
+            </div>
+
+            <div
+              style="margin-top:14px;"
+              data-reveal
+              data-kind="text"
+              data-delay="300"
+            >
+              <a class="btn primary" href="/contact">Ouvrir le formulaire</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

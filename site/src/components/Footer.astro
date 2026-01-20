@@ -1,26 +1,47 @@
 ---
+export interface Props {
+  brandName?: string;
+  instagramUrl?: string;
+  email?: string;
+}
+
 const year = new Date().getFullYear();
+
+const {
+  brandName = "Usagi Délice",
+  instagramUrl = "https://www.instagram.com/usagidelice",
+  email = "contact@usagidelice.fr",
+} = Astro.props as Props;
 ---
 
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-left">
-      <div class="footer-brand">
-        <img src="/logo.png" alt="" width="34" height="34" loading="lazy" />
-        <span class="footer-brand-name">Usagi Délice</span>
+  <div class="container footer-grid">
+    <div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="badge">Takoyaki d’Osaka à Paris</span>
       </div>
-      <p class="footer-tagline">© {year} Usagi Délice – Takoyaki d’Osaka à Paris</p>
+      <p class="lead" style="margin-top:12px; max-width: 48ch;">
+        Street food japonaise authentique, faite maison et préparée sur place.
+      </p>
+      <p class="small">© {year} {brandName}. Tous droits réservés.</p>
     </div>
 
-    <div class="footer-right">
-      <ul class="footer-links">
-        <li>
-          <a href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">Instagram</a>
-        </li>
-        <li>
-          <a href="mailto:contact@usagidelice.fr">contact@usagidelice.fr</a>
-        </li>
-      </ul>
+    <div class="footer-links">
+      <strong>Pages</strong>
+      <a href="/notre-histoire">Notre histoire</a>
+      <a href="/nos-produits">Nos produits</a>
+      <a href="/evenements">Événements</a>
+      <a href="/galerie">Galerie</a>
+      <a href="/contact">Contact / collaboration</a>
+    </div>
+
+    <div class="footer-links">
+      <strong>Contact</strong>
+      <a href={`mailto:${email}`}>{email}</a>
+      <a href={instagramUrl} rel="noopener noreferrer" target="_blank"
+        >Instagram</a
+      >
+      <a href="/mentions-legales">Mentions légales</a>
     </div>
   </div>
 </footer>

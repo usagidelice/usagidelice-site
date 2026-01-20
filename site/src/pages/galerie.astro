@@ -1,55 +1,48 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-const title = "Galerie (Instagram) — Usagi Délice";
-const description =
-  "Galerie Usagi Délice : espace Instagram pour photos et vidéos autour des takoyaki. Remplacez le bloc embed par l’intégration officielle.";
+const title = "Galerie — Usagi Délice";
+const description = "Photos du stand, des takoyaki et des événements. L’ambiance Usagi Délice en images.";
+
+const photos = [
+  { src: '/images/gallery-1.jpg', alt: 'Stand Usagi Délice' },
+  { src: '/images/gallery-2.jpg', alt: 'Takoyaki' },
+  { src: '/images/gallery-3.jpg', alt: 'Cuisson sur plaque' },
+  { src: '/images/gallery-4.jpg', alt: 'Ambiance événement' },
+  { src: '/images/gallery-5.jpg', alt: 'Préparation' },
+  { src: '/images/gallery-6.jpg', alt: 'Service' }
+];
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="card page">
-    <h1>Galerie</h1>
-    <p class="lead">
-      Cet espace est prévu pour afficher Instagram (embed officiel) ou une grille simple. Remplacez le code ci-dessous
-      par votre embed.
-    </p>
-
-    <section class="section">
-      <h2>Embed Instagram</h2>
-      <div class="note">
-        👉 Remplacer ici par le code embed officiel Instagram (ou un plugin/front script si besoin).
-        <br />
-        Exemple : coller le code fourni par Instagram, ou intégrer une grille statique que vous mettez à jour.
-      </div>
-
-      <!-- =========================================================
-           PLACEHOLDER EMBED
-           Remplacez ce bloc par votre embed Instagram officiel.
-           ========================================================= -->
-      <div class="card" style="margin-top: 12px; padding: 16px;">
-        <p style="margin:0; font-weight: 750; color: var(--muted);">
-          [Instagram embed à insérer ici]
-        </p>
-        <p class="help" style="margin-top: 8px;">
-          Compte : <a href="https://www.instagram.com/usagidelice/" target="_blank" rel="noreferrer">@usagidelice</a>
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Grille simple (option)</h2>
-      <p class="help">
-        Si vous préférez une grille sans embed, vous pouvez remplacer par des images dans <code>/public/media/</code>.
+  <section class="apple-section">
+    <div class="container">
+      <span class="badge">Galerie</span>
+      <h1 class="h1" style="margin-top:14px;">L’ambiance Usagi Délice</h1>
+      <p class="lead" style="max-width:72ch;">
+        Ici, vous trouverez des photos du stand, de la cuisson et des événements. Ajoutez vos meilleures photos au fil du temps : c’est ce qui crée la confiance.
       </p>
 
-      <div class="grid grid-3" style="margin-top: 12px;">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <figure class="media-tile">
-            <img src={`/media/insta-${i + 1}.jpg`} alt={`Galerie — image ${i + 1}`} loading="lazy" />
-            <figcaption class="media-caption">Image de remplacement — sera remplacée</figcaption>
-          </figure>
+      <div class="grid" style="margin-top:18px; grid-template-columns: repeat(2, 1fr);">
+        {photos.map((p) => (
+          <a class="card" href={p.src} target="_blank" rel="noopener noreferrer">
+            <img src={p.src} alt={p.alt} loading="lazy" width="1200" height="900" />
+          </a>
         ))}
       </div>
-    </section>
-  </article>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="pad">
+          <h2 class="h2">Instagram</h2>
+          <p class="lead" style="margin:0; max-width:80ch;">
+            Pour encore plus de photos et les stories des marchés / festivals.
+          </p>
+          <div style="margin-top:14px;">
+            <a class="btn primary" href="https://www.instagram.com/usagidelice" target="_blank" rel="noopener noreferrer">Voir Instagram</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 </BaseLayout>
