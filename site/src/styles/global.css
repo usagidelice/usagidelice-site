@@ -1050,3 +1050,115 @@ main h6,
     word-break: normal;
   }
 }
+
+/* =========================================================
+   Usagi Délice — UI Micro-tuning Patch (non-destructive)
+   Goal: cleaner, more Apple-like, less "cardy"
+   - Keep structure; override only
+========================================================= */
+
+/* Token refinements */
+:root {
+  --hairline: rgba(42, 31, 31, 0.1);
+  --hairline-2: rgba(42, 31, 31, 0.16);
+
+  /* Softer elevation (reduce card feeling) */
+  --shadow-soft: 0 10px 24px rgba(42, 31, 31, 0.08);
+  --shadow-softer: 0 8px 18px rgba(42, 31, 31, 0.06);
+
+  /* Tighter radii feel more Apple-like */
+  --radius: 16px;
+  --radius-sm: 12px;
+}
+
+/* Container: consistent side padding across breakpoints */
+.container {
+  padding-inline: clamp(16px, 2.2vw, 20px);
+}
+
+/* Header polish */
+.site-header {
+  background: rgba(246, 235, 221, 0.86);
+  border-bottom: 1px solid var(--hairline);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.nav {
+  font-weight: 650;
+}
+.nav a {
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(42, 31, 31, 0.86);
+  transition:
+    background 160ms var(--ease),
+    opacity 160ms var(--ease);
+}
+.nav a:hover {
+  background: rgba(255, 255, 255, 0.48);
+}
+
+/* Better focus (keyboard accessibility, Apple-like) */
+a:focus-visible,
+button:focus-visible,
+.menu-btn:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid rgba(194, 59, 50, 0.45);
+  outline-offset: 3px;
+}
+
+/* Buttons: subtler motion */
+.btn {
+  transition:
+    transform 160ms var(--ease),
+    background 160ms var(--ease),
+    box-shadow 160ms var(--ease);
+}
+.btn:hover {
+  transform: translateY(-0.5px);
+  box-shadow: 0 8px 18px rgba(42, 31, 31, 0.08);
+}
+
+/* Reduce "card" feeling site-wide: prefer hairline + gentle shadow */
+.card,
+.mini-card,
+.feature-card,
+.panel-card,
+.media-card {
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-softer);
+}
+.hero-panel {
+  border: 1px solid var(--hairline);
+  box-shadow: none;
+  background: rgba(255, 247, 239, 0.72);
+}
+
+/* Mobile drawer: lighter and less heavy */
+.mobile-drawer {
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: 0 14px 34px rgba(42, 31, 31, 0.1);
+}
+.mobile-drawer a {
+  border: 1px solid var(--hairline);
+}
+
+/* Typography rhythm: slightly calmer paragraph spacing */
+p + p {
+  margin-top: 10px;
+}
+
+/* Prevent scroll-snap from feeling "sticky" on trackpads in some browsers */
+@media (min-width: 1024px) {
+  .apple-page {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: var(--header-h);
+  }
+}
+
+/* Smooth scroll only when motion is allowed */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
