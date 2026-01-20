@@ -122,12 +122,13 @@ img {
   min-width: 220px;
 }
 .brand img {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
 }
 .brand .name {
-  font-weight: 800;
+  font-weight: 850;
+  font-size: 18px;
   letter-spacing: -0.02em;
 }
 
@@ -1161,4 +1162,186 @@ p + p {
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* ===== Header mobile centering & brand scaling ===== */
+
+@media (max-width: 720px) {
+  .header-inner--responsive {
+    justify-content: center;
+    position: relative;
+  }
+
+  .brand {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .brand img {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+
+  .brand .name {
+    font-size: 17px;
+    font-weight: 900;
+    max-width: none;
+  }
+
+  .header-actions {
+    position: absolute;
+    right: 12px;
+  }
+}
+
+/* ===== Hamburger button redesign ===== */
+.menu-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--hairline);
+}
+
+.menu-btn .burger {
+  display: grid;
+  gap: 4px;
+}
+
+.menu-btn .burger i {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(42, 31, 31, 0.85);
+  border-radius: 2px;
+}
+
+
+
+/* ===== Mobile header: logo left, title centered, burger right ===== */
+@media (max-width: 720px) {
+  .header-inner {
+    position: relative;
+  }
+
+  .brand {
+    flex: 0 0 auto;
+  }
+
+  .brand img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand .name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .header-actions {
+    flex: 0 0 auto;
+  }
+}
+
+/* ===== Burger icon refinement ===== */
+.menu-btn {
+  background: transparent;
+  border-radius: 12px;
+}
+
+.menu-btn .burger {
+  display: grid;
+  gap: 4px;
+}
+
+.menu-btn .burger i {
+  display: block;
+  width: 22px; /* wider bars */
+  height: 2px;
+  background: rgba(42,31,31,0.9);
+  border-radius: 2px;
+}
+
+
+
+/* =========================================================
+   FIX: Mobile header layout (logo left, title centered, burger right)
+   - Overrides earlier experimental patches
+========================================================= */
+
+@media (max-width: 720px) {
+  .site-header .header-inner,
+  .site-header .header-inner--responsive {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  .site-header .brand {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-width: 0 !important;
+  }
+
+  .site-header .brand img {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Take the title out of the left flow and center it visually */
+  .site-header .brand .name {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+
+    font-size: 18px !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.05 !important;
+
+    max-width: 68% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+
+    pointer-events: none !important;
+  }
+
+  .site-header .header-actions {
+    position: static !important;
+  }
+}
+
+/* Burger button: keep your new style, make bars slightly wider */
+.menu-btn {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  border: 1px solid rgba(42, 31, 31, 0.14) !important;
+}
+
+.menu-btn .burger {
+  display: grid !important;
+  gap: 4px !important;
+}
+
+.menu-btn .burger i {
+  display: block !important;
+  width: 24px !important; /* wider bars */
+  height: 2px !important;
+  background: rgba(42, 31, 31, 0.9) !important;
+  border-radius: 2px !important;
 }

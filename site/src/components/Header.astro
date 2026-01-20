@@ -18,13 +18,13 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
 ---
 
 <header class="site-header" data-header>
-  <div class="container header-inner">
+  <div class="container header-inner header-inner--responsive">
     <a class="brand" href="/" aria-label={`${brandName} — Accueil`}>
       <img
         src={logoSrc}
         alt={`${brandName} logo`}
-        width="38"
-        height="38"
+        width="48"
+        height="48"
         loading="eager"
       />
       <span class="name">{brandName}</span>
@@ -49,7 +49,7 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
         aria-controls="mobile-drawer"
         data-menu-btn
       >
-        ☰
+        <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
       </button>
     </div>
   </div>
