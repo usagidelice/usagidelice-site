@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "Message envoyé — Usagi Délice";
+const description = "Merci ! Votre message a bien été envoyé à Usagi Délice.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="apple-section">
+    <div class="container">
+      <span class="badge">Merci</span>
+      <h1 class="h1" style="margin-top:14px;">Message envoyé ✅</h1>
+      <p class="lead" style="max-width:70ch;">
+        Merci pour votre message. Nous revenons vers vous généralement sous 24–48h.
+      </p>
+
+      <div class="grid" style="grid-template-columns: 1fr; gap:16px; margin-top:18px;">
+        <div class="card">
+          <div class="pad">
+            <h2 class="h2">Pendant ce temps</h2>
+            <p class="lead" style="margin-top:0; max-width:72ch;">
+              Retrouvez nos prochaines dates et photos sur Instagram.
+            </p>
+            <div class="cta-row">
+              <a class="btn primary" href="https://www.instagram.com/usagidelice" target="_blank" rel="noopener noreferrer">Voir Instagram</a>
+              <a class="btn ghost" href="/">Retour à l’accueil</a>
+              <a class="btn ghost" href="/contact">Revenir au formulaire</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="pad">
+            <h2 class="h2">Contact direct</h2>
+            <p class="small" style="margin:0;">
+              Si vous n’avez pas de réponse sous 48h, vous pouvez écrire directement à :
+            </p>
+            <div style="margin-top:12px;">
+              <a class="btn ghost" href="mailto:contact@usagidelice.fr">contact@usagidelice.fr</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

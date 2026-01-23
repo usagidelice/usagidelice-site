@@ -4,9 +4,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const title = "Contact & collaboration — Usagi Délice";
 const description = "Contactez Usagi Délice pour une collaboration, un événement, un marché ou une demande d’information.";
 
-// Option: connect this form to Formspree or another provider.
-// Replace FORM_ACTION with your endpoint.
-const FORM_ACTION = "https://formspree.io/f/xxxxxxxx";
+// Formspree endpoint
+const FORM_ACTION = "https://formspree.io/f/mgoaybke";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -22,22 +21,43 @@ const FORM_ACTION = "https://formspree.io/f/xxxxxxxx";
         <div class="card">
           <div class="pad">
             <h2 class="h2">Formulaire</h2>
-            <p class="small">Astro = site statique. Pour recevoir les messages, connectez le formulaire (Formspree, Zoho, etc.).</p>
+            <p class="small">Vous recevrez une réponse sous 24–48h (selon période d’événements).</p>
 
-            <form method="POST" action={FORM_ACTION} style="display:grid; gap:12px; max-width: 720px;">
+            <form
+              id="contactForm"
+              method="POST"
+              action={FORM_ACTION}
+              style="display:grid; gap:12px; max-width: 720px;"
+            >
               <label>
                 <div class="small" style="margin-bottom:6px; font-weight:700;">Nom</div>
-                <input name="name" required placeholder="Votre nom" style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);" />
+                <input
+                  name="name"
+                  required
+                  autocomplete="name"
+                  placeholder="Votre nom"
+                  style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);"
+                />
               </label>
 
               <label>
                 <div class="small" style="margin-bottom:6px; font-weight:700;">Email</div>
-                <input type="email" name="email" required placeholder="vous@email.com" style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);" />
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  placeholder="vous@email.com"
+                  style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);"
+                />
               </label>
 
               <label>
                 <div class="small" style="margin-bottom:6px; font-weight:700;">Type de demande</div>
-                <select name="type" style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);">
+                <select
+                  name="type"
+                  style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);"
+                >
                   <option value="evenement">Événement / festival</option>
                   <option value="marche">Marché</option>
                   <option value="entreprise">Entreprise</option>
@@ -48,10 +68,32 @@ const FORM_ACTION = "https://formspree.io/f/xxxxxxxx";
 
               <label>
                 <div class="small" style="margin-bottom:6px; font-weight:700;">Message</div>
-                <textarea name="message" required rows="6" placeholder="Date, lieu, horaires, nombre de personnes, contraintes..." style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);"></textarea>
+                <textarea
+                  name="message"
+                  required
+                  rows="6"
+                  placeholder="Date, lieu, horaires, nombre de personnes, contraintes..."
+                  style="width:100%; padding:12px 14px; border-radius: 14px; border:1px solid rgba(42,31,31,0.12); background: rgba(255,255,255,0.75);"
+                ></textarea>
               </label>
 
-              <button class="btn primary" type="submit" style="justify-self:start;">Envoyer</button>
+              <!-- Anti-spam honeypot: ne rien écrire ici -->
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" />
+
+              <!-- Optional: consistent email subject -->
+              <input type="hidden" name="_subject" value="Nouveau message — Usagi Délice" />
+
+              <button id="contactSubmit" class="btn primary" type="submit" style="justify-self:start;">
+                Envoyer
+              </button>
+
+              <p id="formStatus" class="small" role="status" aria-live="polite" style="margin:0; opacity:.85;"></p>
+
+              <noscript>
+                <p class="small" style="margin:0; opacity:.85;">
+                  JavaScript est désactivé : après l’envoi, vous verrez la page de confirmation Formspree.
+                </p>
+              </noscript>
             </form>
           </div>
         </div>
@@ -72,4 +114,40 @@ const FORM_ACTION = "https://formspree.io/f/xxxxxxxx";
 
     </div>
   </section>
+
+  <script is:inline>
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('contactSubmit');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (statusEl) statusEl.textContent = "Envoi en cours…";
+        if (submitBtn) submitBtn.setAttribute('disabled', 'true');
+
+        try {
+          const data = new FormData(form);
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            window.location.href = '/merci';
+            return;
+          }
+
+          // try to parse error (optional)
+          if (statusEl) statusEl.textContent = "Oups… impossible d’envoyer. Réessayez plus tard.";
+          if (submitBtn) submitBtn.removeAttribute('disabled');
+        } catch (err) {
+          if (statusEl) statusEl.textContent = "Erreur réseau. Vérifiez votre connexion et réessayez.";
+          if (submitBtn) submitBtn.removeAttribute('disabled');
+        }
+      });
+    }
+  </script>
 </BaseLayout>
