@@ -25,8 +25,7 @@ const upcomingEventsMore = events
         data-parallax="hero"
         style="--hero-bg:url('/images/hero-bg.png'); --hero-bg-mobile:url('/images/hero-bg-mobile.png');"
         aria-hidden="true"
-      >
-      </div>
+      ></div>
 
       <div class="container content">
         <div class="hero-split">
@@ -42,9 +41,9 @@ const upcomingEventsMore = events
             </p>
           </div>
 
-          <!-- Right panel -->
+          <!-- Right panel (desktop) -->
           <aside
-            class="hero-panel"
+            class="hero-panel hero-panel--desktop"
             data-reveal
             data-kind="media"
             data-delay="120"
@@ -72,6 +71,41 @@ const upcomingEventsMore = events
               </a>
             </div>
           </aside>
+
+          <!-- Mobile-only: collapsible upcoming dates -->
+          <details class="hero-dates-toggle only-mobile">
+            <summary class="hero-dates-btn">
+              <span class="badge">Prochaines dates</span>
+              <span class="hero-dates-btn__chev" aria-hidden="true"></span>
+            </summary>
+
+            <div class="hero-dates-drawer" role="dialog" aria-label="Prochaines dates">
+              <div class="hero-panel hero-panel--drawer">
+                <div class="badge">Prochaines dates</div>
+
+                <div style="margin-top:12px; display:grid; gap:10px;">
+                  {
+                    upcomingEvents.map((e) => (
+                      <div>
+                        <div style="font-weight:800; letter-spacing:-0.01em;">
+                          {e.title}
+                        </div>
+                        <div class="small">
+                          🗓️ {e.dateLabel} · 📍 {e.location}
+                        </div>
+                      </div>
+                    ))
+                  }
+                </div>
+
+                <div style="margin-top:14px;">
+                  <a class="btn primary" href="/evenements#prochaines-dates">
+                    Voir toutes les dates
+                  </a>
+                </div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -124,8 +158,7 @@ const upcomingEventsMore = events
               data-parallax="media"
               style="background-image:url('/images/histoire-bg.jpg')"
               aria-hidden="true"
-            >
-            </div>
+            ></div>
           </div>
         </div>
 
@@ -163,7 +196,7 @@ const upcomingEventsMore = events
       </div>
     </section>
 
-    <!-- PRODUITS -->
+    <!-- PRODUITS (focus: Takoyaki) -->
     <section class="apple-section tone-b" id="produits">
       <div class="container">
         <span class="badge" data-reveal data-kind="text" data-delay="0"
@@ -177,7 +210,7 @@ const upcomingEventsMore = events
           data-kind="text"
           data-delay="80"
         >
-          Street food d’Osaka, préparée à la minute
+          Takoyaki — notre spécialité d’Osaka
         </h2>
 
         <p
@@ -187,17 +220,16 @@ const upcomingEventsMore = events
           data-kind="text"
           data-delay="140"
         >
-          Takoyaki, Ebi-yaki, Okonomiyaki… Une carte courte, concentrée sur la
-          qualité et l’authenticité.
+          Une carte courte et maîtrisée : takoyaki dorés à l’extérieur, fondants à l’intérieur,
+          préparés à la minute devant vous.
         </p>
 
         <div class="feature-row" style="margin-top:16px;">
           <div class="feature-card" data-reveal data-kind="card" data-delay="0">
             <div class="feature-kicker">Signature</div>
-            <div class="feature-title">Takoyaki</div>
+            <div class="feature-title">Cuisson minute</div>
             <div class="feature-text">
-              Doré à l’extérieur, fondant à l’intérieur — sauce, mayo, aonori &
-              katsuobushi.
+              Chaque portion est cuite sur place, servie bien chaude.
             </div>
           </div>
 
@@ -207,10 +239,10 @@ const upcomingEventsMore = events
             data-kind="card"
             data-delay="90"
           >
-            <div class="feature-kicker">Osaka</div>
-            <div class="feature-title">Okonomiyaki</div>
+            <div class="feature-kicker">Texture</div>
+            <div class="feature-title">Cœur fondant</div>
             <div class="feature-text">
-              Une autre spécialité d’Osaka, généreuse et réconfortante.
+              Une pâte légère, un intérieur moelleux, comme à Osaka.
             </div>
           </div>
 
@@ -220,10 +252,10 @@ const upcomingEventsMore = events
             data-kind="card"
             data-delay="180"
           >
-            <div class="feature-kicker">Option</div>
-            <div class="feature-title">Ebi-yaki</div>
+            <div class="feature-kicker">Toppings</div>
+            <div class="feature-title">Classiques japonais</div>
             <div class="feature-text">
-              Alternative crevette, même esprit “street food” et cuisson minute.
+              Sauce takoyaki, mayo, aonori, katsuobushi… et variantes selon la saison.
             </div>
           </div>
         </div>
@@ -316,8 +348,7 @@ const upcomingEventsMore = events
               data-kind="text"
               data-delay="220"
             >
-              <a class="btn ghost" href="/evenements">Voir la page événements</a
-              >
+              <a class="btn ghost" href="/evenements">Voir la page événements</a>
               <a class="btn primary" href="#contact">Collaborer</a>
             </div>
           </div>
@@ -365,12 +396,10 @@ const upcomingEventsMore = events
       </div>
     </section>
 
-    <!-- GALERIE -->
-    <section class="apple-section tone-a" id="galerie">
+    <!-- GALERIE (rail + lightbox) -->
+    <section class="apple-section tone-a home-galerie" id="galerie">
       <div class="container">
-        <span class="badge" data-reveal data-kind="text" data-delay="0"
-          >Galerie</span
-        >
+        <span class="badge" data-reveal data-kind="text" data-delay="0">Galerie</span>
 
         <h2
           class="h2"
@@ -389,52 +418,49 @@ const upcomingEventsMore = events
           data-kind="text"
           data-delay="140"
         >
-          Quelques photos pour sentir l’esprit du stand : préparation minute,
-          marchés, festivals, et bons moments.
+          Quelques images de nos stands, de nos événements et de nos takoyaki préparés sur place.
         </p>
+      </div>
 
-        <div class="gallery-grid" style="margin-top:16px;">
-          <div class="card g1" data-reveal data-kind="media" data-delay="0">
-            <img
-              src="/images/gallery-1.jpg"
-              alt="Usagi Délice — stand"
-              loading="lazy"
-              width="1400"
-              height="900"
-            />
-          </div>
+      <div class="rail-wrap" data-reveal data-kind="media" data-delay="180">
+        <button class="rail-arrow left" data-rail-left aria-label="Précédent">←</button>
+        <button class="rail-arrow right" data-rail-right aria-label="Suivant">→</button>
 
-          <div class="card g2" data-reveal data-kind="media" data-delay="90">
-            <img
-              src="/images/gallery-2.jpg"
-              alt="Usagi Délice — takoyaki"
-              loading="lazy"
-              width="1200"
-              height="900"
-            />
-          </div>
-
-          <div class="card g3" data-reveal data-kind="media" data-delay="180">
-            <img
-              src="/images/gallery-3.jpg"
-              alt="Usagi Délice — cuisson"
-              loading="lazy"
-              width="1200"
-              height="900"
-            />
-          </div>
-
-          <div class="card g4" data-reveal data-kind="media" data-delay="270">
-            <img
-              src="/images/gallery-4.jpg"
-              alt="Usagi Délice — événement"
-              loading="lazy"
-              width="1200"
-              height="900"
-            />
-          </div>
+        <div class="rail" id="home-photos">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <a
+              class="shot landscape"
+              href={`/images/references/photos/ref-photo-${i}.webp`}
+              data-src={`/images/references/photos/ref-photo-${i}.webp`}
+              data-index={i}
+              aria-label={`Voir la photo ${i}`}
+            >
+              <img
+                src={`/images/references/photos/ref-photo-${i}.webp`}
+                alt={`Usagi Délice — photo ${i}`}
+                loading="lazy"
+                width="1400"
+                height="900"
+              />
+            </a>
+          ))}
         </div>
+      </div>
 
+      <!-- Lightbox (homepage) -->
+      <div class="lb-home" id="lb-home" aria-hidden="true">
+        <div class="lb-backdrop" data-lb-close></div>
+
+        <div class="lb-card" role="dialog" aria-modal="true" aria-label="Aperçu photo">
+          <button class="lb-close" type="button" data-lb-close aria-label="Fermer">✕</button>
+
+          <button class="lb-nav prev" type="button" data-lb-prev aria-label="Précédent">←</button>
+          <img class="lb-img" alt="Photo Usagi Délice" />
+          <button class="lb-nav next" type="button" data-lb-next aria-label="Suivant">→</button>
+        </div>
+      </div>
+
+      <div class="container">
         <div
           class="cta-row"
           style="margin-top:18px;"
@@ -442,10 +468,354 @@ const upcomingEventsMore = events
           data-kind="text"
           data-delay="220"
         >
-          <a class="btn primary" href="/galerie">Voir toute la galerie</a>
+          <a class="btn primary" href="/references">Voir toutes les références</a>
           <a class="btn ghost" href="#contact">Nous contacter</a>
         </div>
       </div>
+
+      <style>
+        /* Make the gallery section feel like a "highlight chapter" */
+        #galerie.home-galerie{ padding-top: 10px; }
+
+        .rail-wrap{
+          position: relative;
+          width: min(1680px, calc(100vw - 24px));
+          margin: 0 auto;
+          box-sizing: border-box;
+        }
+
+        .rail{
+          display: flex;
+          gap: 18px;
+          overflow-x: auto;
+          padding: 14px 64px 26px;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .rail::-webkit-scrollbar{ height: 6px; }
+        .rail::-webkit-scrollbar-thumb{
+          background: rgba(42,31,31,.10);
+          border-radius: 999px;
+        }
+
+        .shot{
+          position: relative;
+          flex: 0 0 auto;
+          height: 440px;
+          border-radius: 18px;
+          border: 1px solid rgba(42,31,31,.10);
+          background: rgba(255,255,255,.14);
+          overflow: hidden;
+          scroll-snap-align: start;
+          text-decoration: none;
+          color: inherit;
+          transition: transform .22s ease, box-shadow .22s ease;
+          will-change: transform;
+          outline: none;
+          transform: translateY(var(--lift, 0px)) scale(var(--card-scale, 1));
+        }
+        .shot:hover{ transform: translateY(calc(var(--lift, 0px) - 2px)) scale(var(--card-scale, 1)); }
+        .shot:focus-visible{
+          outline: 3px solid rgba(194, 59, 50, 0.28);
+          outline-offset: 3px;
+        }
+        .shot.landscape{ aspect-ratio: 3 / 2; }
+        .shot img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform .35s ease;
+          will-change: transform;
+        }
+
+        .rail-wrap:not(.is-scrollable) .rail-arrow{ display: none !important; }
+
+        .rail-arrow{
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 44px;
+          height: 44px;
+          border-radius: 999px;
+          border: 1px solid rgba(42,31,31,.14);
+          background: rgba(255,255,255,.65);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 8px 24px rgba(0,0,0,.18);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          opacity: 0;
+          transition: opacity .18s ease, transform .18s ease;
+          z-index: 2;
+        }
+        .rail-wrap.is-scrollable:hover .rail-arrow{ opacity: .92; }
+        .rail-arrow.left{ left: 14px; }
+        .rail-arrow.right{ right: 14px; }
+        .rail-arrow.is-disabled{
+          opacity: 0 !important;
+          pointer-events: none;
+          transform: translateY(-50%) scale(0.98);
+        }
+
+        @media (max-width: 860px){
+          .rail-arrow{ display: none; }
+          .rail{ padding: 8px 12px 14px; }
+          .shot{ height: 320px; }
+        }
+
+        /* Lightbox (homepage) */
+        .lb-home{
+          position: fixed;
+          inset: 0;
+          z-index: 90;
+          display: none;
+        }
+        .lb-home.is-open{ display: block;
+          transition: transform .35s ease;
+          will-change: transform; }
+        .lb-backdrop{
+          position: absolute;
+          inset: 0;
+          background: rgba(20, 16, 16, 0.55);
+          backdrop-filter: blur(10px);
+        }
+        .lb-card{
+          position: relative;
+          width: min(var(--container, 1120px), calc(100% - 28px));
+          margin: 14px auto;
+          border-radius: 18px;
+          border: 1px solid rgba(255,255,255,0.18);
+          background: rgba(255, 247, 239, 0.92);
+          box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+          overflow: hidden;
+          display: grid;
+          place-items: center;
+          padding: 12px;
+        }
+        .lb-img{
+          display: block;
+          transition: transform .35s ease;
+          will-change: transform;
+          width: 100%;
+          height: min(74vh, 780px);
+          object-fit: contain;
+          background: rgba(255,255,255,.18);
+          border-radius: 12px;
+        }
+        .lb-close{
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          width: 38px;
+          height: 38px;
+          border-radius: 999px;
+          border: 1px solid rgba(42,31,31,.14);
+          background: rgba(255,255,255,.65);
+          backdrop-filter: blur(10px);
+          cursor: pointer;
+          font-weight: 900;
+        }
+        .lb-nav{
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 44px;
+          height: 44px;
+          border-radius: 999px;
+          border: 1px solid rgba(42,31,31,.14);
+          background: rgba(255,255,255,.65);
+          backdrop-filter: blur(10px);
+          cursor: pointer;
+          font-weight: 900;
+        }
+        .lb-nav.prev{ left: 10px; }
+        .lb-nav.next{ right: 10px; }
+        @media (max-width: 860px){
+          .lb-nav{ display: none; }
+          .lb-card{ margin: 10px auto; }
+          .lb-img{ height: min(76vh, 680px); }
+        }
+      
+
+        /* Subtle Apple-like hover zoom */
+        @media (hover: hover) and (pointer: fine){
+          .shot:hover img{ transform: scale(1.03); }
+        }
+</style>
+
+      <script is:inline>
+        (() => {
+          const wrap = document.querySelector('#galerie .rail-wrap');
+          const rail = document.querySelector('#home-photos');
+          const shotsForDepth = Array.from(rail ? rail.querySelectorAll('a.shot') : []);
+          if (!wrap || !rail) return;
+
+          const leftBtn = wrap.querySelector('[data-rail-left]');
+          const rightBtn = wrap.querySelector('[data-rail-right]');
+
+          const step = () => rail.clientWidth * 0.85;
+          const isScrollable = () => rail.scrollWidth > rail.clientWidth + 2;
+
+          const update = () => {
+            const canScroll = isScrollable();
+            wrap.classList.toggle('is-scrollable', canScroll);
+            if (!canScroll) return;
+
+            const atStart = rail.scrollLeft <= 2;
+            const atEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+
+            leftBtn && leftBtn.classList.toggle('is-disabled', atStart);
+            rightBtn && rightBtn.classList.toggle('is-disabled', atEnd);
+          };
+          // Depth layering (Apple-like) — subtle lift/scale based on proximity to viewport center
+          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const mqDesktop = window.matchMedia ? window.matchMedia('(min-width: 861px)') : { matches: true };
+
+          let rafDepth = 0;
+          const updateDepth = () => {
+            if (prefersReduced || !mqDesktop.matches) {
+              shotsForDepth.forEach((el) => {
+                el.style.removeProperty('--lift');
+                el.style.removeProperty('--card-scale');
+                el.style.removeProperty('--shadow');
+              });
+              return;
+            }
+
+            const railRect = rail.getBoundingClientRect();
+            const centerX = railRect.left + railRect.width / 2;
+            const max = railRect.width * 0.55;
+
+            shotsForDepth.forEach((el) => {
+              const r = el.getBoundingClientRect();
+              const x = r.left + r.width / 2;
+              const dist = Math.abs(centerX - x);
+              const t = Math.max(0, 1 - dist / max); // 0..1
+              const lift = 10 * t;                  // px
+              const scale = 1 + 0.02 * t;           // 1..1.02
+              const shadow = 0.22 * t;              // alpha
+              el.style.setProperty('--lift', `${lift.toFixed(2)}px`);
+              el.style.setProperty('--card-scale', `${scale.toFixed(4)}`);
+              el.style.setProperty('--shadow', `${shadow.toFixed(3)}`);
+            });
+          };
+
+          const scheduleDepth = () => {
+            if (rafDepth) return;
+            rafDepth = window.requestAnimationFrame(() => {
+              rafDepth = 0;
+              updateDepth();
+            });
+          };
+
+
+          leftBtn && leftBtn.addEventListener('click', () => {
+            rail.scrollBy({ left: -step(), behavior: 'smooth' });
+          });
+          rightBtn && rightBtn.addEventListener('click', () => {
+            rail.scrollBy({ left: step(), behavior: 'smooth' });
+          });
+
+          // Lightbox (homepage)
+          const lb = document.getElementById('lb-home');
+          const lbImg = lb ? lb.querySelector('.lb-img') : null;
+          const closeEls = lb ? lb.querySelectorAll('[data-lb-close]') : [];
+          const prevBtn = lb ? lb.querySelector('[data-lb-prev]') : null;
+          const nextBtn = lb ? lb.querySelector('[data-lb-next]') : null;
+
+          const shots = Array.from(rail.querySelectorAll('a.shot'));
+          const sources = shots.map((el) => el.dataset.src).filter(Boolean);
+
+          let current = 0;
+          let lockedScrollY = 0;
+
+          const lockScroll = () => {
+            lockedScrollY = window.scrollY || 0;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${lockedScrollY}px`;
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+            document.body.style.width = '100%';
+          };
+
+          const unlockScroll = () => {
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
+            document.body.style.width = '';
+            window.scrollTo(0, lockedScrollY);
+          };
+
+          const render = () => {
+            if (!lbImg) return;
+            lbImg.src = sources[current];
+          };
+
+          const openLb = (idx) => {
+            if (!lb || !lbImg || !sources.length) return;
+            current = ((idx % sources.length) + sources.length) % sources.length;
+            render();
+            lb.classList.add('is-open');
+            lb.setAttribute('aria-hidden', 'false');
+            lockScroll();
+          };
+
+          const closeLb = () => {
+            if (!lb) return;
+            lb.classList.remove('is-open');
+            lb.setAttribute('aria-hidden', 'true');
+            if (lbImg) lbImg.removeAttribute('src');
+            unlockScroll();
+          };
+
+          shots.forEach((el, idx) => {
+            el.addEventListener('click', (e) => {
+              e.preventDefault();
+              openLb(idx);
+            });
+          });
+
+          closeEls.forEach((el) => el.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeLb();
+          }));
+
+          prevBtn && prevBtn.addEventListener('click', () => {
+            current = (current - 1 + sources.length) % sources.length;
+            render();
+          });
+
+          nextBtn && nextBtn.addEventListener('click', () => {
+            current = (current + 1) % sources.length;
+            render();
+          });
+
+          window.addEventListener('keydown', (e) => {
+            if (!lb || !lb.classList.contains('is-open')) return;
+            if (e.key === 'Escape') closeLb();
+            if (e.key === 'ArrowLeft' && sources.length) {
+              current = (current - 1 + sources.length) % sources.length;
+              render();
+            }
+            if (e.key === 'ArrowRight' && sources.length) {
+              current = (current + 1) % sources.length;
+              render();
+            }
+          });
+
+          rail.addEventListener('scroll', update, { passive: true });
+          rail.addEventListener('scroll', scheduleDepth, { passive: true });
+          window.addEventListener('resize', update, { passive: true });
+          window.addEventListener('resize', scheduleDepth, { passive: true });
+          update();
+          scheduleDepth();
+          window.setTimeout(() => { update(); scheduleDepth(); }, 120);
+        })();
+      </script>
     </section>
 
     <!-- CONTACT -->

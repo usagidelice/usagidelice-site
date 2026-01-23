@@ -9,12 +9,17 @@ const nav = [
   { href: "/notre-histoire", label: "Notre histoire" },
   { href: "/nos-produits", label: "Nos produits" },
   { href: "/evenements", label: "Événements" },
-  { href: "/galerie", label: "Galerie" },
+
+  // Social proof / B2B
+  { href: "/references", label: "Références" },
+
   { href: "/contact", label: "Contact / collaboration" },
+
+  // Utility (keep, but lower visual weight on desktop)
+  { href: "/evenements#prochaines-dates", label: "Nous trouver", cta: true },
 ];
 
-const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
-  Astro.props;
+const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } = Astro.props;
 ---
 
 <header class="site-header" data-header>
@@ -31,16 +36,14 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
     </a>
 
     <nav class="nav" aria-label="Navigation principale">
-      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      {nav.map((item) => (
+        <a href={item.href} class={item.cta ? "nav-cta" : undefined}>
+          {item.label}
+        </a>
+      ))}
     </nav>
 
     <div class="header-actions">
-      <!-- Desktop only -->
-      <a class="btn primary only-desktop" href="/evenements#prochaines-dates">
-        Nous trouver
-      </a>
-
-      <!-- Mobile menu button -->
       <button
         class="menu-btn"
         type="button"
@@ -54,26 +57,22 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
     </div>
   </div>
 
-  <!-- Mobile drawer -->
   <div class="mobile-drawer" id="mobile-drawer" data-mobile-drawer>
     <div class="container" role="menu" aria-label="Menu mobile">
-      {
-        nav.map((item) => (
-          <a href={item.href} role="menuitem">
-            {item.label}
-          </a>
-        ))
-      }
+      {nav.map((item) => (
+        <a href={item.href} role="menuitem" class={item.cta ? "mobile-cta" : undefined}>
+          {item.label}
+        </a>
+      ))}
     </div>
   </div>
 </header>
 
 <script is:inline>
   (() => {
-    const header = document.querySelector("[data-header]");
     const btn = document.querySelector("[data-menu-btn]");
     const drawer = document.querySelector("[data-mobile-drawer]");
-    if (!header || !btn || !drawer) return;
+    if (!(btn instanceof HTMLButtonElement) || !(drawer instanceof HTMLElement)) return;
 
     const setOpen = (open) => {
       drawer.style.display = open ? "block" : "none";
@@ -82,21 +81,17 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
 
     const isOpen = () => drawer.style.display === "block";
 
-    // initial state
     setOpen(false);
 
-    // toggle on button
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       setOpen(!isOpen());
     });
 
-    // close when clicking a link
     drawer.querySelectorAll("a").forEach((a) => {
       a.addEventListener("click", () => setOpen(false));
     });
 
-    // close on outside click
     document.addEventListener("click", (e) => {
       if (!isOpen()) return;
       const t = e.target;
@@ -104,16 +99,14 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
       setOpen(false);
     });
 
-    // close on scroll (your requirement)
     window.addEventListener(
       "scroll",
       () => {
         if (isOpen()) setOpen(false);
       },
-      { passive: true },
+      { passive: true }
     );
 
-    // close on ESC
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") setOpen(false);
     });
@@ -121,24 +114,23 @@ const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } =
 </script>
 
 <style>
-  /* Desktop-only helper */
-  .only-desktop {
-    display: none;
+  .mobile-drawer { display: none; }
+
+  .site-header { position: sticky; top: 0; }
+
+  /* "Nous trouver" CTA — subtle on desktop */
+  .nav-cta {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(42, 31, 31, 0.14);
+    background: rgba(255, 255, 255, 0.25);
   }
+  .nav-cta:hover { background: rgba(255, 255, 255, 0.4); }
+
   @media (min-width: 980px) {
-    .only-desktop {
-      display: inline-flex;
-    }
+    .nav-cta { margin-left: 6px; }
   }
 
-  /* Mobile drawer base hidden (JS controls display) */
-  .mobile-drawer {
-    display: none;
-  }
-
-  /* Ensure header is the positioning context for the absolute drawer (your global.css uses top: var(--header-h)) */
-  .site-header {
-    position: sticky;
-    top: 0;
-  }
+  /* Mobile drawer: make "Nous trouver" more obvious */
+  .mobile-cta { font-weight: 900; }
 </style>

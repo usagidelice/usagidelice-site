@@ -27,8 +27,16 @@
   /* =========================================================
      Section rhythm tokens
   ========================================================= */
-  --section-top: 52px;
-  --section-bottom: 44px;
+  --section-top: 64px;
+  --section-bottom: 54px;
+
+  /* Visual sections (gallery / references) breathe more */
+  --section-top-visual: 82px;
+  --section-bottom-visual: 66px;
+
+  /* Tight sections (CTA-heavy) */
+  --section-top-tight: 46px;
+  --section-bottom-tight: 40px;
 
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -260,20 +268,34 @@ img {
   overflow-x: hidden;
 }
 
-.apple-section {
-  min-height: 100svh;
-  padding: calc(var(--header-h) + var(--section-top)) 0 var(--section-bottom);
+.apple-section{
+  /* Sections should feel like chapters without breaking layout */
+  min-height: calc(100svh - var(--header-h));
+  padding: var(--section-top) 0 var(--section-bottom);
   display: grid;
   align-content: start;
 }
 
-@media (min-width: 1024px) {
-  .apple-page {
+/* Only the first hero needs to compensate for the sticky header */
+.apple-section.hero{
+  min-height: 100svh;
+  padding-top: calc(var(--header-h) + var(--section-top));
+}
+
+/* Anchor accuracy under the sticky header */
+section[id]{
+  scroll-margin-top: calc(var(--header-h) + 14px);
+}
+
+@media (min-width: 1024px){
+  /* Soft snap: helps “landing” on sections without forcing */
+  .apple-page{
     scroll-snap-type: y proximity;
     scroll-behavior: smooth;
   }
-  .apple-section {
+  .apple-section{
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }
 
@@ -1344,4 +1366,94 @@ p + p {
   height: 2px !important;
   background: rgba(42, 31, 31, 0.9) !important;
   border-radius: 2px !important;
+}
+
+
+
+/* =========================================================
+   Hero — Mobile Prochaines dates toggle (drawer)
+   Requirements:
+   - Desktop: no visual change (desktop panel stays as-is)
+   - Mobile: show a single "Prochaines dates" button
+            tapping slides up the existing panel content as a drawer
+========================================================= */
+
+.only-mobile {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  /* Hide the in-flow desktop panel on mobile */
+  .hero-panel--desktop {
+    display: none;
+  }
+
+  /* Show mobile toggle */
+  .only-mobile {
+    display: block;
+  }
+
+  .hero-dates-toggle {
+    margin-top: 14px;
+  }
+
+  .hero-dates-btn {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-dates-btn::-webkit-details-marker {
+    display: none;
+  }
+
+  .hero-dates-btn__chev {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid rgba(42, 31, 31, 0.55);
+    border-bottom: 2px solid rgba(42, 31, 31, 0.55);
+    transform: rotate(45deg);
+    transition: transform 180ms var(--ease);
+    flex: 0 0 auto;
+  }
+  .hero-dates-toggle[open] .hero-dates-btn__chev {
+    transform: rotate(-135deg);
+  }
+
+  .hero-dates-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: grid;
+    align-items: end;
+    padding: 0 16px 18px;
+    background: rgba(0,0,0,0.12);
+    backdrop-filter: blur(2px);
+  }
+
+  .hero-panel--drawer {
+    width: min(560px, 100%);
+    margin: 0 auto;
+    border-radius: 22px;
+    background: rgba(255, 247, 239, 0.88);
+    border: 1px solid rgba(42, 31, 31, 0.10);
+    box-shadow: 0 22px 60px rgba(42, 31, 31, 0.18);
+    transform: translateY(110%);
+    transition: transform 220ms var(--ease);
+
+    max-height: min(70vh, 520px);
+    overflow: auto;
+  }
+
+  .hero-dates-toggle[open] .hero-panel--drawer {
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 721px) {
+  .only-mobile {
+    display: none !important;
+  }
 }
