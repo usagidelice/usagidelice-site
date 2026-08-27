@@ -1,961 +1,178 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductShowcase from "../components/ProductShowcase.astro";
-import EventCard from "../components/EventCard.astro";
 import { products } from "../data/products";
 import { events } from "../data/events";
+import { partners, refPhotos } from "../data/references";
 
 const title = "Usagi Délice — Takoyaki d’Osaka à Paris";
-const description =
-  "Takoyaki faits maison, préparés sur place. Retrouvez Usagi Délice sur les marchés et événements à Paris & Île-de-France.";
+const description = "Takoyaki faits maison, préparés sur place. Retrouvez Usagi Délice sur les marchés et événements à Paris & Île-de-France.";
 
-const upcomingEvents = events.filter((e) => e.status !== "past").slice(0, 3);
-
-const upcomingEventsMore = events
-  .filter((e) => e.status !== "past")
-  .slice(0, 5);
-
-const homeCaptions = [
-  "Marché de Noël · La Villette",
-  "Takoyaki dorés, cœur fondant",
-  "Takoyaki face à la Tour Eiffel",
-  "Takoyaki face à l’Arc de Triomphe",
-  "Cuisson minute à la plaque",
-  "Préparés devant vous",
-  "Service en forte affluence",
-  "Collaboration · UNIQLO Paris",
-  "Stand en plein air",
-  "Festival · Île-de-France",
-];
-
+const nextDates = events.filter((event) => event.status !== "past").slice(0, 3);
+const selectedPhotos = refPhotos.slice(0, 6);
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="apple-page">
-    <!-- HERO -->
-    <section class="apple-section hero" id="accueil">
-      <div
-        class="bg parallax"
-        data-parallax="hero"
-        style="--hero-bg:url('/images/hero-bg.png'); --hero-bg-mobile:url('/images/hero-bg-mobile.png');"
-        aria-hidden="true"
-      ></div>
-
-      <div class="container content">
-        <div class="hero-split">
-          <!-- Left copy -->
-          <div class="hero-left" data-reveal data-kind="text" data-delay="0">
-            <h1 class="h1">
-              Takoyaki d’Osaka<br />faits maison à Paris
-            </h1>
-
-            <p class="lead">
-              Street food japonaise authentique, préparée sur place à Paris et
-              en Île-de-France.
-            </p>
+  <main class="home">
+    <section class="home-hero">
+      <div class="container home-hero__grid">
+        <div class="home-hero__copy">
+          <span class="badge">Takoyaki d’Osaka · Paris</span>
+          <h1>La street food japonaise préparée devant vous.</h1>
+          <p>
+            Des takoyaki faits maison, dorés à l’extérieur et fondants à l’intérieur,
+            cuits à la minute sur les marchés, festivals et événements.
+          </p>
+          <div class="home-actions">
+            <a class="btn primary" href="/evenements">Voir les prochaines dates</a>
+            <a class="btn ghost" href="/contact">Proposer un événement</a>
           </div>
-
-          <!-- Right panel (desktop) -->
-          <aside
-            class="hero-panel hero-panel--desktop"
-            data-reveal
-            data-kind="media"
-            data-delay="120"
-          >
-            <div class="badge">Prochaines dates</div>
-
-            <div style="margin-top:12px; display:grid; gap:10px;">
-              {
-                upcomingEvents.map((e) => (
-                  <div>
-                    <div style="font-weight:800; letter-spacing:-0.01em;">
-                      {e.title}
-                    </div>
-                    <div class="small">
-                      🗓️ {e.dateLabel} · 📍 {e.location}
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-
-            <div style="margin-top:14px;">
-              <a class="btn primary" href="/evenements#prochaines-dates">
-                Voir toutes les dates
-              </a>
-            </div>
-          </aside>
-
-          <!-- Mobile-only: collapsible upcoming dates -->
-          <details class="hero-dates-toggle only-mobile">
-            <summary class="hero-dates-btn">
-              <span class="badge">Prochaines dates</span>
-              <span class="hero-dates-btn__chev" aria-hidden="true"></span>
-            </summary>
-
-            <div class="hero-dates-drawer" role="dialog" aria-label="Prochaines dates">
-              <div class="hero-panel hero-panel--drawer">
-                <div class="badge">Prochaines dates</div>
-
-                <div style="margin-top:12px; display:grid; gap:10px;">
-                  {
-                    upcomingEvents.map((e) => (
-                      <div>
-                        <div style="font-weight:800; letter-spacing:-0.01em;">
-                          {e.title}
-                        </div>
-                        <div class="small">
-                          🗓️ {e.dateLabel} · 📍 {e.location}
-                        </div>
-                      </div>
-                    ))
-                  }
-                </div>
-
-                <div style="margin-top:14px;">
-                  <a class="btn primary" href="/evenements#prochaines-dates">
-                    Voir toutes les dates
-                  </a>
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- HISTOIRE -->
-    <section class="apple-section tone-a" id="histoire">
-      <div class="container">
-        <div class="split">
-          <div>
-            <span class="badge" data-reveal data-kind="text" data-delay="0"
-              >Notre histoire</span
-            >
-
-            <h2
-              class="h2"
-              style="margin-top:14px;"
-              data-reveal
-              data-kind="text"
-              data-delay="80"
-            >
-              Un stand japonais artisanal, inspiré d’Osaka
-            </h2>
-
-            <p
-              class="lead"
-              style="max-width:62ch;"
-              data-reveal
-              data-kind="text"
-              data-delay="140"
-            >
-              Usagi Délice est né de l’envie de faire découvrir le vrai goût du
-              takoyaki : cuisson sur place, recette maison, et toppings japonais
-              classiques.
-            </p>
-
-            <div class="cta-row" data-reveal data-kind="text" data-delay="220">
-              <a class="btn ghost" href="/notre-histoire">Découvrir</a>
-              <a class="btn primary" href="#dates">Nous trouver</a>
-            </div>
-          </div>
-
-          <div
-            class="media-card"
-            data-reveal
-            data-kind="media"
-            data-delay="140"
-          >
-            <div
-              class="media parallax"
-              data-parallax="media"
-              style="background-image:url('/images/histoire-bg.jpg')"
-              aria-hidden="true"
-            ></div>
-          </div>
-        </div>
-
-        <div
-          class="highlights"
-          style="margin-top:18px;"
-          data-reveal
-          data-kind="card"
-          data-delay="220"
-        >
-          <div class="mini-card">
-            <div class="mini-kicker">Artisanal</div>
-            <div class="mini-title">Préparé sur place</div>
-            <div class="mini-text">
-              Cuisson minute et service chaud, comme au Japon.
-            </div>
-          </div>
-
-          <div class="mini-card">
-            <div class="mini-kicker">Recette</div>
-            <div class="mini-title">Style Osaka</div>
-            <div class="mini-text">
-              Pâte légère, cœur fondant, toppings japonais classiques.
-            </div>
-          </div>
-
-          <div class="mini-card">
-            <div class="mini-kicker">Paris</div>
-            <div class="mini-title">Marchés & événements</div>
-            <div class="mini-text">
-              Présent en Île-de-France selon le calendrier des marchés.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRODUITS (focus: Takoyaki) -->
-    <section class="apple-section tone-b" id="produits">
-      <div class="container">
-        <span class="badge" data-reveal data-kind="text" data-delay="0"
-          >Nos produits</span
-        >
-
-        <h2
-          class="h2"
-          style="margin-top:14px;"
-          data-reveal
-          data-kind="text"
-          data-delay="80"
-        >
-          Takoyaki — notre spécialité d’Osaka
-        </h2>
-
-        <p
-          class="lead"
-          style="max-width:66ch;"
-          data-reveal
-          data-kind="text"
-          data-delay="140"
-        >
-          Une carte courte et maîtrisée : takoyaki dorés à l’extérieur, fondants à l’intérieur,
-          préparés à la minute devant vous.
-        </p>
-
-        <div class="feature-row" style="margin-top:16px;">
-          <div class="feature-card" data-reveal data-kind="card" data-delay="0">
-            <div class="feature-kicker">Signature</div>
-            <div class="feature-title">Cuisson minute</div>
-            <div class="feature-text">
-              Chaque portion est cuite sur place, servie bien chaude.
-            </div>
-          </div>
-
-          <div
-            class="feature-card"
-            data-reveal
-            data-kind="card"
-            data-delay="90"
-          >
-            <div class="feature-kicker">Texture</div>
-            <div class="feature-title">Cœur fondant</div>
-            <div class="feature-text">
-              Une pâte légère, un intérieur moelleux, comme à Osaka.
-            </div>
-          </div>
-
-          <div
-            class="feature-card"
-            data-reveal
-            data-kind="card"
-            data-delay="180"
-          >
-            <div class="feature-kicker">Toppings</div>
-            <div class="feature-title">Classiques japonais</div>
-            <div class="feature-text">
-              Sauce takoyaki, mayo, aonori, katsuobushi… et variantes selon la saison.
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:20px;">
-          {
-            products.map((p, i) => (
-              <div data-reveal data-kind="media" data-delay={i * 70}>
-                <ProductShowcase product={p} compact />
-              </div>
-            ))
-          }
-        </div>
-
-        <div
-          class="cta-row"
-          style="margin-top:18px;"
-          data-reveal
-          data-kind="text"
-          data-delay="240"
-        >
-          <a class="btn primary" href="/nos-produits">Voir la page produits</a>
-          <a class="btn ghost" href="#galerie">Voir des photos</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- DATES -->
-    <section class="apple-section tone-c" id="dates">
-      <div class="container">
-        <div class="split">
-          <div>
-            <span class="badge" data-reveal data-kind="text" data-delay="0"
-              >Nous trouver</span
-            >
-
-            <h2
-              class="h2"
-              style="margin-top:14px;"
-              data-reveal
-              data-kind="text"
-              data-delay="80"
-            >
-              Prochaines dates & marchés
-            </h2>
-
-            <p
-              class="lead"
-              style="max-width:60ch;"
-              data-reveal
-              data-kind="text"
-              data-delay="140"
-            >
-              Retrouvez-nous le dimanche à Vincennes selon notre calendrier,
-              ainsi que dans des festivals japonais et pop culture.
-            </p>
-
-            <div class="highlights highlights-2" style="margin-top:14px;">
-              <div
-                class="mini-card"
-                data-reveal
-                data-kind="card"
-                data-delay="0"
-              >
-                <div class="mini-kicker">Marché</div>
-                <div class="mini-title">Vincennes</div>
-                <div class="mini-text">
-                  Retrouvez-nous régulièrement (selon planning).
-                </div>
-              </div>
-
-              <div
-                class="mini-card"
-                data-reveal
-                data-kind="card"
-                data-delay="90"
-              >
-                <div class="mini-kicker">Marché</div>
-                <div class="mini-title">Festivals & pop-ups</div>
-                <div class="mini-text">
-                  Paris, Île-de-France et événements partout en France.
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="cta-row"
-              style="margin-top:16px;"
-              data-reveal
-              data-kind="text"
-              data-delay="220"
-            >
-              <a class="btn ghost" href="/evenements">Voir la page événements</a>
-              <a class="btn primary" href="#contact">Collaborer</a>
-            </div>
-          </div>
-
-          <div
-            class="panel-card"
-            data-reveal
-            data-kind="media"
-            data-delay="120"
-          >
-            <div class="panel-title">À venir</div>
-
-            <div class="panel-list" style="margin-top:10px;">
-              {
-                upcomingEventsMore.map((e) => (
-                  <div class="panel-item">
-                    <div class="panel-item-title">{e.title}</div>
-                    <div class="small">
-                      🗓️ {e.dateLabel} · 📍 {e.location}
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-
-            <div style="margin-top:14px;">
-              <a class="btn primary" href="/evenements#prochaines-dates">
-                Toutes les dates
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid cols-3" style="margin-top:16px;">
-          {
-            events
-              .filter((e) => e.status !== "past")
-              .map((e, i) => (
-                <div data-reveal data-kind="media" data-delay={i * 70}>
-                  <EventCard item={e} />
-                </div>
-              ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- GALERIE (rail + lightbox) -->
-    <section class="apple-section tone-a home-galerie" id="galerie">
-      <div class="container">
-        <span class="badge" data-reveal data-kind="text" data-delay="0">Galerie</span>
-
-        <h2
-          class="h2"
-          style="margin-top:14px;"
-          data-reveal
-          data-kind="text"
-          data-delay="80"
-        >
-          Ambiance, cuisine, événements
-        </h2>
-
-        <p
-          class="lead"
-          style="max-width:66ch;"
-          data-reveal
-          data-kind="text"
-          data-delay="140"
-        >
-          Quelques images de nos stands, de nos événements et de nos takoyaki préparés sur place.
-        </p>
-      </div>
-
-      <div class="rail-wrap" data-reveal data-kind="media" data-delay="180">
-        <button class="rail-arrow left" data-rail-left aria-label="Précédent">←</button>
-        <button class="rail-arrow right" data-rail-right aria-label="Suivant">→</button>
-
-        <div class="rail" id="home-photos">
-          
-          {Array.from({ length: 10 }, (_, i) => i + 1).map((i) => (
-            <a
-              class="shot landscape"
-              href={`/images/references/photos/ref-photo-${i}.webp`}
-              data-src={`/images/references/photos/ref-photo-${i}.webp`}
-              data-index={i}
-              aria-label={`Voir la photo ${i}`}
-            >
-              <img
-                src={`/images/references/photos/ref-photo-${i}.webp`}
-                alt={homeCaptions[i - 1]}
-                loading="lazy"
-                width="1400"
-                height="900"
-              />
-            
-              <span class="tag">{homeCaptions[i - 1]}</span>
+          {nextDates[0] && (
+            <a class="next-date" href="/evenements#prochaines-dates">
+              <span>Prochain rendez-vous</span>
+              <strong>{nextDates[0].title}</strong>
+              <small>{nextDates[0].dateLabel} · {nextDates[0].location}</small>
             </a>
+          )}
+        </div>
+        <a class="home-hero__media" href="/notre-histoire" aria-label="Découvrir notre histoire">
+          <img src="/images/references/photos/ref-photo-1.webp" alt="Stand Usagi Délice au marché de Noël de La Villette" loading="eager" />
+          <span>Notre histoire <b>→</b></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="home-section home-section--soft" aria-labelledby="home-product-title">
+      <div class="container">
+        <div class="section-intro">
+          <div>
+            <span class="badge">Notre spécialité</span>
+            <h2 id="home-product-title">Une carte courte, un produit maîtrisé.</h2>
+          </div>
+          <a class="section-link" href="/nos-produits">Découvrir le produit →</a>
+        </div>
+        {products.map((product) => <ProductShowcase product={product} compact />)}
+      </div>
+    </section>
+
+    <section class="home-section" aria-labelledby="home-dates-title">
+      <div class="container">
+        <div class="section-intro">
+          <div>
+            <span class="badge">Nous trouver</span>
+            <h2 id="home-dates-title">Les prochains rendez-vous.</h2>
+          </div>
+          <a class="section-link" href="/evenements">Voir toutes les dates →</a>
+        </div>
+        <div class="date-preview">
+          {nextDates.map((event) => (
+            <article>
+              <p>{event.dateLabel}</p>
+              <h3>{event.title}</h3>
+              <span>{event.location}</span>
+            </article>
           ))}
         </div>
       </div>
-
-      <!-- Lightbox (homepage) -->
-      <div class="lb-home" id="lb-home" aria-hidden="true">
-        <div class="lb-backdrop" data-lb-close></div>
-
-        <div class="lb-card" role="dialog" aria-modal="true" aria-label="Aperçu photo">
-          <button class="lb-close" type="button" data-lb-close aria-label="Fermer">✕</button>
-
-          <button class="lb-nav prev" type="button" data-lb-prev aria-label="Précédent">←</button>
-          <img class="lb-img" alt="Photo Usagi Délice" />
-          <button class="lb-nav next" type="button" data-lb-next aria-label="Suivant">→</button>
-        </div>
-      </div>
-
-      <div class="container">
-        <div
-          class="cta-row"
-          style="margin-top:18px;"
-          data-reveal
-          data-kind="text"
-          data-delay="220"
-        >
-          <a class="btn primary" href="/references">Voir les événements & collaborations</a>
-          <a class="btn ghost" href="#contact">Nous contacter</a>
-        </div>
-      </div>
-
-      <style>
-        /* Make the gallery section feel like a "highlight chapter" */
-        #galerie.home-galerie{ padding-top: 10px; }
-
-        .rail-wrap{
-          position: relative;
-          width: min(1680px, calc(100vw - 24px));
-          margin: 0 auto;
-          box-sizing: border-box;
-        }
-
-        .rail{
-          display: flex;
-          gap: 18px;
-          overflow-x: auto;
-          padding: 14px 64px 26px;
-          scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch;
-        }
-
-        .rail::-webkit-scrollbar{ height: 6px; }
-        .rail::-webkit-scrollbar-thumb{
-          background: rgba(42,31,31,.10);
-          border-radius: 999px;
-        }
-
-        .shot{
-          position: relative;
-          flex: 0 0 auto;
-          height: 440px;
-          border-radius: 18px;
-          border: 1px solid rgba(42,31,31,.10);
-          background: rgba(255,255,255,.14);
-          overflow: hidden;
-          scroll-snap-align: start;
-          text-decoration: none;
-          color: inherit;
-          transition: transform .22s ease, box-shadow .22s ease;
-          will-change: transform;
-          outline: none;
-          transform: translateY(var(--lift, 0px)) scale(var(--card-scale, 1));
-        }
-        .shot:hover{ transform: translateY(calc(var(--lift, 0px) - 2px)) scale(var(--card-scale, 1)); }
-        .shot:focus-visible{
-          outline: 3px solid rgba(194, 59, 50, 0.28);
-          outline-offset: 3px;
-        }
-        .shot.landscape{ aspect-ratio: 3 / 2; }
-        .shot img{
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-          transition: transform .35s ease;
-          will-change: transform;
-        }
-
-        .rail-wrap:not(.is-scrollable) .rail-arrow{ display: none !important; }
-
-        .rail-arrow{
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 44px;
-          height: 44px;
-          border-radius: 999px;
-          border: 1px solid rgba(42,31,31,.14);
-          background: rgba(255,255,255,.65);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 8px 24px rgba(0,0,0,.18);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          opacity: 0;
-          transition: opacity .18s ease, transform .18s ease;
-          z-index: 2;
-        }
-        .rail-wrap.is-scrollable:hover .rail-arrow{ opacity: .92; }
-        .rail-arrow.left{ left: 14px; }
-        .rail-arrow.right{ right: 14px; }
-        .rail-arrow.is-disabled{
-          opacity: 0 !important;
-          pointer-events: none;
-          transform: translateY(-50%) scale(0.98);
-        }
-
-        @media (max-width: 860px){
-          .rail-arrow{ display: none; }
-          .rail{ padding: 8px 12px 14px; }
-          .shot{ height: 320px; }
-        }
-
-        /* Lightbox (homepage) */
-        .lb-home{
-          position: fixed;
-          inset: 0;
-          z-index: 90;
-          display: none;
-        }
-        .lb-home.is-open{ display: block;
-          transition: transform .35s ease;
-          will-change: transform; }
-        .lb-backdrop{
-          position: absolute;
-          inset: 0;
-          background: rgba(20, 16, 16, 0.55);
-          backdrop-filter: blur(10px);
-        }
-        .lb-card{
-          position: relative;
-          width: min(var(--container, 1120px), calc(100% - 28px));
-          margin: 14px auto;
-          border-radius: 18px;
-          border: 1px solid rgba(255,255,255,0.18);
-          background: rgba(255, 247, 239, 0.92);
-          box-shadow: 0 30px 90px rgba(0,0,0,0.35);
-          overflow: hidden;
-          display: grid;
-          place-items: center;
-          padding: 12px;
-        }
-        .lb-img{
-          display: block;
-          transition: transform .35s ease;
-          will-change: transform;
-          width: 100%;
-          height: min(74vh, 780px);
-          object-fit: contain;
-          background: rgba(255,255,255,.18);
-          border-radius: 12px;
-        }
-        .lb-close{
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          width: 38px;
-          height: 38px;
-          border-radius: 999px;
-          border: 1px solid rgba(42,31,31,.14);
-          background: rgba(255,255,255,.65);
-          backdrop-filter: blur(10px);
-          cursor: pointer;
-          font-weight: 900;
-        }
-        .lb-nav{
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 44px;
-          height: 44px;
-          border-radius: 999px;
-          border: 1px solid rgba(42,31,31,.14);
-          background: rgba(255,255,255,.65);
-          backdrop-filter: blur(10px);
-          cursor: pointer;
-          font-weight: 900;
-        }
-        .lb-nav.prev{ left: 10px; }
-        .lb-nav.next{ right: 10px; }
-        @media (max-width: 860px){
-          .lb-nav{ display: none; }
-          .lb-card{ margin: 10px auto; }
-          .lb-img{ height: min(76vh, 680px); }
-        }
-      
-
-        /* Subtle Apple-like hover zoom */
-        @media (hover: hover) and (pointer: fine){
-          .shot:hover img{ transform: scale(1.03); }
-        }
-
-        .tag{
-          position:absolute;
-          left:12px;
-          bottom:12px;
-          padding:8px 12px;
-          border-radius:999px;
-          font-weight:900;
-          font-size:.88rem;
-          color:rgba(42,31,31,.9);
-          background:rgba(255,247,239,.82);
-          border:1px solid rgba(42,31,31,.1);
-          backdrop-filter:blur(10px);
-          max-width:calc(100% - 24px);
-          white-space:nowrap;
-          overflow:hidden;
-          text-overflow:ellipsis;
-        }
-
-</style>
-
-      <script is:inline>
-        (() => {
-          const wrap = document.querySelector('#galerie .rail-wrap');
-          const rail = document.querySelector('#home-photos');
-          const shotsForDepth = Array.from(rail ? rail.querySelectorAll('a.shot') : []);
-          if (!wrap || !rail) return;
-
-          const leftBtn = wrap.querySelector('[data-rail-left]');
-          const rightBtn = wrap.querySelector('[data-rail-right]');
-
-          const step = () => rail.clientWidth * 0.85;
-          const isScrollable = () => rail.scrollWidth > rail.clientWidth + 2;
-
-          const update = () => {
-            const canScroll = isScrollable();
-            wrap.classList.toggle('is-scrollable', canScroll);
-            if (!canScroll) return;
-
-            const atStart = rail.scrollLeft <= 2;
-            const atEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
-
-            leftBtn && leftBtn.classList.toggle('is-disabled', atStart);
-            rightBtn && rightBtn.classList.toggle('is-disabled', atEnd);
-          };
-          // Depth layering (Apple-like) — subtle lift/scale based on proximity to viewport center
-          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          const mqDesktop = window.matchMedia ? window.matchMedia('(min-width: 861px)') : { matches: true };
-
-          let rafDepth = 0;
-          const updateDepth = () => {
-            if (prefersReduced || !mqDesktop.matches) {
-              shotsForDepth.forEach((el) => {
-                el.style.removeProperty('--lift');
-                el.style.removeProperty('--card-scale');
-                el.style.removeProperty('--shadow');
-              });
-              return;
-            }
-
-            const railRect = rail.getBoundingClientRect();
-            const centerX = railRect.left + railRect.width / 2;
-            const max = railRect.width * 0.55;
-
-            shotsForDepth.forEach((el) => {
-              const r = el.getBoundingClientRect();
-              const x = r.left + r.width / 2;
-              const dist = Math.abs(centerX - x);
-              const t = Math.max(0, 1 - dist / max); // 0..1
-              const lift = 10 * t;                  // px
-              const scale = 1 + 0.02 * t;           // 1..1.02
-              const shadow = 0.22 * t;              // alpha
-              el.style.setProperty('--lift', `${lift.toFixed(2)}px`);
-              el.style.setProperty('--card-scale', `${scale.toFixed(4)}`);
-              el.style.setProperty('--shadow', `${shadow.toFixed(3)}`);
-            });
-          };
-
-          const scheduleDepth = () => {
-            if (rafDepth) return;
-            rafDepth = window.requestAnimationFrame(() => {
-              rafDepth = 0;
-              updateDepth();
-            });
-          };
-
-
-          leftBtn && leftBtn.addEventListener('click', () => {
-            rail.scrollBy({ left: -step(), behavior: 'smooth' });
-          });
-          rightBtn && rightBtn.addEventListener('click', () => {
-            rail.scrollBy({ left: step(), behavior: 'smooth' });
-          });
-
-          // Lightbox (homepage)
-          const lb = document.getElementById('lb-home');
-          const lbImg = lb ? lb.querySelector('.lb-img') : null;
-          const closeEls = lb ? lb.querySelectorAll('[data-lb-close]') : [];
-          const prevBtn = lb ? lb.querySelector('[data-lb-prev]') : null;
-          const nextBtn = lb ? lb.querySelector('[data-lb-next]') : null;
-
-          const shots = Array.from(rail.querySelectorAll('a.shot'));
-          const sources = shots.map((el) => el.dataset.src).filter(Boolean);
-
-          let current = 0;
-          let lockedScrollY = 0;
-
-          const lockScroll = () => {
-            lockedScrollY = window.scrollY || 0;
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${lockedScrollY}px`;
-            document.body.style.left = '0';
-            document.body.style.right = '0';
-            document.body.style.width = '100%';
-          };
-
-          const unlockScroll = () => {
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.left = '';
-            document.body.style.right = '';
-            document.body.style.width = '';
-            window.scrollTo(0, lockedScrollY);
-          };
-
-          const render = () => {
-            if (!lbImg) return;
-            lbImg.src = sources[current];
-          };
-
-          const openLb = (idx) => {
-            if (!lb || !lbImg || !sources.length) return;
-            current = ((idx % sources.length) + sources.length) % sources.length;
-            render();
-            lb.classList.add('is-open');
-            lb.setAttribute('aria-hidden', 'false');
-            lockScroll();
-          };
-
-          const closeLb = () => {
-            if (!lb) return;
-            lb.classList.remove('is-open');
-            lb.setAttribute('aria-hidden', 'true');
-            if (lbImg) lbImg.removeAttribute('src');
-            unlockScroll();
-          };
-
-          shots.forEach((el, idx) => {
-            el.addEventListener('click', (e) => {
-              e.preventDefault();
-              openLb(idx);
-            });
-          });
-
-          closeEls.forEach((el) => el.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeLb();
-          }));
-
-          prevBtn && prevBtn.addEventListener('click', () => {
-            current = (current - 1 + sources.length) % sources.length;
-            render();
-          });
-
-          nextBtn && nextBtn.addEventListener('click', () => {
-            current = (current + 1) % sources.length;
-            render();
-          });
-
-          window.addEventListener('keydown', (e) => {
-            if (!lb || !lb.classList.contains('is-open')) return;
-            if (e.key === 'Escape') closeLb();
-            if (e.key === 'ArrowLeft' && sources.length) {
-              current = (current - 1 + sources.length) % sources.length;
-              render();
-            }
-            if (e.key === 'ArrowRight' && sources.length) {
-              current = (current + 1) % sources.length;
-              render();
-            }
-          });
-
-          rail.addEventListener('scroll', update, { passive: true });
-          rail.addEventListener('scroll', scheduleDepth, { passive: true });
-          window.addEventListener('resize', update, { passive: true });
-          window.addEventListener('resize', scheduleDepth, { passive: true });
-          update();
-          scheduleDepth();
-          window.setTimeout(() => { update(); scheduleDepth(); }, 120);
-        })();
-      </script>
     </section>
 
-    <!-- CONTACT -->
-    <section class="apple-section tone-b" id="contact">
+    <section class="home-section home-section--soft" aria-labelledby="home-events-title">
       <div class="container">
-        <div class="split">
+        <div class="section-intro">
           <div>
-            <span class="badge" data-reveal data-kind="text" data-delay="0"
-              >Collaboration</span
-            >
-
-            <h2
-              class="h2"
-              style="margin-top:14px;"
-              data-reveal
-              data-kind="text"
-              data-delay="80"
-            >
-              Vous organisez un événement ?
-            </h2>
-
-            <p
-              class="lead"
-              style="max-width:62ch;"
-              data-reveal
-              data-kind="text"
-              data-delay="140"
-            >
-              Marché, festival, entreprise, événement privé… Dites-nous la date,
-              le lieu et le format — on vous répond rapidement.
-            </p>
-
-            <div class="cta-row" data-reveal data-kind="text" data-delay="220">
-              <a class="btn primary" href="/contact">Nous contacter</a>
-              <a
-                class="btn ghost"
-                href="https://www.instagram.com/usagidelice"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Voir Instagram
-              </a>
-            </div>
-
-            <div class="highlights highlights-2" style="margin-top:16px;">
-              <div
-                class="mini-card"
-                data-reveal
-                data-kind="card"
-                data-delay="0"
-              >
-                <div class="mini-kicker">Réponse</div>
-                <div class="mini-title">Rapide</div>
-                <div class="mini-text">
-                  On revient vers vous avec une proposition claire.
-                </div>
-              </div>
-
-              <div
-                class="mini-card"
-                data-reveal
-                data-kind="card"
-                data-delay="90"
-              >
-                <div class="mini-kicker">Format</div>
-                <div class="mini-title">Flexible</div>
-                <div class="mini-text">
-                  Stand, prestation, événement d’entreprise…
-                </div>
-              </div>
-            </div>
+            <span class="badge">Sur le terrain</span>
+            <h2 id="home-events-title">Événements & collaborations.</h2>
+            <p>Quelques images récentes — la galerie complète reste sur la page dédiée.</p>
           </div>
+          <a class="section-link" href="/references">Voir toutes les participations →</a>
+        </div>
 
-          <div
-            class="panel-card"
-            data-reveal
-            data-kind="media"
-            data-delay="120"
-          >
-            <div class="panel-title">Contact direct</div>
+        <div class="photo-preview">
+          {selectedPhotos.map((photo, index) => (
+            <a class:list={["photo-preview__item", { "photo-preview__item--wide": index === 0 || index === 5 }]} href="/references#photos">
+              <img src={photo.src} alt={photo.alt} loading="lazy" />
+              <span>{photo.caption}</span>
+            </a>
+          ))}
+        </div>
 
-            <div class="panel-list" style="margin-top:10px;">
-              <div class="panel-item">
-                <div class="panel-item-title">Email</div>
-                <div class="small">contact@usagidelice.fr</div>
-              </div>
-
-              <div class="panel-item">
-                <div class="panel-item-title">Instagram</div>
-                <div class="small">@usagidelice</div>
-              </div>
-
-              <div class="panel-item">
-                <div class="panel-item-title">Zone</div>
-                <div class="small">Paris & Île-de-France</div>
-              </div>
-            </div>
-
-            <div style="margin-top:14px;">
-              <a class="btn primary" href="/contact">Ouvrir le formulaire</a>
-            </div>
-          </div>
+        <div class="partner-preview" aria-label="Collaborations et événements">
+          {partners.map((partner) => (
+            <div><img src={partner.logo} alt={partner.name} loading="lazy" /></div>
+          ))}
         </div>
       </div>
     </section>
-  </div>
+
+    <section class="home-cta">
+      <div class="container home-cta__box">
+        <div>
+          <span class="badge">Marché · Festival · Entreprise</span>
+          <h2>Vous préparez un événement ?</h2>
+          <p>Indiquez-nous la date, le lieu et le nombre de personnes estimé.</p>
+        </div>
+        <a class="btn primary" href="/contact">Nous contacter</a>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .home { overflow: hidden; }
+    .home-hero { padding: clamp(36px, 6vw, 86px) 0 clamp(54px, 8vw, 104px); }
+    .home-hero__grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(380px, 1.08fr); gap: clamp(34px, 6vw, 84px); align-items: center; }
+    .home-hero__copy h1 { margin: 18px 0; max-width: 12ch; font-size: clamp(3.15rem, 7vw, 6.7rem); line-height: .91; letter-spacing: -.065em; }
+    .home-hero__copy > p { max-width: 56ch; margin: 0; color: var(--muted, #665d58); font-size: clamp(1.04rem, 1.5vw, 1.25rem); line-height: 1.65; }
+    .home-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .next-date { display: grid; gap: 3px; max-width: 520px; margin-top: 30px; padding: 17px 19px; border: 1px solid rgba(42, 31, 31, .1); border-radius: 18px; color: inherit; text-decoration: none; background: rgba(255,255,255,.36); }
+    .next-date span { color: var(--red, #c23b32); font-size: .75rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .next-date strong { font-size: 1.05rem; }
+    .next-date small { color: var(--muted, #665d58); }
+    .home-hero__media { position: relative; display: block; min-height: 660px; overflow: hidden; border-radius: 34px; box-shadow: 0 26px 80px rgba(38, 26, 20, .16); }
+    .home-hero__media img { width: 100%; height: 100%; min-height: inherit; object-fit: cover; display: block; transition: transform .5s ease; }
+    .home-hero__media:hover img { transform: scale(1.025); }
+    .home-hero__media span { position: absolute; right: 20px; bottom: 20px; display: flex; gap: 18px; align-items: center; padding: 12px 15px; border-radius: 999px; color: #2a1f1f; background: rgba(255,255,255,.88); backdrop-filter: blur(12px); font-weight: 850; }
+    .home-section { padding: clamp(62px, 8vw, 112px) 0; }
+    .home-section--soft { background: rgba(255,255,255,.25); }
+    .section-intro { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 26px; }
+    .section-intro h2, .home-cta h2 { margin: 14px 0 0; max-width: 15ch; font-size: clamp(2.3rem, 5vw, 4.8rem); line-height: .98; letter-spacing: -.05em; }
+    .section-intro p { max-width: 58ch; margin: 12px 0 0; color: var(--muted, #665d58); }
+    .section-link { flex: 0 0 auto; color: var(--red, #c23b32); font-weight: 850; text-decoration: none; }
+    .date-preview { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .date-preview article { min-height: 190px; padding: 25px; border: 1px solid rgba(42,31,31,.1); border-radius: 22px; background: rgba(255,255,255,.38); }
+    .date-preview p { margin: 0 0 28px; color: var(--red, #c23b32); font-size: .82rem; font-weight: 900; text-transform: uppercase; }
+    .date-preview h3 { margin: 0 0 8px; font-size: 1.45rem; line-height: 1.1; }
+    .date-preview span { color: var(--muted, #665d58); }
+    .photo-preview { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 245px; gap: 12px; }
+    .photo-preview__item { position: relative; overflow: hidden; border-radius: 20px; color: #fff; }
+    .photo-preview__item--wide { grid-column: span 2; }
+    .photo-preview img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+    .photo-preview a:hover img { transform: scale(1.035); }
+    .photo-preview span { position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px); padding: 7px 10px; border-radius: 999px; background: rgba(25,18,16,.68); backdrop-filter: blur(8px); font-size: .78rem; }
+    .partner-preview { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+    .partner-preview div { display: flex; align-items: center; justify-content: center; min-height: 94px; padding: 18px; border: 1px solid rgba(42,31,31,.09); border-radius: 18px; background: rgba(255,255,255,.44); }
+    .partner-preview img { max-width: 100%; max-height: 42px; }
+    .home-cta { padding: clamp(64px, 9vw, 120px) 0; }
+    .home-cta__box { display: flex; justify-content: space-between; align-items: center; gap: 30px; padding: clamp(30px, 5vw, 68px); border-radius: 30px; background: #2a1f1f; color: #fff; }
+    .home-cta p { margin: 14px 0 0; color: rgba(255,255,255,.72); }
+
+    @media (max-width: 900px) {
+      .home-hero__grid { grid-template-columns: 1fr; }
+      .home-hero__media { min-height: 500px; }
+      .date-preview { grid-template-columns: 1fr; }
+      .date-preview article { min-height: 0; }
+      .photo-preview { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 210px; }
+      .partner-preview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .home-hero { padding-top: 24px; }
+      .home-hero__copy h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
+      .home-hero__media { min-height: 410px; border-radius: 24px; }
+      .section-intro { display: grid; align-items: start; }
+      .section-link { order: 2; }
+      .photo-preview { display: flex; width: calc(100vw - 24px); margin-left: calc((100% - (100vw - 24px)) / 2); padding-bottom: 8px; overflow-x: auto; scroll-snap-type: x mandatory; }
+      .photo-preview__item, .photo-preview__item--wide { flex: 0 0 82vw; height: 330px; scroll-snap-align: center; }
+      .home-cta__box { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
 </BaseLayout>
