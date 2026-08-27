@@ -1,0 +1,89 @@
+media:
+  input: site/public/images
+  output: /images
+  categories: [image]
+  rename: true
+
+content:
+  - name: upcoming_dates
+    label: Prochaines dates
+    type: file
+    path: site/src/data/events.json
+    format: json
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{title} — {dateLabel}"
+    operations:
+      delete: false
+    fields:
+      - name: title
+        label: Nom
+        type: string
+        required: true
+      - name: dateLabel
+        label: Date affichée
+        type: string
+        required: true
+      - name: location
+        label: Lieu
+        type: string
+        required: true
+      - name: status
+        label: Type
+        type: select
+        required: true
+        options:
+          values:
+            - name: upcoming
+              label: À venir
+            - name: regular
+              label: Rendez-vous régulier
+            - name: past
+              label: Passé
+      - name: description
+        label: Description
+        type: text
+        required: true
+
+  - name: gallery
+    label: Galerie
+    type: file
+    path: site/src/data/gallery.json
+    format: json
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{caption}"
+    operations:
+      delete: false
+    fields:
+      - name: id
+        label: Identifiant
+        type: string
+        required: true
+        description: "Unique, par exemple ph-11."
+      - name: src
+        label: Image
+        type: image
+        required: true
+      - name: alt
+        label: Description accessible
+        type: string
+        required: true
+      - name: caption
+        label: Légende
+        type: string
+        required: true
+      - name: shape
+        label: Format de vignette
+        type: select
+        required: true
+        options:
+          values:
+            - name: landscape
+              label: Paysage
+            - name: portrait
+              label: Portrait
+            - name: square
+              label: Carré

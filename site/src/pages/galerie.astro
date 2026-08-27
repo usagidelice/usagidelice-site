@@ -1,21 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { refPhotos as photos } from '../data/references';
 
 const title = "Galerie — Usagi Délice";
 const description = "Photos du stand, des takoyaki et des événements. L’ambiance Usagi Délice en images.";
 
-const photos = [
-  { src: '/images/references/photos/ref-photo-1.webp', alt: 'Stand Usagi Délice au marché de Noël de La Villette' },
-  { src: '/images/references/photos/ref-photo-2.webp', alt: 'Takoyaki d’Osaka servis chauds' },
-  { src: '/images/references/photos/ref-photo-3.webp', alt: 'Takoyaki Usagi Délice devant la Tour Eiffel' },
-  { src: '/images/references/photos/ref-photo-4.webp', alt: 'Takoyaki Usagi Délice devant l’Arc de Triomphe' },
-  { src: '/images/references/photos/ref-photo-5.webp', alt: 'Cuisson des takoyaki sur la plaque' },
-  { src: '/images/references/photos/ref-photo-6.webp', alt: 'Préparation des takoyaki devant le public' },
-  { src: '/images/references/photos/ref-photo-7.webp', alt: 'Service Usagi Délice pendant un événement fréquenté' },
-  { src: '/images/references/photos/ref-photo-8.webp', alt: 'Collaboration Usagi Délice avec UNIQLO Paris' },
-  { src: '/images/references/photos/ref-photo-9.webp', alt: 'Stand Usagi Délice en plein air' },
-  { src: '/images/references/photos/ref-photo-10.webp', alt: 'Public devant le stand Usagi Délice en festival' }
-];
 ---
 
 <BaseLayout title={title} description={description}>

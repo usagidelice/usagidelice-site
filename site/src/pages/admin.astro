@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Administration — Usagi Délice";
+const description = "Accès à la gestion des prochaines dates et de la galerie Usagi Délice.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="apple-section">
+    <div class="container" style="max-width:860px;">
+      <span class="badge">Administration</span>
+      <h1 class="h1" style="margin-top:14px;">Mettre le site à jour</h1>
+      <p class="lead">Le contenu est géré avec votre compte GitHub. Vous pouvez ajouter une date, modifier un lieu, envoyer une photo et réordonner la galerie sans toucher au code.</p>
+      <div class="card" style="margin-top:24px;">
+        <div class="pad">
+          <ol style="display:grid; gap:12px; padding-left:22px; line-height:1.6;">
+            <li>Ouvrez Pages CMS et connectez-vous avec le compte GitHub propriétaire du site.</li>
+            <li>Sélectionnez le dépôt <strong>usagidelice-site</strong>.</li>
+            <li>Choisissez <strong>Prochaines dates</strong> ou <strong>Galerie</strong>, puis enregistrez.</li>
+          </ol>
+          <a class="btn primary" href="https://app.pagescms.org" target="_blank" rel="noopener noreferrer">Ouvrir la gestion du site</a>
+        </div>
+      </div>
+      <p class="small" style="margin-top:16px;">Au premier accès, GitHub demandera d’autoriser Pages CMS pour ce dépôt. Chaque enregistrement déclenchera ensuite automatiquement une nouvelle version sur Vercel.</p>
+    </div>
+  </section>
+</BaseLayout>

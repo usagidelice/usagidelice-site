@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ProductCard from "../components/ProductCard.astro";
+import ProductShowcase from "../components/ProductShowcase.astro";
 import EventCard from "../components/EventCard.astro";
 import { products } from "../data/products";
 import { events } from "../data/events";
@@ -274,11 +274,11 @@ const homeCaptions = [
           </div>
         </div>
 
-        <div class="grid cols-3" style="margin-top:16px;">
+        <div style="margin-top:20px;">
           {
             products.map((p, i) => (
               <div data-reveal data-kind="media" data-delay={i * 70}>
-                <ProductCard product={p} />
+                <ProductShowcase product={p} compact />
               </div>
             ))
           }
@@ -485,7 +485,7 @@ const homeCaptions = [
           data-kind="text"
           data-delay="220"
         >
-          <a class="btn primary" href="/references">Voir toutes les références</a>
+          <a class="btn primary" href="/references">Voir les événements & collaborations</a>
           <a class="btn ghost" href="#contact">Nous contacter</a>
         </div>
       </div>

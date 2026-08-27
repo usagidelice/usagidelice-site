@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProductCard from '../components/ProductCard.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
 import { products } from '../data/products';
 
 const title = "Nos produits — Usagi Délice";
@@ -17,8 +17,8 @@ const description = "Découvrez nos takoyaki d’Osaka faits maison, cuits devan
         Chaque portion est cuite devant vous et servie bien chaude. Les formats et options peuvent varier selon l’événement.
       </p>
 
-      <div class="grid" style="grid-template-columns:minmax(0, 680px); margin-top:18px;">
-        {products.map((p) => <ProductCard product={p} />)}
+      <div style="margin-top:28px;">
+        {products.map((p) => <ProductShowcase product={p} />)}
       </div>
 
       <div class="card" style="margin-top:18px;">
