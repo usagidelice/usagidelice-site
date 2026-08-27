@@ -29,13 +29,6 @@ export const events: EventItem[] = [
     description: "Retrouvez Usagi Délice pendant le week-end de la Fête de la Lune à Belleville.",
   },
   {
-    title: "Game’in Reims",
-    dateLabel: "21–22 novembre 2026",
-    location: "Parc des Expositions de Reims",
-    status: "upcoming",
-    description: "Takoyaki d’Osaka au cœur de ce rendez-vous pop culture et gaming.",
-  },
-  {
     title: "Marché de Vincennes",
     dateLabel: "Le dimanche, selon notre calendrier",
     location: "Vincennes",
