@@ -16,12 +16,16 @@ const upcomingEventsMore = events
   .slice(0, 5);
 
 const homeCaptions = [
-  "Stand & service sur place",
+  "Marché de Noël · La Villette",
   "Takoyaki dorés, cœur fondant",
-  "Marchés & événements",
+  "Takoyaki face à la Tour Eiffel",
+  "Takoyaki face à l’Arc de Triomphe",
   "Cuisson minute à la plaque",
-  "Ambiance japonaise",
-  "Paris & Île-de-France",
+  "Préparés devant vous",
+  "Service en forte affluence",
+  "Collaboration · UNIQLO Paris",
+  "Stand en plein air",
+  "Festival · Île-de-France",
 ];
 
 ---
@@ -319,8 +323,8 @@ const homeCaptions = [
               data-kind="text"
               data-delay="140"
             >
-              Nous sommes souvent sur les marchés (Vincennes, Paris 16e) et sur
-              des événements japonais (matsuri, hanami…).
+              Retrouvez-nous le dimanche à Vincennes selon notre calendrier,
+              ainsi que dans des festivals japonais et pop culture.
             </p>
 
             <div class="highlights highlights-2" style="margin-top:14px;">
@@ -344,9 +348,9 @@ const homeCaptions = [
                 data-delay="90"
               >
                 <div class="mini-kicker">Marché</div>
-                <div class="mini-title">Paris 16e</div>
+                <div class="mini-title">Festivals & pop-ups</div>
                 <div class="mini-text">
-                  Président Wilson — stand artisan, service rapide.
+                  Paris, Île-de-France et événements partout en France.
                 </div>
               </div>
             </div>
@@ -438,7 +442,7 @@ const homeCaptions = [
 
         <div class="rail" id="home-photos">
           
-          {[1, 2, 3, 4, 5, 6].map((i) => (
+          {Array.from({ length: 10 }, (_, i) => i + 1).map((i) => (
             <a
               class="shot landscape"
               href={`/images/references/photos/ref-photo-${i}.webp`}
@@ -448,7 +452,7 @@ const homeCaptions = [
             >
               <img
                 src={`/images/references/photos/ref-photo-${i}.webp`}
-                alt={`Usagi Délice — photo ${i}`}
+                alt={homeCaptions[i - 1]}
                 loading="lazy"
                 width="1400"
                 height="900"

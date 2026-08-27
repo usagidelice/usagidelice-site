@@ -14,7 +14,7 @@ const {
   title = "Usagi Délice — Takoyaki d’Osaka à Paris",
   description = "Usagi Délice : takoyaki faits maison, préparés sur place, dans l’esprit de la street food d’Osaka à Paris.",
   canonical,
-  ogImage = "/images/og.jpg",
+  ogImage = "/images/og.webp",
 } = Astro.props as Props;
 
 // ✅ safest canonical (no Astro.url typing dependency)
@@ -23,6 +23,20 @@ const canonicalUrl =
   (typeof Astro !== "undefined" && (Astro as any).url
     ? new URL((Astro as any).url.pathname, "https://usagidelice.fr").toString()
     : "https://usagidelice.fr/");
+
+const ogImageUrl = new URL(ogImage, "https://usagidelice.fr").toString();
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  name: "Usagi Délice",
+  url: "https://usagidelice.fr",
+  image: ogImageUrl,
+  description,
+  servesCuisine: ["Japonaise", "Street food", "Takoyaki d’Osaka"],
+  areaServed: ["Paris", "Île-de-France", "France"],
+  email: "contact@usagidelice.fr",
+  sameAs: ["https://www.instagram.com/usagidelice"],
+};
 ---
 
 <!doctype html>
@@ -39,12 +53,18 @@ const canonicalUrl =
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Usagi Délice" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image" content={ogImageUrl} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <meta name="theme-color" content="#f6eadc" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
