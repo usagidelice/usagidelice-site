@@ -3,640 +3,217 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = "Takoyaki — Usagi Délice";
 const description =
-  "Découvrez l’histoire du takoyaki, le savoir-faire d’Osaka et l’aventure d’Usagi Délice, de nos premiers marchés à Paris à nos événements en Île-de-France.";
-
-const craftPoints = [
-  { number: '01', title: 'Une pâte légère', text: 'Dorée dehors, fondante au centre.' },
-  { number: '02', title: 'Un vrai morceau de poulpe', text: 'Un morceau généreux dans chaque boule.' },
-  { number: '03', title: 'Le geste à la plaque', text: 'Tournée à la main, pièce après pièce.' },
-  { number: '04', title: 'La finition japonaise', text: 'Sauce, mayo, aonori et bonite.' },
-];
-
-const timeline = [
-  { year: '2023', text: 'Naissance d’Usagi Délice et premiers marchés.' },
-  { year: '2024–2025', text: 'Festivals japonais, asiatiques et collaborations.' },
-  { year: 'Aujourd’hui', text: 'Paris et Île-de-France, toujours en direct.' },
-];
+  "Découvrez l’histoire du takoyaki et l’aventure d’Usagi Délice, de la tradition d’Osaka aux marchés de Paris.";
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="takoyaki-page">
-    <section class="takoyaki-intro" id="origine" aria-labelledby="origine-title">
-      <div class="container takoyaki-intro__grid">
-        <div class="takoyaki-intro__copy" data-reveal>
-          <p class="eyebrow">Takoyaki · Osaka · depuis 1935</p>
-          <h1 id="origine-title">Le geste d’Osaka</h1>
-          <p class="takoyaki-intro__lead">
-            Le takoyaki est l’un des grands symboles de la street food japonaise : une bouchée populaire,
-            généreuse et faite pour être partagée.
-          </p>
-          <p>
-            Né à Osaka en <strong>1935</strong> sous l’impulsion de Tomekichi Endo, il s’est répandu dans les rues,
-            les marchés et les festivals du Kansai. Une pâte fluide, un morceau de poulpe et une plaque chaude :
-            chaque boule est retournée à la main.
-          </p>
-          <a class="text-link" href="#savoir-faire">Découvrir le geste <span aria-hidden="true">↓</span></a>
-        </div>
+  <section class="apple-section story takoyaki-story-page">
+    <div class="container">
+      <span class="badge">Takoyaki</span>
+      <h1 class="h1 story__title">Le goût d’Osaka, à Paris</h1>
+      <p class="lead story__lead">
+        Une spécialité japonaise née à Osaka, préparée sur place et partagée avec vous depuis 2023.
+      </p>
 
-        <figure class="takoyaki-intro__media" data-reveal data-delay="80">
-          <img
-            src="/images/takoyaki/cuisson-1.webp"
-            alt="Préparation des takoyaki sur le stand Usagi Délice"
-            width="1254"
-            height="1254"
-            loading="eager"
-            fetchpriority="high"
-          />
-          <figcaption>Une spécialité populaire, préparée minute</figcaption>
-        </figure>
-      </div>
-
-      <div class="container origin-facts" data-reveal data-delay="140" aria-label="Repères sur le takoyaki">
-        <div><strong>1935</strong><span>Naissance à Osaka</span></div>
-        <div><strong>Osaka</strong><span>La ville du kuidaore</span></div>
-        <div><strong>Un geste</strong><span>Chaque boule tournée à la main</span></div>
-      </div>
-    </section>
-
-    <section class="takoyaki-craft" id="savoir-faire" aria-labelledby="savoir-faire-title">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Notre façon de faire</p>
-          <h2 id="savoir-faire-title">À Paris,<br />le goût d’Osaka</h2>
-          <p>
-            Nous préparons des takoyaki dans le style traditionnel d’Osaka, pour vous faire retrouver à Paris
-            une bouchée authentique, chaude et généreuse.
-          </p>
-        </div>
-
-        <div class="craft-grid">
-          <figure class="craft-grid__media" data-reveal>
-            <img
-              src="/images/takoyaki/cuisson-2.webp"
-              alt="Cuisson des takoyaki sur la plaque"
-              width="2048"
-              height="1365"
-              loading="lazy"
-            />
-            <figcaption>Servis bien chauds, dès la sortie de la plaque</figcaption>
-          </figure>
-
-          <div class="craft-grid__content" data-reveal data-delay="80">
-            <h3>Fait minute, devant vous</h3>
-            <p>
-              La cuisson et le retournement demandent du rythme. Chaque portion est travaillée sur place,
-              juste avant d’être servie.
-            </p>
-
-            <div class="craft-points">
-              {craftPoints.map((point) => (
-                <article class="craft-point">
-                  <span>{point.number}</span>
-                  <div>
-                    <h4>{point.title}</h4>
-                    <p>{point.text}</p>
-                  </div>
-                </article>
-              ))}
+      <div class="story__grid">
+        <article class="card story__card" data-reveal>
+          <div class="pad story__block">
+            <div class="story__text">
+              <p class="story__kicker">01 · Origine</p>
+              <h2 class="h2">Une spécialité née à Osaka</h2>
+              <p class="lead">
+                Apparu à Osaka en <strong>1935</strong> grâce à Tomekichi Endo, le takoyaki est devenu
+                l’un des grands classiques de la street food japonaise.
+              </p>
+              <p class="story__short">
+                Une pâte fluide, un morceau de poulpe et une plaque chaude : chaque boule est retournée
+                à la main. Un geste simple en apparence, précis en réalité.
+              </p>
             </div>
-
-            <p class="allergen-note">
-              Allergènes principaux : gluten, œufs, poisson, mollusques et soja. Informations détaillées sur demande.
-            </p>
+            <figure class="story__media">
+              <img
+                src="/images/takoyaki/cuisson-1.webp"
+                alt="Préparation des takoyaki sur le stand Usagi Délice"
+                width="1200"
+                height="1200"
+                loading="eager"
+                fetchpriority="high"
+              />
+              <figcaption>Le geste de la plaque</figcaption>
+            </figure>
           </div>
-        </div>
-      </div>
-    </section>
+        </article>
 
-    <section class="takoyaki-story" id="usagi-delice" aria-labelledby="usagi-title">
-      <div class="container takoyaki-story__grid">
-        <div class="takoyaki-story__content" data-reveal>
-          <p class="eyebrow">L’histoire d’Usagi Délice</p>
-          <h2 id="usagi-title">Depuis 2023,<br />sur les marchés</h2>
-          <p class="takoyaki-story__lead">
-            Usagi Délice est né d’une envie simple : partager une spécialité japonaise authentique au fil
-            des marchés et des rencontres.
-          </p>
-          <p>
-            Depuis <strong>2023</strong>, notre stand itinérant parcourt Paris et ses alentours. Festivals japonais,
-            événements asiatiques, marchés de Noël et collaborations : toujours la même envie de cuisiner devant
-            le public et de transmettre l’âme d’Osaka.
-          </p>
+        <article class="card story__card" data-reveal data-delay="80">
+          <div class="pad story__block story__block--reverse">
+            <div class="story__text">
+              <p class="story__kicker">02 · Notre façon</p>
+              <h2 class="h2">Le style d’Osaka, ici</h2>
+              <p class="lead">
+                Nous préparons des takoyaki dans le style traditionnel d’Osaka, pour vous faire retrouver
+                à Paris une bouchée chaude, fondante et généreuse.
+              </p>
+              <ul class="story__tags" aria-label="Notre savoir-faire">
+                <li>Recette maison</li>
+                <li>Cuisson minute</li>
+                <li>Un vrai morceau de poulpe</li>
+                <li>Sauce &amp; toppings japonais</li>
+              </ul>
+              <p class="story__note">Préparés devant vous, puis servis dès la sortie de la plaque.</p>
+            </div>
+            <figure class="story__media">
+              <img
+                src="/images/takoyaki/produit-2.webp"
+                alt="Takoyaki Usagi Délice devant la Tour Eiffel"
+                width="900"
+                height="1200"
+                loading="lazy"
+              />
+              <figcaption>Osaka à Paris</figcaption>
+            </figure>
+          </div>
+        </article>
 
-          <div class="timeline" aria-label="Les étapes d’Usagi Délice">
-            {timeline.map((item) => (
-              <div class="timeline__item">
-                <span>{item.year}</span>
-                <p>{item.text}</p>
+        <article class="card story__card" data-reveal data-delay="160">
+          <div class="pad story__block">
+            <div class="story__text">
+              <p class="story__kicker">03 · Usagi Délice</p>
+              <h2 class="h2">Depuis 2023, sur les marchés</h2>
+              <p class="lead">
+                Depuis 2023, notre stand itinérant parcourt Paris et ses alentours.
+              </p>
+              <p class="story__short">
+                Marchés, festivals japonais et asiatiques, marchés de Noël et collaborations :
+                nous cuisinons devant le public et transmettons l’âme de la street food d’Osaka.
+              </p>
+              <div class="story__cta">
+                <a class="btn primary" href="/evenements">Voir les prochaines dates</a>
+                <a class="btn ghost" href="/contact">Proposer un événement</a>
               </div>
-            ))}
+            </div>
+            <figure class="story__media">
+              <img
+                src="/images/takoyaki/stand-1.webp"
+                alt="Le stand Usagi Délice lors d’un marché de Noël"
+                width="900"
+                height="1200"
+                loading="lazy"
+              />
+              <figcaption>Des marchés aux festivals</figcaption>
+            </figure>
           </div>
-        </div>
-
-        <figure class="takoyaki-story__media" data-reveal data-delay="80">
-          <img
-            src="/images/takoyaki/stand-1.webp"
-            alt="Le stand Usagi Délice lors d’un marché de Noël"
-            width="1000"
-            height="1333"
-            loading="lazy"
-          />
-          <figcaption>Des marchés aux festivals, une cuisine qui se partage</figcaption>
-        </figure>
+        </article>
       </div>
-    </section>
 
-    <section class="takoyaki-cta" aria-labelledby="takoyaki-cta-title">
-      <div class="container takoyaki-cta__inner" data-reveal>
-        <div>
-          <p class="eyebrow">À bientôt sur la plaque</p>
-          <h2 id="takoyaki-cta-title">Goûter à Osaka à Paris&nbsp;?</h2>
-          <p>Retrouvez-nous sur nos prochains marchés ou invitez Usagi Délice à votre événement.</p>
-        </div>
-        <div class="takoyaki-cta__actions">
-          <a class="btn primary" href="/evenements#prochaines-dates">Voir les prochaines dates</a>
-          <a class="btn ghost" href="/contact">Parler d’un événement</a>
-        </div>
-      </div>
-    </section>
-  </div>
-</BaseLayout>
+      <p class="story__allergens">
+        Allergènes principaux : gluten, œufs, poisson, mollusques et soja. Informations détaillées sur demande.
+      </p>
+    </div>
+  </section>
 
-<style>
-  .takoyaki-page {
-    overflow: clip;
-    background: #f7f3ec;
-  }
-
-  .takoyaki-page .container {
-    width: min(1120px, 100%);
-    margin-inline: auto;
-    padding-inline: 20px;
-  }
-
-  .takoyaki-page .eyebrow {
-    margin: 0 0 14px;
-    color: var(--red);
-    font-size: 0.75rem;
-    font-weight: 850;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .takoyaki-page h1,
-  .takoyaki-page h2,
-  .takoyaki-page h3,
-  .takoyaki-page h4,
-  .takoyaki-page p {
-    margin-top: 0;
-  }
-
-  .takoyaki-page h1,
-  .takoyaki-page h2 {
-    color: #2b2420;
-    letter-spacing: -0.055em;
-    line-height: 0.98;
-  }
-
-  .takoyaki-page h1 {
-    max-width: 9ch;
-    margin-bottom: 23px;
-    font-size: clamp(3.25rem, 5.8vw, 5.8rem);
-  }
-
-  .takoyaki-page h2 {
-    margin-bottom: 22px;
-    font-size: clamp(2.8rem, 5.1vw, 5rem);
-  }
-
-  .takoyaki-page h3 {
-    margin-bottom: 13px;
-    color: #2b2420;
-    font-size: clamp(1.6rem, 2.4vw, 2.25rem);
-    letter-spacing: -0.035em;
-    line-height: 1.05;
-  }
-
-  .takoyaki-page p {
-    color: rgba(43, 36, 32, 0.7);
-    font-size: 1rem;
-    line-height: 1.72;
-  }
-
-  .takoyaki-page strong {
-    color: #2b2420;
-  }
-
-  .takoyaki-intro {
-    padding: clamp(60px, 8vw, 112px) 0 clamp(70px, 9vw, 126px);
-  }
-
-  .takoyaki-intro__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.78fr) minmax(460px, 1.22fr);
-    gap: clamp(45px, 8vw, 108px);
-    align-items: center;
-  }
-
-  .takoyaki-intro__copy {
-    max-width: 550px;
-  }
-
-  .takoyaki-intro__lead {
-    margin-bottom: 20px;
-    color: #3a312d !important;
-    font-size: clamp(1.15rem, 1.65vw, 1.4rem) !important;
-    font-weight: 650;
-    line-height: 1.52 !important;
-  }
-
-  .takoyaki-intro__copy p:not(.eyebrow):not(.takoyaki-intro__lead) {
-    margin-bottom: 14px;
-  }
-
-  .text-link {
-    display: inline-flex;
-    gap: 10px;
-    align-items: center;
-    margin-top: 12px;
-    color: var(--red);
-    font-weight: 800;
-  }
-
-  .text-link span {
-    transition: transform 180ms ease;
-  }
-
-  .text-link:hover span {
-    transform: translateY(3px);
-  }
-
-  .takoyaki-intro__media,
-  .craft-grid__media,
-  .takoyaki-story__media {
-    position: relative;
-    overflow: hidden;
-    margin: 0;
-    background: #dfd0c3;
-    box-shadow: 0 24px 65px rgba(63, 42, 30, 0.13);
-  }
-
-  .takoyaki-intro__media {
-    aspect-ratio: 1 / 1.03;
-    min-height: clamp(480px, 42vw, 620px);
-    border-radius: 32px 150px 32px 32px;
-  }
-
-  .takoyaki-intro__media img,
-  .craft-grid__media img,
-  .takoyaki-story__media img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .takoyaki-intro__media img {
-    object-position: 50% 52%;
-  }
-
-  .takoyaki-intro figure figcaption,
-  .craft-grid figure figcaption,
-  .takoyaki-story figure figcaption {
-    position: absolute;
-    right: 14px;
-    bottom: 14px;
-    left: 14px;
-    width: fit-content;
-    max-width: calc(100% - 28px);
-    padding: 8px 12px;
-    border: 1px solid rgba(42, 31, 31, 0.1);
-    border-radius: 999px;
-    background: rgba(255, 247, 239, 0.84);
-    color: rgba(42, 31, 31, 0.86);
-    backdrop-filter: blur(10px);
-    font-size: 0.82rem;
-    font-weight: 800;
-    line-height: 1.2;
-  }
-
-  .origin-facts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-    margin-top: clamp(48px, 7vw, 88px);
-    padding-top: 22px;
-    border-top: 1px solid rgba(43, 36, 32, 0.14);
-  }
-
-  .origin-facts div {
-    display: grid;
-    gap: 5px;
-  }
-
-  .origin-facts strong {
-    color: #2b2420;
-    font-size: 1.08rem;
-  }
-
-  .origin-facts span {
-    color: rgba(43, 36, 32, 0.58);
-    font-size: 0.85rem;
-  }
-
-  .takoyaki-craft {
-    padding: clamp(76px, 10vw, 132px) 0;
-    background: #f1e6da;
-  }
-
-  .section-head {
-    max-width: 700px;
-    margin-bottom: clamp(32px, 5vw, 58px);
-  }
-
-  .section-head > p:last-child {
-    max-width: 63ch;
-    margin-bottom: 0;
-    font-size: 1.08rem;
-  }
-
-  .craft-grid {
-    display: grid;
-    grid-template-columns: minmax(420px, 1.08fr) minmax(0, 0.92fr);
-    gap: clamp(40px, 7vw, 96px);
-    align-items: center;
-  }
-
-  .craft-grid__media {
-    aspect-ratio: 1.16 / 1;
-    min-height: clamp(420px, 38vw, 560px);
-    border-radius: 32px 32px 140px 32px;
-  }
-
-  .craft-grid__media img {
-    object-position: 50% 50%;
-  }
-
-  .craft-grid__content > p {
-    max-width: 58ch;
-  }
-
-  .craft-points {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 24px;
-    margin-top: 28px;
-    border-top: 1px solid rgba(43, 36, 32, 0.14);
-  }
-
-  .craft-point {
-    display: grid;
-    grid-template-columns: 34px 1fr;
-    gap: 12px;
-    padding: 18px 0 17px;
-    border-bottom: 1px solid rgba(43, 36, 32, 0.14);
-  }
-
-  .craft-point > span {
-    color: var(--red);
-    font-size: 0.78rem;
-    font-weight: 850;
-    letter-spacing: 0.04em;
-  }
-
-  .craft-point h4 {
-    margin-bottom: 5px;
-    color: #2b2420;
-    font-size: 0.98rem;
-  }
-
-  .craft-point p {
-    margin: 0;
-    font-size: 0.88rem;
-    line-height: 1.48;
-  }
-
-  .allergen-note {
-    margin: 19px 0 0;
-    color: rgba(43, 36, 32, 0.55) !important;
-    font-size: 0.82rem !important;
-    line-height: 1.5 !important;
-  }
-
-  .takoyaki-story {
-    padding: clamp(78px, 10vw, 138px) 0;
-  }
-
-  .takoyaki-story__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.86fr) minmax(460px, 1.14fr);
-    gap: clamp(44px, 8vw, 110px);
-    align-items: center;
-  }
-
-  .takoyaki-story__content {
-    max-width: 590px;
-  }
-
-  .takoyaki-story__lead {
-    color: #3a312d !important;
-    font-size: 1.12rem !important;
-    font-weight: 650;
-  }
-
-  .timeline {
-    margin-top: 30px;
-    padding-left: 18px;
-    border-left: 2px solid rgba(194, 59, 50, 0.25);
-  }
-
-  .timeline__item {
-    position: relative;
-    padding: 0 0 22px 20px;
-  }
-
-  .timeline__item:last-child {
-    padding-bottom: 0;
-  }
-
-  .timeline__item::before {
-    position: absolute;
-    top: 4px;
-    left: -25px;
-    width: 9px;
-    height: 9px;
-    border: 2px solid #f7f3ec;
-    border-radius: 50%;
-    background: var(--red);
-    box-shadow: 0 0 0 1px rgba(194, 59, 50, 0.25);
-    content: "";
-  }
-
-  .timeline__item span {
-    display: block;
-    margin-bottom: 4px;
-    color: var(--red);
-    font-size: 0.82rem;
-    font-weight: 850;
-    letter-spacing: 0.04em;
-  }
-
-  .timeline__item p {
-    margin: 0;
-    font-size: 0.94rem;
-    line-height: 1.52;
-  }
-
-  .takoyaki-story__media {
-    aspect-ratio: 1 / 1.02;
-    min-height: clamp(480px, 42vw, 620px);
-    border-radius: 150px 32px 32px 32px;
-  }
-
-  .takoyaki-story__media img {
-    object-position: 50% 50%;
-  }
-
-  .takoyaki-cta {
-    padding: 0 0 clamp(70px, 8vw, 110px);
-  }
-
-  .takoyaki-cta__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(43, 36, 32, 0.14);
-  }
-
-  .takoyaki-cta h2 {
-    margin-bottom: 10px;
-    font-size: clamp(2.25rem, 4vw, 3.8rem);
-  }
-
-  .takoyaki-cta p:not(.eyebrow) {
-    margin-bottom: 0;
-  }
-
-  .takoyaki-cta__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-end;
-  }
-
-  @media (max-width: 900px) {
-    .takoyaki-intro__grid,
-    .craft-grid,
-    .takoyaki-story__grid {
-      grid-template-columns: 1fr;
-      gap: 38px;
+  <style>
+    .takoyaki-story-page .story__title { margin-top: 14px; max-width: 900px; }
+    .takoyaki-story-page .story__lead { max-width: 64ch; }
+    .takoyaki-story-page .story__grid { margin-top: 30px; display: grid; gap: 22px; }
+    .takoyaki-story-page .story__card { background: rgba(255, 247, 239, .92); }
+    .takoyaki-story-page .story__card .pad { padding: clamp(22px, 3.1vw, 38px); }
+    .takoyaki-story-page .story__block {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(450px, 1.2fr);
+      gap: clamp(24px, 3.8vw, 54px);
+      align-items: stretch;
     }
-
-    .takoyaki-intro__copy,
-    .takoyaki-story__content {
-      max-width: 700px;
+    .takoyaki-story-page .story__block--reverse {
+      grid-template-columns: minmax(450px, 1.2fr) minmax(0, .8fr);
     }
-
-    .takoyaki-intro__media,
-    .craft-grid__media,
-    .takoyaki-story__media {
-      width: min(100%, 680px);
-      justify-self: center;
+    .takoyaki-story-page .story__block--reverse .story__text { order: 2; }
+    .takoyaki-story-page .story__block--reverse .story__media { order: 1; }
+    .takoyaki-story-page .story__text { align-self: center; max-width: 43ch; }
+    .takoyaki-story-page .story__kicker {
+      margin: 0 0 12px;
+      color: var(--red);
+      font-size: .74rem;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
     }
-
-    .takoyaki-intro__media {
-      aspect-ratio: 1.15 / 1;
-      min-height: 0;
+    .takoyaki-story-page .story__text .h2 { margin-bottom: 18px; }
+    .takoyaki-story-page .story__text .lead {
+      margin-bottom: 14px;
+      font-size: clamp(1.03rem, 1.45vw, 1.2rem);
+      line-height: 1.55;
     }
-
-    .craft-grid__media {
-      order: 2;
-      aspect-ratio: 1.18 / 1;
-      min-height: 0;
+    .takoyaki-story-page .story__short,
+    .takoyaki-story-page .story__note { margin: 0; color: var(--muted); line-height: 1.62; }
+    .takoyaki-story-page .story__media {
+      position: relative;
+      min-width: 0;
+      min-height: 420px;
+      aspect-ratio: 1.12 / 1;
+      overflow: hidden;
+      margin: 0;
+      border-radius: 20px;
+      background: #dfd0c3;
     }
-
-    .craft-grid__content {
-      order: 1;
-    }
-
-    .takoyaki-story__media {
-      aspect-ratio: 1.18 / 1;
-      min-height: 0;
-    }
-
-    .takoyaki-cta__inner {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
-    .takoyaki-cta__actions {
-      justify-content: flex-start;
-    }
-  }
-
-  @media (max-width: 620px) {
-    .takoyaki-page .container {
-      padding-inline: 18px;
-    }
-
-    .takoyaki-intro {
-      padding-top: 44px;
-    }
-
-    .takoyaki-page h1 {
-      max-width: 9ch;
-      margin-bottom: 21px;
-      font-size: clamp(3rem, 15vw, 4.5rem);
-    }
-
-    .takoyaki-page h2 {
-      font-size: clamp(2.55rem, 12vw, 3.55rem);
-    }
-
-    .takoyaki-intro__media,
-    .craft-grid__media,
-    .takoyaki-story__media {
-      border-radius: 24px 82px 24px 24px;
-    }
-
-    .craft-grid__media {
-      border-radius: 24px 24px 82px 24px;
-    }
-
-    .takoyaki-story__media {
-      border-radius: 82px 24px 24px 24px;
-    }
-
-    .origin-facts {
-      grid-template-columns: 1fr;
-      gap: 17px;
-      margin-top: 46px;
-    }
-
-    .craft-points {
-      grid-template-columns: 1fr;
-    }
-
-    .takoyaki-craft,
-    .takoyaki-story {
-      padding-block: 72px;
-    }
-
-    .takoyaki-cta__actions,
-    .takoyaki-cta__actions .btn {
+    .takoyaki-story-page .story__media img {
       width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
-
-    .takoyaki-cta__actions .btn {
-      justify-content: center;
+    .takoyaki-story-page .story__media figcaption {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      width: fit-content;
+      max-width: calc(100% - 28px);
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(42, 31, 31, .1);
+      background: rgba(255, 247, 239, .86);
+      color: rgba(42, 31, 31, .86);
+      backdrop-filter: blur(10px);
+      font-size: .82rem;
+      font-weight: 800;
+      line-height: 1.2;
     }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .text-link span {
-      transition: none;
+    .takoyaki-story-page .story__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 22px 0 18px;
+      padding: 0;
+      list-style: none;
     }
-  }
-</style>
+    .takoyaki-story-page .story__tags li {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(194, 59, 50, .09);
+      color: #2b2420;
+      font-size: .83rem;
+      font-weight: 800;
+    }
+    .takoyaki-story-page .story__cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .takoyaki-story-page .story__allergens {
+      margin: 18px 0 0;
+      color: rgba(42, 31, 31, .54);
+      font-size: .82rem;
+      line-height: 1.5;
+    }
+    @media (max-width: 880px) {
+      .takoyaki-story-page .story__block,
+      .takoyaki-story-page .story__block--reverse { grid-template-columns: 1fr; gap: 20px; }
+      .takoyaki-story-page .story__block--reverse .story__text,
+      .takoyaki-story-page .story__block--reverse .story__media { order: initial; }
+      .takoyaki-story-page .story__text { max-width: none; }
+      .takoyaki-story-page .story__media { min-height: 0; aspect-ratio: 1.25 / 1; }
+    }
+    @media (max-width: 520px) {
+      .takoyaki-story-page .story__title { font-size: clamp(2.15rem, 9vw, 3.2rem); }
+      .takoyaki-story-page .story__card .pad { padding: 18px; }
+      .takoyaki-story-page .story__media { aspect-ratio: 1.12 / 1; border-radius: 16px; }
+      .takoyaki-story-page .story__cta { gap: 8px; }
+      .takoyaki-story-page .story__cta .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</BaseLayout>
