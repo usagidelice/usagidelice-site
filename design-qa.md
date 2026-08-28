@@ -16,9 +16,11 @@
 
 - Astro check: passed with 0 errors, 0 warnings and 0 hints.
 - Production build: passed; 11 static routes generated.
-- Local browser comparison: blocked by the cloud preview transport after the preview service reported healthy. This is an environment limitation rather than a rendered application error.
+- Vercel deployment: ready and linked to commit `b805b83`.
+- Desktop browser QA at 1363 × 936: passed for the hero collage, product section, cooking media, event cards, contact CTA, footer, image loading, video playback and horizontal overflow.
+- Mobile browser emulation: blocked by the cloud browser URL/security policy. The mobile CSS and markup passed static/build validation, but an automated 375/390/430 visual screenshot could not be produced in this environment.
 
-## Remaining visual gate
+## Mobile handoff check
 
-- Compare the deployed branch preview at desktop width and at 375 px, 390 px and 430 px.
-- Confirm no horizontal overflow, mobile drawer operation, video fallback/poster, image crops and event card height.
+- Open the branch preview with browser responsive mode at 375 px, 390 px and 430 px.
+- Confirm no horizontal overflow, the mobile drawer operation, image crops and the 105–125 px event card height.
