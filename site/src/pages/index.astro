@@ -224,7 +224,7 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
   </script>
 
   <style>
-    .home { overflow: clip; background: #f7f3ec; }
+    .home { overflow: clip; background: var(--bg); }
     .home :global(.container) { width: min(1200px, 100%); padding-inline: clamp(20px, 3vw, 40px); }
     .eyebrow { margin: 0 0 13px; color: var(--red); font-size: .75rem; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
     .home-button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: 11px 19px; border: 1px solid rgba(43, 36, 32, .18); border-radius: 999px; font-size: .93rem; font-weight: 780; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
