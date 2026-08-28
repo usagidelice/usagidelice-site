@@ -164,7 +164,7 @@ const organizers = [
 
   .event-gallery__rail-wrap {
     position: relative;
-    width: min(1680px, calc(100vw - 24px));
+    width: min(var(--container), calc(100vw - 32px));
     margin: 0 auto;
   }
 
@@ -172,7 +172,7 @@ const organizers = [
     display: flex;
     gap: 18px;
     overflow-x: auto;
-    padding: 16px max(16px, calc((100vw - var(--container)) / 2)) 30px;
+    padding: 16px 20px 30px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
@@ -192,10 +192,10 @@ const organizers = [
     position: relative;
     display: block;
     flex: 0 0 auto;
-    height: 380px;
+    height: 420px;
     overflow: hidden;
     border: 1px solid rgba(42, 31, 31, 0.1);
-    border-radius: 22px;
+    border-radius: 16px;
     background: rgba(255, 255, 255, 0.18);
     color: inherit;
     scroll-snap-align: start;
@@ -444,7 +444,7 @@ const organizers = [
     }
 
     .event-shot {
-      height: 290px;
+      height: 320px;
     }
 
     .event-organizers__grid {
