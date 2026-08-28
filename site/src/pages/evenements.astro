@@ -71,48 +71,17 @@ const organizers = [
         <button class="event-gallery__arrow event-gallery__arrow--right" type="button" data-event-gallery-right aria-label="Images suivantes">→</button>
 
         <div class="event-gallery__rail" id="event-photos" data-event-gallery-rail>
-          {eventPhotos.map((photo, index) => {
-            const id = `event-${photo.id ?? `photo-${index + 1}`}`;
+          {eventPhotos.map((photo) => {
             const shape = photo.shape ?? 'landscape';
             return (
-              <a class={`event-shot ${shape}`} href={`#${id}`} aria-label={`Voir : ${photo.caption}`}>
+              <figure class={`event-shot ${shape}`}>
                 <img src={photo.src} alt={photo.alt} loading="lazy" width="1400" height="900" />
-                <span class="event-shot__tag">{photo.caption}</span>
-              </a>
+                <figcaption class="event-shot__tag">{photo.caption}</figcaption>
+              </figure>
             );
           })}
         </div>
       </div>
-
-      {eventPhotos.map((photo, index) => {
-        const id = `event-${photo.id ?? `photo-${index + 1}`}`;
-        const next = eventPhotos[(index + 1) % eventPhotos.length];
-        const prev = eventPhotos[(index - 1 + eventPhotos.length) % eventPhotos.length];
-        const nextId = `event-${next.id ?? `photo-${((index + 1) % eventPhotos.length) + 1}`}`;
-        const prevId = `event-${prev.id ?? `photo-${((index - 1 + eventPhotos.length) % eventPhotos.length) + 1}`}`;
-
-        return (
-          <section id={id} class="event-lightbox" aria-label={`Agrandir : ${photo.caption}`}>
-            <a class="event-lightbox__backdrop" href="#event-photos" aria-label="Fermer" />
-            <div class="event-lightbox__card" role="dialog" aria-modal="true">
-              <div class="event-lightbox__top">
-                <div>
-                  <p class="event-lightbox__kicker">Usagi Délice</p>
-                  <p class="event-lightbox__caption">{photo.caption}</p>
-                </div>
-                <a class="event-lightbox__close" href="#event-photos" aria-label="Fermer">✕</a>
-              </div>
-              <div class="event-lightbox__media">
-                <img src={photo.src} alt={photo.alt} />
-              </div>
-              <div class="event-lightbox__nav">
-                <a href={`#${prevId}`} aria-label="Image précédente">←</a>
-                <a href={`#${nextId}`} aria-label="Image suivante">→</a>
-              </div>
-            </div>
-          </section>
-        );
-      })}
     </section>
 
     <section class="event-organizers" aria-labelledby="event-organizers-title">
@@ -191,6 +160,7 @@ const organizers = [
   .event-shot {
     position: relative;
     display: block;
+    margin: 0;
     flex: 0 0 auto;
     height: 420px;
     overflow: hidden;
@@ -345,95 +315,6 @@ const organizers = [
     font-size: 0.84rem;
   }
 
-  .event-lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 80;
-    display: none;
-  }
-
-  .event-lightbox:target {
-    display: block;
-  }
-
-  .event-lightbox__backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(20, 16, 16, 0.56);
-    backdrop-filter: blur(10px);
-  }
-
-  .event-lightbox__card {
-    position: relative;
-    width: min(var(--container), calc(100% - 28px));
-    margin: 14px auto;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 18px;
-    background: rgba(255, 247, 239, 0.94);
-    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
-  }
-
-  .event-lightbox__top,
-  .event-lightbox__nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 14px;
-  }
-
-  .event-lightbox__top {
-    border-bottom: 1px solid rgba(42, 31, 31, 0.1);
-  }
-
-  .event-lightbox__nav {
-    border-top: 1px solid rgba(42, 31, 31, 0.1);
-  }
-
-  .event-lightbox__kicker,
-  .event-lightbox__caption {
-    margin: 0;
-  }
-
-  .event-lightbox__kicker {
-    color: rgba(42, 31, 31, 0.6);
-    font-size: 0.78rem;
-    font-weight: 900;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .event-lightbox__caption {
-    margin-top: 2px;
-    font-weight: 950;
-  }
-
-  .event-lightbox__close,
-  .event-lightbox__nav a {
-    display: inline-flex;
-    min-width: 42px;
-    min-height: 38px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(42, 31, 31, 0.14);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.5);
-    color: rgba(42, 31, 31, 0.85);
-    font-weight: 900;
-  }
-
-  .event-lightbox__media {
-    background: rgba(255, 255, 255, 0.35);
-  }
-
-  .event-lightbox__media img {
-    display: block;
-    width: 100%;
-    height: min(72vh, 720px);
-    object-fit: contain;
-    background: rgba(255, 255, 255, 0.18);
-  }
-
   @media (max-width: 860px) {
     .event-gallery__rail {
       padding: 10px 16px 20px;
@@ -461,17 +342,6 @@ const organizers = [
       grid-template-columns: 1fr;
     }
 
-    .event-lightbox__card {
-      margin: 10px auto;
-    }
-
-    .event-lightbox__nav {
-      display: none;
-    }
-
-    .event-lightbox__media img {
-      height: min(76vh, 680px);
-    }
   }
 </style>
 
