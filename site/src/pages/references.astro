@@ -2,9 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { referencesIntro, partners, refPhotos } from "../data/references";
 
-const title = "Références — Usagi Délice";
+const title = "Événements & collaborations — Usagi Délice";
 const description =
-  "Marques, institutions et festivals qui ont fait confiance à Usagi Délice. Découvrez nos collaborations et quelques photos de nos participations.";
+  "Découvrez les événements passés, collaborations et photos du stand Usagi Délice.";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -35,10 +35,9 @@ const description =
     <section class="partners" aria-label="Partenaires et événements">
       <div class="container">
         <div class="section-head">
-          <h2>Partenaires & événements</h2>
+          <h2>Collaborations & événements réalisés</h2>
           <p>
-            Quelques marques, institutions et festivals avec lesquels nous avons
-            collaboré.
+            Une sélection de collaborations et de rendez-vous auxquels Usagi Délice a participé.
           </p>
         </div>
 
@@ -177,7 +176,12 @@ const description =
 
     .refs {
       padding: calc(var(--header-h, 72px) + 12px) 0 64px;
+      display: flex;
+      flex-direction: column;
     }
+    .refs .hero { order: 1; }
+    .refs .photos { order: 2; }
+    .refs .partners { order: 3; }
 
     /* SECTION 1 */
     .hero {
@@ -267,8 +271,9 @@ const description =
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: 64px;
-      padding: 14px 14px;
+      align-items: center;
+      min-height: 108px;
+      padding: 20px 18px;
       border-radius: 18px;
       border: 1px solid rgba(42, 31, 31, 0.1);
       background: rgba(255, 255, 255, 0.22);
@@ -282,10 +287,10 @@ const description =
       background: rgba(255, 255, 255, 0.34);
     }
     .logo-tile img {
-      max-height: 30px;
+      max-width: 100%;
+      max-height: 48px;
       width: auto;
-      opacity: 0.86;
-      filter: grayscale(1);
+      opacity: 1;
     }
     .logo-name {
       font-weight: 950;

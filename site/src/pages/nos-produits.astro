@@ -1,32 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProductCard from '../components/ProductCard.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
 import { products } from '../data/products';
 
 const title = "Nos produits — Usagi Délice";
-const description = "Découvrez nos spécialités : takoyaki, ebi-yaki et okonomiyaki. Une street food d’Osaka, faite maison et préparée sur place.";
+const description = "Découvrez nos takoyaki d’Osaka faits maison, cuits devant vous et servis bien chauds sur les marchés et événements.";
 ---
 
 <BaseLayout title={title} description={description}>
   <section class="apple-section">
     <div class="container">
       <span class="badge">Nos produits</span>
-      <h1 class="h1" style="margin-top:14px;">Une carte courte, authentique</h1>
+      <h1 class="h1" style="margin-top:14px;">Notre spécialité : le takoyaki d’Osaka</h1>
       <p class="lead" style="max-width:72ch;">
-        Nous ne mettons pas de prix sur le site : nos formats peuvent varier selon les événements.
-        En revanche, la qualité reste la même : recette maison, cuisson minute, toppings japonais classiques.
+        Une pâte légère, un cœur fondant avec un morceau de poulpe, puis les toppings classiques japonais.
+        Chaque portion est cuite devant vous et servie bien chaude. Les formats et options peuvent varier selon l’événement.
       </p>
 
-      <div class="grid cols-3" style="margin-top:18px;">
-        {products.map((p) => <ProductCard product={p} />)}
+      <div style="margin-top:28px;">
+        {products.map((p) => <ProductShowcase product={p} />)}
       </div>
 
       <div class="card" style="margin-top:18px;">
         <div class="pad">
-          <h2 class="h2">Toppings & options</h2>
+          <h2 class="h2">Composition & allergènes</h2>
           <p class="lead" style="margin:0; max-width:80ch;">
-            Sauce takoyaki, mayonnaise japonaise, aonori, copeaux de bonite… et selon les événements, quelques variations.
-            Si vous avez une demande spécifique (allergènes, événement privé), contactez-nous.
+            Sauce takoyaki, mayonnaise japonaise, aonori et copeaux de bonite complètent la recette.
+            La préparation contient notamment du gluten, des œufs, du poisson, des mollusques et du soja. Demandez-nous la fiche allergènes sur place ou avant votre événement.
           </p>
           <div style="margin-top:14px;">
             <a class="btn primary" href="/contact">Nous contacter</a>

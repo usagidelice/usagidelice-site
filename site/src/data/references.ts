@@ -1,6 +1,6 @@
 export type Partner = {
   name: string;
-  kind: "Marque" | "Institution" | "Festival" | "Média" | "Lieu";
+  kind: "Collaboration" | "Festival" | "Événement";
   note?: string;
   // Optional: put a logo file here later (SVG/PNG/WebP). Keep empty for text-tiles.
   logo?: string;
@@ -16,10 +16,12 @@ export type RefPhoto = {
   id?: string; // optional stable id for lightbox
 };
 
+import galleryData from "./gallery.json";
+
 export const referencesIntro = {
-  title: "Ils nous ont fait confiance",
+  title: "Événements & collaborations",
   subtitle:
-    "Un stand de street food japonaise habitué aux événements grand public, aux institutions et aux grandes marques — avec une production sur place et un service fluide, même en forte affluence.",
+    "Retrouvez ici les événements déjà réalisés, les collaborations et les images de notre stand sur le terrain.",
   stats: [
     { k: "+ de", v: "2", label: "marchés / semaine" },
     { k: "Formats", v: "Pop-ups", label: "& festivals" },
@@ -28,15 +30,10 @@ export const referencesIntro = {
 };
 
 export const partners: Partner[] = [
-  { name: "UNIQLO", kind: "Marque" },
-  { name: "Tang Frères", kind: "Marque" },
-  { name: "Groupe Dadoune", kind: "Marque" },
-  { name: "Japan Fes", kind: "Festival" },
-  { name: "Rice Market (Europe Times)", kind: "Média" },
-  { name: "Mairie de Vincennes", kind: "Institution" },
-  { name: "Parc Floral / Vincennes", kind: "Lieu" },
-  { name: "Parc départemental de Sceaux (92)", kind: "Lieu" },
-  { name: "Marché de Noël — La Villette", kind: "Festival" },
+  { name: "UNIQLO Paris", kind: "Collaboration", logo: "/images/partners/uniqlo.svg" },
+  { name: "Japan Fes", kind: "Festival", logo: "/images/partners/japan-fes.svg" },
+  { name: "Rice Market", kind: "Événement", logo: "/images/partners/rice-market.svg" },
+  { name: "Marché de Noël · La Villette", kind: "Événement", logo: "/images/partners/la-villette-noel.svg" },
 ];
 
 /**
@@ -46,47 +43,5 @@ export const partners: Partner[] = [
  * - The lightbox ALWAYS shows the full image (object-fit: contain).
  * Change shapes later if you add lots of portrait images.
  */
-export const refPhotos: RefPhoto[] = [
-  {
-    id: "ph-1",
-    src: "/images/references/photos/ref-photo-1.webp",
-    alt: "Stand Usagi Délice — marché",
-    caption: "Marché · Vincennes",
-    shape: "portrait",
-  },
-  {
-    id: "ph-2",
-    src: "/images/references/photos/ref-photo-2.webp",
-    alt: "Takoyaki servis sur place",
-    caption: "Service sur place · flux continu",
-    shape: "landscape",
-  },
-  {
-    id: "ph-3",
-    src: "/images/references/photos/ref-photo-3.webp",
-    alt: "Festival / pop-up",
-    caption: "Festival · Paris & Île-de-France",
-    shape: "portrait",
-  },
-  {
-    id: "ph-4",
-    src: "/images/references/photos/ref-photo-4.webp",
-    alt: "Événement public",
-    caption: "Événement public · grande affluence",
-    shape: "landscape",
-  },
-  {
-    id: "ph-5",
-    src: "/images/references/photos/ref-photo-5.webp",
-    alt: "Préparation takoyaki",
-    caption: "Cuisine live · takoyaki d’Osaka",
-    shape: "square",
-  },
-  {
-    id: "ph-6",
-    src: "/images/references/photos/ref-photo-6.webp",
-    alt: "Photo stand",
-    caption: "Pop-up · collaboration",
-    shape: "portrait",
-  },
-];
+/* Gallery content is edited through Pages CMS; keep the type contract here. */
+export const refPhotos = galleryData as RefPhoto[];

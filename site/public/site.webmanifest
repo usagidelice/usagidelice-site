@@ -1,0 +1,10 @@
+{
+  "name": "Usagi Délice",
+  "short_name": "Usagi Délice",
+  "description": "Takoyaki d’Osaka faits maison à Paris",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6eadc",
+  "theme_color": "#c83f3a",
+  "icons": [{ "src": "/images/favicon.png", "sizes": "512x512", "type": "image/png" }]
+}

@@ -6,13 +6,6 @@ export type EventItem = {
   description: string;
 };
 
-export const events: EventItem[] = [
-  {
-    title: "Marché de Vincennes",
-    dateLabel: "Dimanche 25 janvier 2026",
-    location: "Vincennes",
-    status: "regular",
-    description:
-      "Retrouvez-nous au marché pour des takoyaki faits maison, préparés sur place.",
-  },
-];
+import eventsData from "./events.json";
+
+export const events = eventsData as EventItem[];

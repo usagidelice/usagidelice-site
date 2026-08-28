@@ -1,136 +1,91 @@
 ---
-export interface Props {
-  logoSrc?: string;
-  brandName?: string;
-}
+export interface Props { logoSrc?: string; brandName?: string; }
 
 const nav = [
   { href: "/", label: "Accueil" },
-  { href: "/notre-histoire", label: "Notre histoire" },
-  { href: "/nos-produits", label: "Nos produits" },
+  { href: "/nos-produits", label: "Takoyaki" },
   { href: "/evenements", label: "Événements" },
-
-  // Social proof / B2B
-  { href: "/references", label: "Références" },
-
-  { href: "/contact", label: "Contact / collaboration" },
-
-  // Utility (keep, but lower visual weight on desktop)
-  { href: "/evenements#prochaines-dates", label: "Nous trouver", cta: true },
+  { href: "/contact", label: "Contact" },
 ];
-
 const { logoSrc = "/images/logo.png", brandName = "Usagi Délice" } = Astro.props;
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
 <header class="site-header" data-header>
-  <div class="container header-inner header-inner--responsive">
+  <div class="container header-inner">
     <a class="brand" href="/" aria-label={`${brandName} — Accueil`}>
-      <img
-        src={logoSrc}
-        alt={`${brandName} logo`}
-        width="48"
-        height="48"
-        loading="eager"
-      />
+      <img src={logoSrc} alt="" width="44" height="44" loading="eager" />
       <span class="name">{brandName}</span>
     </a>
-
     <nav class="nav" aria-label="Navigation principale">
       {nav.map((item) => (
-        <a href={item.href} class={item.cta ? "nav-cta" : undefined}>
-          {item.label}
-        </a>
+        <a href={item.href} class:list={{ active: isActive(item.href) }} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
       ))}
+      <a class="instagram-link" href="https://www.instagram.com/usagidelice" target="_blank" rel="noopener noreferrer">
+        <img src="/images/icons/instagram.svg" alt="" width="18" height="18" /><span>Instagram</span>
+      </a>
     </nav>
-
-    <div class="header-actions">
-      <button
-        class="menu-btn"
-        type="button"
-        aria-label="Ouvrir le menu"
-        aria-expanded="false"
-        aria-controls="mobile-drawer"
-        data-menu-btn
-      >
-        <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
-      </button>
-    </div>
+    <button class="menu-btn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-drawer" data-menu-btn>
+      <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
   </div>
-
   <div class="mobile-drawer" id="mobile-drawer" data-mobile-drawer>
-    <div class="container" role="menu" aria-label="Menu mobile">
+    <div class="container">
       {nav.map((item) => (
-        <a href={item.href} role="menuitem" class={item.cta ? "mobile-cta" : undefined}>
-          {item.label}
-        </a>
+        <a href={item.href} class:list={{ active: isActive(item.href) }} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
       ))}
+      <a href="https://www.instagram.com/usagidelice" target="_blank" rel="noopener noreferrer">
+        <span>Instagram</span><img src="/images/icons/instagram.svg" alt="" width="18" height="18" />
+      </a>
     </div>
   </div>
 </header>
 
 <script is:inline>
   (() => {
-    const btn = document.querySelector("[data-menu-btn]");
+    const button = document.querySelector("[data-menu-btn]");
     const drawer = document.querySelector("[data-mobile-drawer]");
-    if (!(btn instanceof HTMLButtonElement) || !(drawer instanceof HTMLElement)) return;
-
+    if (!(button instanceof HTMLButtonElement) || !(drawer instanceof HTMLElement)) return;
     const setOpen = (open) => {
+      drawer.hidden = !open;
       drawer.style.display = open ? "block" : "none";
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      button.setAttribute("aria-expanded", String(open));
+      button.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
     };
-
-    const isOpen = () => drawer.style.display === "block";
-
     setOpen(false);
-
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      setOpen(!isOpen());
+    button.addEventListener("click", () => setOpen(button.getAttribute("aria-expanded") !== "true"));
+    drawer.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
+    document.addEventListener("click", (event) => {
+      if (button.getAttribute("aria-expanded") !== "true") return;
+      if (event.target instanceof Node && !drawer.contains(event.target) && !button.contains(event.target)) setOpen(false);
     });
-
-    drawer.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => setOpen(false));
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!isOpen()) return;
-      const t = e.target;
-      if (t instanceof Node && (drawer.contains(t) || btn.contains(t))) return;
-      setOpen(false);
-    });
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (isOpen()) setOpen(false);
-      },
-      { passive: true }
-    );
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setOpen(false);
-    });
+    window.addEventListener("keydown", (event) => { if (event.key === "Escape") setOpen(false); });
   })();
 </script>
 
 <style>
-  .mobile-drawer { display: none; }
-
-  .site-header { position: sticky; top: 0; }
-
-  /* "Nous trouver" CTA — subtle on desktop */
-  .nav-cta {
-    padding: 8px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(42, 31, 31, 0.14);
-    background: rgba(255, 255, 255, 0.25);
+  .site-header { height: 76px; background: rgba(247, 243, 236, .9); border-color: rgba(43, 36, 32, .08); }
+  .header-inner { height: 100%; }
+  .brand { min-width: auto; gap: 10px; }
+  .brand img { width: 44px; height: 44px; border-radius: 50%; }
+  .brand .name { color: #2b2420; font-size: 1.1rem; font-weight: 850; }
+  .nav { display: flex; gap: 4px; margin-left: auto; font-size: .9rem; }
+  .nav a { position: relative; padding: 9px 12px; }
+  .nav a.active::after { position: absolute; right: 12px; bottom: 3px; left: 12px; height: 2px; border-radius: 2px; background: var(--red); content: ""; }
+  .instagram-link { display: inline-flex; gap: 7px; align-items: center; margin-left: 6px; }
+  .instagram-link img { width: 17px; height: 17px; border-radius: 0; }
+  .menu-btn { display: none; border: 0; background: transparent; }
+  .burger { display: grid; gap: 5px; }
+  .burger i { display: block; width: 25px; height: 2px; border-radius: 2px; background: #2b2420; }
+  .mobile-drawer { top: 68px; }
+  .mobile-drawer a.active { color: var(--red); }
+  .mobile-drawer img { width: 18px; height: 18px; border-radius: 0; }
+  @media (max-width: 820px) {
+    .site-header { height: 68px; }
+    .brand img { width: 40px; height: 40px; }
+    .brand .name { font-size: 1rem; }
+    .nav { display: none; }
+    .menu-btn { display: inline-flex; width: 42px; height: 42px; }
   }
-  .nav-cta:hover { background: rgba(255, 255, 255, 0.4); }
-
-  @media (min-width: 980px) {
-    .nav-cta { margin-left: 6px; }
-  }
-
-  /* Mobile drawer: make "Nous trouver" more obvious */
-  .mobile-cta { font-weight: 900; }
 </style>

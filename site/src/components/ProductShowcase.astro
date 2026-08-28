@@ -1,0 +1,57 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+  compact?: boolean;
+}
+
+const { product, compact = false } = Astro.props;
+---
+
+<article class:list={["product-showcase", { "product-showcase--compact": compact }]}>
+  <div class="product-showcase__media">
+    {product.image && <img src={product.image} alt={product.name} loading="lazy" />}
+  </div>
+  <div class="product-showcase__body">
+    <span class="badge">Notre spécialité</span>
+    <h3>{product.name}</h3>
+    <p class="product-showcase__subtitle">{product.subtitle}</p>
+    <p>{product.description}</p>
+    <ul aria-label="Points forts">
+      {product.highlights.map((highlight) => <li>{highlight}</li>)}
+    </ul>
+    <div class="product-showcase__actions">
+      <a class="btn primary" href="/evenements#prochaines-dates">Où nous trouver</a>
+      <a class="btn ghost" href="/contact">Demande événement</a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .product-showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--ink, #171717) 10%, transparent);
+    border-radius: 28px;
+    background: color-mix(in srgb, var(--paper, #fff) 92%, transparent);
+    box-shadow: 0 22px 60px rgba(24, 20, 16, .08);
+  }
+  .product-showcase__media { min-height: 440px; background: #eee8df; }
+  .product-showcase__media img { width: 100%; height: 100%; min-height: inherit; object-fit: cover; display: block; }
+  .product-showcase__body { display: flex; flex-direction: column; justify-content: center; padding: clamp(28px, 4vw, 58px); }
+  .product-showcase h3 { margin: 18px 0 6px; font-size: clamp(2.2rem, 5vw, 4.5rem); line-height: .96; letter-spacing: -.045em; }
+  .product-showcase__subtitle { margin: 10px 0; font-size: 1.12rem; font-weight: 700; }
+  .product-showcase__body > p:last-of-type { margin: 0; line-height: 1.65; color: var(--muted, #5e5e5e); }
+  .product-showcase ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; }
+  .product-showcase li { padding: 8px 12px; border-radius: 999px; background: rgba(196, 50, 36, .08); font-size: .9rem; font-weight: 700; }
+  .product-showcase__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .product-showcase--compact .product-showcase__media { min-height: 390px; }
+
+  @media (max-width: 800px) {
+    .product-showcase { grid-template-columns: 1fr; }
+    .product-showcase__media, .product-showcase--compact .product-showcase__media { min-height: 320px; max-height: 430px; }
+    .product-showcase__body { padding: 28px 22px 32px; }
+  }
+</style>

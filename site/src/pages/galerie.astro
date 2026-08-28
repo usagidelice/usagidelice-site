@@ -1,17 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { refPhotos as photos } from '../data/references';
 
 const title = "Galerie — Usagi Délice";
 const description = "Photos du stand, des takoyaki et des événements. L’ambiance Usagi Délice en images.";
 
-const photos = [
-  { src: '/images/gallery-1.jpg', alt: 'Stand Usagi Délice' },
-  { src: '/images/gallery-2.jpg', alt: 'Takoyaki' },
-  { src: '/images/gallery-3.jpg', alt: 'Cuisson sur plaque' },
-  { src: '/images/gallery-4.jpg', alt: 'Ambiance événement' },
-  { src: '/images/gallery-5.jpg', alt: 'Préparation' },
-  { src: '/images/gallery-6.jpg', alt: 'Service' }
-];
 ---
 
 <BaseLayout title={title} description={description}>
@@ -20,7 +13,7 @@ const photos = [
       <span class="badge">Galerie</span>
       <h1 class="h1" style="margin-top:14px;">L’ambiance Usagi Délice</h1>
       <p class="lead" style="max-width:72ch;">
-        Ici, vous trouverez des photos du stand, de la cuisson et des événements. Ajoutez vos meilleures photos au fil du temps : c’est ce qui crée la confiance.
+        Nos takoyaki, leur préparation en direct et quelques-uns des marchés, festivals et collaborations qui ont marqué notre parcours.
       </p>
 
       <div class="grid" style="margin-top:18px; grid-template-columns: repeat(2, 1fr);">
