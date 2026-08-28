@@ -6,16 +6,16 @@ const description =
   "Découvrez l’histoire du takoyaki, le savoir-faire d’Osaka et l’aventure d’Usagi Délice, de nos premiers marchés à Paris à nos événements en Île-de-France.";
 
 const craftPoints = [
-  { number: '01', title: 'Une pâte légère', text: 'Une base préparée pour garder un extérieur délicatement doré et un cœur fondant.' },
-  { number: '02', title: 'Un vrai morceau de poulpe', text: 'Chaque takoyaki est garni d’un morceau généreux, comme dans la recette traditionnelle.' },
-  { number: '03', title: 'Le geste à la plaque', text: 'Les pièces sont retournées une à une, avec précision, pour obtenir leur forme ronde.' },
-  { number: '04', title: 'La finition japonaise', text: 'Sauce takoyaki, mayonnaise japonaise, aonori et copeaux de bonite complètent la dégustation.' },
+  { number: '01', title: 'Une pâte légère', text: 'Dorée dehors, fondante au centre.' },
+  { number: '02', title: 'Un vrai morceau de poulpe', text: 'Un morceau généreux dans chaque boule.' },
+  { number: '03', title: 'Le geste à la plaque', text: 'Tournée à la main, pièce après pièce.' },
+  { number: '04', title: 'La finition japonaise', text: 'Sauce, mayo, aonori et bonite.' },
 ];
 
 const timeline = [
-  { year: '2023', text: 'Naissance d’Usagi Délice et premiers marchés à Paris et en Île-de-France.' },
-  { year: '2024–2025', text: 'Participation à des événements japonais, asiatiques et street culture, avec de nouvelles collaborations.' },
-  { year: 'Aujourd’hui', text: 'Un stand itinérant qui continue de faire découvrir les takoyaki d’Osaka, préparés en direct.' },
+  { year: '2023', text: 'Naissance d’Usagi Délice et premiers marchés.' },
+  { year: '2024–2025', text: 'Festivals japonais, asiatiques et collaborations.' },
+  { year: 'Aujourd’hui', text: 'Paris et Île-de-France, toujours en direct.' },
 ];
 ---
 
@@ -25,30 +25,25 @@ const timeline = [
       <div class="container takoyaki-intro__grid">
         <div class="takoyaki-intro__copy" data-reveal>
           <p class="eyebrow">Takoyaki · Osaka · depuis 1935</p>
-          <h1 id="origine-title">Une bouchée née à Osaka</h1>
+          <h1 id="origine-title">Le geste d’Osaka</h1>
           <p class="takoyaki-intro__lead">
             Le takoyaki est l’un des grands symboles de la street food japonaise : une bouchée populaire,
-            généreuse et profondément liée à la convivialité d’Osaka.
+            généreuse et faite pour être partagée.
           </p>
           <p>
-            Il apparaît à Osaka en <strong>1935</strong>, créé par Tomekichi Endo, le fondateur de l’enseigne
-            Aizuya. Inspiré de préparations plus anciennes comme le choboyaki et le radioyaki, il se répand
-            rapidement dans les rues, les marchés et les festivals du Kansai.
-          </p>
-          <p>
-            Depuis, sa recette a peu changé dans son esprit : une pâte versée dans une plaque en fonte,
-            un morceau de poulpe au centre et un geste précis pour retourner chaque pièce. Le takoyaki est
-            devenu un véritable <strong>métier de la plaque</strong>, à la fois gourmand et spectaculaire.
+            Né à Osaka en <strong>1935</strong> sous l’impulsion de Tomekichi Endo, il s’est répandu dans les rues,
+            les marchés et les festivals du Kansai. Une pâte fluide, un morceau de poulpe et une plaque chaude :
+            chaque boule est retournée à la main.
           </p>
           <a class="text-link" href="#savoir-faire">Découvrir le geste <span aria-hidden="true">↓</span></a>
         </div>
 
         <figure class="takoyaki-intro__media" data-reveal data-delay="80">
           <img
-            src="/images/notre-histoire-2.jpg"
-            alt="Le stand Usagi Délice et ses takoyaki en préparation"
-            width="2000"
-            height="1333"
+            src="/images/takoyaki/cuisson-1.webp"
+            alt="Préparation des takoyaki sur le stand Usagi Délice"
+            width="1254"
+            height="1254"
             loading="eager"
             fetchpriority="high"
           />
@@ -67,31 +62,30 @@ const timeline = [
       <div class="container">
         <div class="section-head" data-reveal>
           <p class="eyebrow">Notre façon de faire</p>
-          <h2 id="savoir-faire-title">Le goût d’Osaka,<br />jusqu’à Paris</h2>
+          <h2 id="savoir-faire-title">À Paris,<br />le goût d’Osaka</h2>
           <p>
-            Chez Usagi Délice, nous préparons des takoyaki dans le style traditionnel d’Osaka pour vous faire
-            retrouver, à Paris, le goût et l’énergie d’une vraie échoppe japonaise.
+            Nous préparons des takoyaki dans le style traditionnel d’Osaka, pour vous faire retrouver à Paris
+            une bouchée authentique, chaude et généreuse.
           </p>
         </div>
 
         <div class="craft-grid">
           <figure class="craft-grid__media" data-reveal>
             <img
-              src="/images/product-takoyaki.webp"
-              alt="Takoyaki Usagi Délice avec sauce, mayonnaise, aonori et copeaux de bonite"
-              width="1400"
-              height="934"
+              src="/images/takoyaki/cuisson-2.webp"
+              alt="Cuisson des takoyaki sur la plaque"
+              width="2048"
+              height="1365"
               loading="lazy"
             />
             <figcaption>Servis bien chauds, dès la sortie de la plaque</figcaption>
           </figure>
 
           <div class="craft-grid__content" data-reveal data-delay="80">
-            <h3>Une recette maison, un service vivant</h3>
+            <h3>Fait minute, devant vous</h3>
             <p>
-              La pâte, la cuisson et le retournement demandent du rythme. Nous travaillons chaque portion sur
-              place, devant vous, afin que l’extérieur reste légèrement croustillant et que le cœur conserve
-              sa texture fondante.
+              La cuisson et le retournement demandent du rythme. Chaque portion est travaillée sur place,
+              juste avant d’être servie.
             </p>
 
             <div class="craft-points">
@@ -107,8 +101,7 @@ const timeline = [
             </div>
 
             <p class="allergen-note">
-              La recette peut contenir notamment du gluten, des œufs, du poisson, des mollusques et du soja.
-              Demandez-nous les informations détaillées sur place ou avant votre événement.
+              Allergènes principaux : gluten, œufs, poisson, mollusques et soja. Informations détaillées sur demande.
             </p>
           </div>
         </div>
@@ -119,16 +112,15 @@ const timeline = [
       <div class="container takoyaki-story__grid">
         <div class="takoyaki-story__content" data-reveal>
           <p class="eyebrow">L’histoire d’Usagi Délice</p>
-          <h2 id="usagi-title">Faire vivre la street food japonaise ici</h2>
+          <h2 id="usagi-title">Depuis 2023,<br />sur les marchés</h2>
           <p class="takoyaki-story__lead">
-            Usagi Délice est né d’une envie simple : partager une spécialité japonaise authentique, dans un
-            format chaleureux et accessible, au fil des marchés et des rencontres.
+            Usagi Délice est né d’une envie simple : partager une spécialité japonaise authentique au fil
+            des marchés et des rencontres.
           </p>
           <p>
-            Depuis <strong>2023</strong>, nous parcourons Paris et ses alentours avec notre stand itinérant.
-            Nous avons participé à de nombreux rendez-vous japonais et asiatiques, à des festivals, des marchés
-            de Noël et des collaborations, toujours avec la même volonté : préparer devant le public et transmettre
-            l’âme de cette cuisine d’Osaka.
+            Depuis <strong>2023</strong>, notre stand itinérant parcourt Paris et ses alentours. Festivals japonais,
+            événements asiatiques, marchés de Noël et collaborations : toujours la même envie de cuisiner devant
+            le public et de transmettre l’âme d’Osaka.
           </p>
 
           <div class="timeline" aria-label="Les étapes d’Usagi Délice">
@@ -143,10 +135,10 @@ const timeline = [
 
         <figure class="takoyaki-story__media" data-reveal data-delay="80">
           <img
-            src="/images/notre-histoire-4.jpg"
-            alt="Le stand Usagi Délice au milieu du public lors d’un événement"
-            width="1536"
-            height="1024"
+            src="/images/takoyaki/stand-1.webp"
+            alt="Le stand Usagi Délice lors d’un marché de Noël"
+            width="1000"
+            height="1333"
             loading="lazy"
           />
           <figcaption>Des marchés aux festivals, une cuisine qui se partage</figcaption>
@@ -207,9 +199,9 @@ const timeline = [
   }
 
   .takoyaki-page h1 {
-    max-width: 8ch;
-    margin-bottom: 26px;
-    font-size: clamp(3.6rem, 6.8vw, 6.7rem);
+    max-width: 9ch;
+    margin-bottom: 23px;
+    font-size: clamp(3.25rem, 5.8vw, 5.8rem);
   }
 
   .takoyaki-page h2 {
@@ -241,7 +233,7 @@ const timeline = [
 
   .takoyaki-intro__grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
+    grid-template-columns: minmax(0, 0.78fr) minmax(460px, 1.22fr);
     gap: clamp(45px, 8vw, 108px);
     align-items: center;
   }
@@ -291,6 +283,7 @@ const timeline = [
 
   .takoyaki-intro__media {
     aspect-ratio: 1 / 1.03;
+    min-height: clamp(480px, 42vw, 620px);
     border-radius: 32px 150px 32px 32px;
   }
 
@@ -369,13 +362,14 @@ const timeline = [
 
   .craft-grid {
     display: grid;
-    grid-template-columns: minmax(330px, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(420px, 1.08fr) minmax(0, 0.92fr);
     gap: clamp(40px, 7vw, 96px);
     align-items: center;
   }
 
   .craft-grid__media {
-    aspect-ratio: 0.92 / 1;
+    aspect-ratio: 1.16 / 1;
+    min-height: clamp(420px, 38vw, 560px);
     border-radius: 32px 32px 140px 32px;
   }
 
@@ -435,7 +429,7 @@ const timeline = [
 
   .takoyaki-story__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(400px, 0.96fr);
+    grid-template-columns: minmax(0, 0.86fr) minmax(460px, 1.14fr);
     gap: clamp(44px, 8vw, 110px);
     align-items: center;
   }
@@ -495,6 +489,7 @@ const timeline = [
 
   .takoyaki-story__media {
     aspect-ratio: 1 / 1.02;
+    min-height: clamp(480px, 42vw, 620px);
     border-radius: 150px 32px 32px 32px;
   }
 
@@ -553,11 +548,13 @@ const timeline = [
 
     .takoyaki-intro__media {
       aspect-ratio: 1.15 / 1;
+      min-height: 0;
     }
 
     .craft-grid__media {
       order: 2;
       aspect-ratio: 1.18 / 1;
+      min-height: 0;
     }
 
     .craft-grid__content {
@@ -566,6 +563,7 @@ const timeline = [
 
     .takoyaki-story__media {
       aspect-ratio: 1.18 / 1;
+      min-height: 0;
     }
 
     .takoyaki-cta__inner {
@@ -590,7 +588,7 @@ const timeline = [
     .takoyaki-page h1 {
       max-width: 9ch;
       margin-bottom: 21px;
-      font-size: clamp(3.2rem, 16vw, 4.7rem);
+      font-size: clamp(3rem, 15vw, 4.5rem);
     }
 
     .takoyaki-page h2 {
