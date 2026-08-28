@@ -1,26 +1,35 @@
-# Homepage design QA
+# Homepage hero photo QA
 
-## Source references
+## Evidence
 
-- Desktop sketch: `upload/01-b8d4b38e93056340933c128b675d05f8.png`
-- Mobile sketch: `upload/02-ChatGPT-Image-2026-8-27-22_03_01.png`
-- Requirements: `upload/03-Usagi_Delice_-_-_-_-.docx`
+- Source visual truth: the five uploaded files in `upload/usagiDelice_*.jpg`.
+- Implementation: Vercel branch preview for commit `527d469`.
+- Browser viewport: 1363 × 936 CSS pixels at device pixel ratio 1.
+- State: homepage, top of page, all five hero images loaded.
+- Browser-rendered screenshot: inspected in the cloud browser but the runtime could not persist it to a workspace path.
 
-## Implemented structure
+## Checks
 
-- Desktop: compact header, editorial photo collage, Osaka product introduction, cooking media, three upcoming dates, contact CTA, lightweight footer.
-- Mobile: compact header with drawer, single hero image, vertical product story, compact dates, centered contact CTA and stacked footer.
-- Content exclusions preserved: no hygiene rating, mayor photo, Game’in Reims, SIRET or operating address.
+- Typography: unchanged from the approved homepage.
+- Spacing and layout: five-photo desktop collage retains the approved 58/42 composition and has no horizontal overflow.
+- Colors: uploaded image colors are preserved; only WebP compression and resizing were applied.
+- Image quality: all five WebP assets load successfully and remain sharp at the desktop viewport.
+- Copy: unchanged.
+- Focused crop check: the cooking subject, plaque, Arc de Triomphe product, Eiffel Tower product and Noël La Villette stand remain identifiable in their respective frames.
+- Console: no site-origin errors; one unrelated browser-extension metadata error was observed.
 
-## Automated checks
+## Findings
 
-- Astro check: passed with 0 errors, 0 warnings and 0 hints.
-- Production build: passed; 11 static routes generated.
-- Vercel deployment: ready and linked to commit `b805b83`.
-- Desktop browser QA at 1363 × 936: passed for the hero collage, product section, cooking media, event cards, contact CTA, footer, image loading, video playback and horizontal overflow.
-- Mobile browser emulation: blocked by the cloud browser URL/security policy. The mobile CSS and markup passed static/build validation, but an automated 375/390/430 visual screenshot could not be produced in this environment.
+- No P0, P1 or P2 issue was visible in the desktop hero.
+- Mobile automated viewport capture remains unavailable in this cloud browser, so the single-image mobile crop needs user/device confirmation.
 
-## Mobile handoff check
+## Comparison history
 
-- Open the branch preview with browser responsive mode at 375 px, 390 px and 430 px.
-- Confirm no horizontal overflow, the mobile drawer operation, image crops and the 105–125 px event card height.
+- Initial capture briefly showed two lazy images before paint completed.
+- After waiting for paint, all five frames appeared correctly; no code fix was required.
+
+## Final result
+
+final result: blocked
+
+Blocker: the mobile viewport and a persistable combined comparison image are unavailable in the current browser environment.
