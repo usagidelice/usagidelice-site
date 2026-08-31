@@ -185,7 +185,7 @@ const structuredData = {
       })();
     </script>
     <!-- Global smart section snapping: short sections snap, long sections scroll freely until their edge -->
-    <script data-global-smart-snap>
+    <script>
       (() => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -208,10 +208,26 @@ const structuredData = {
         const tops = () => sections.map(sectionTop);
 
         const setScrollY = (top: number) => {
-          const options: ScrollToOptions = { top, behavior: "smooth" };
-          document.body.scrollTo(options);
-          document.documentElement.scrollTo(options);
-          window.scrollTo(options);
+          const start = getScrollY();
+          const distance = top - start;
+          const duration = 520;
+          const startedAt = performance.now();
+
+          const writeScroll = (value: number) => {
+            document.body.scrollTop = value;
+            document.documentElement.scrollTop = value;
+            window.scrollTo(0, value);
+          };
+
+          const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+          const tick = (now: number) => {
+            const progress = Math.min(1, (now - startedAt) / duration);
+            writeScroll(start + distance * easeOutCubic(progress));
+            if (progress < 1) requestAnimationFrame(tick);
+            else writeScroll(top);
+          };
+
+          requestAnimationFrame(tick);
         };
 
         const activeIndex = () => {
@@ -231,7 +247,8 @@ const structuredData = {
           const bottom = sectionBottom(section);
           const viewport = window.innerHeight;
           const usableViewport = viewport - headerOffset();
-          const longSection = section.offsetHeight > usableViewport + 80;
+          const explicitlyLong = section.matches(".story-section, .events-section, .events-page, .event-gallery, .event-organizers, [data-snap-long]");
+          const longSection = explicitlyLong || section.offsetHeight > usableViewport * 1.8;
           if (!longSection) return false;
 
           if (direction > 0) return y + viewport < bottom - 42;
