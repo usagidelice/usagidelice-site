@@ -184,5 +184,110 @@ const structuredData = {
         update();
       })();
     </script>
+    <!-- Global smart section snapping: short sections snap, long sections scroll freely until their edge -->
+    <script data-global-smart-snap>
+      (() => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const sections = Array.from(
+          document.querySelectorAll<HTMLElement>("main > section, main > div > section"),
+        ).filter((section) => !section.classList.contains("lb"));
+        if (sections.length < 2) return;
+
+        let snapping = false;
+        let wheelAccumulator = 0;
+        let resetTimer: ReturnType<typeof window.setTimeout> | undefined;
+
+        const headerOffset = () => window.innerWidth <= 820 ? 70 : 82;
+        const getScrollY = () =>
+          document.body.scrollTop || document.documentElement.scrollTop || window.scrollY;
+        const sectionTop = (section: HTMLElement) =>
+          Math.max(0, getScrollY() + section.getBoundingClientRect().top - headerOffset());
+        const sectionBottom = (section: HTMLElement) =>
+          getScrollY() + section.getBoundingClientRect().bottom;
+        const tops = () => sections.map(sectionTop);
+
+        const setScrollY = (top: number) => {
+          const options: ScrollToOptions = { top, behavior: "smooth" };
+          document.body.scrollTo(options);
+          document.documentElement.scrollTo(options);
+          window.scrollTo(options);
+        };
+
+        const activeIndex = () => {
+          const y = getScrollY() + headerOffset() + 2;
+          let index = 0;
+          for (let i = 0; i < sections.length; i += 1) {
+            if (sectionTop(sections[i]) + headerOffset() <= y) index = i;
+            else break;
+          }
+          return index;
+        };
+
+        const canScrollInside = (index: number, direction: number) => {
+          const section = sections[index];
+          const y = getScrollY();
+          const top = sectionTop(section);
+          const bottom = sectionBottom(section);
+          const viewport = window.innerHeight;
+          const usableViewport = viewport - headerOffset();
+          const longSection = section.offsetHeight > usableViewport + 80;
+          if (!longSection) return false;
+
+          if (direction > 0) return y + viewport < bottom - 42;
+          return y > top + 42;
+        };
+
+        const goTo = (index: number) => {
+          const bounded = Math.max(0, Math.min(sections.length - 1, index));
+          snapping = true;
+          setScrollY(tops()[bounded]);
+          window.setTimeout(() => {
+            snapping = false;
+            wheelAccumulator = 0;
+          }, 760);
+        };
+
+        window.addEventListener("wheel", (event) => {
+          if (Math.abs(event.deltaY) < 2) return;
+          if (snapping) {
+            event.preventDefault();
+            return;
+          }
+
+          const direction = event.deltaY > 0 ? 1 : -1;
+          const current = activeIndex();
+
+          if (canScrollInside(current, direction)) {
+            wheelAccumulator = 0;
+            return;
+          }
+
+          wheelAccumulator += event.deltaY;
+          if (resetTimer) window.clearTimeout(resetTimer);
+          resetTimer = window.setTimeout(() => { wheelAccumulator = 0; }, 180);
+
+          if (Math.abs(wheelAccumulator) < 18) return;
+          event.preventDefault();
+          goTo(current + direction);
+        }, { passive: false });
+
+        let touchStartY = 0;
+        window.addEventListener("touchstart", (event) => {
+          touchStartY = event.touches[0]?.clientY ?? 0;
+        }, { passive: true });
+
+        window.addEventListener("touchend", (event) => {
+          if (snapping) return;
+          const endY = event.changedTouches[0]?.clientY ?? touchStartY;
+          const delta = touchStartY - endY;
+          if (Math.abs(delta) < 34) return;
+          const direction = delta > 0 ? 1 : -1;
+          const current = activeIndex();
+          if (canScrollInside(current, direction)) return;
+          goTo(current + direction);
+        }, { passive: true });
+      })();
+    </script>
   </body>
 </html>

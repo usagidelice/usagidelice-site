@@ -221,14 +221,11 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
     reducedMotion.addEventListener?.("change", updateVideo);
   </script>
 
+
+
   <style>
     :global(html) {
-      scroll-snap-type: y proximity;
       scroll-padding-top: 82px;
-    }
-    .home > section {
-      scroll-snap-align: start;
-      scroll-snap-stop: normal;
     }
     .home { overflow: clip; background: var(--bg); }
     .home :global(.container) { width: min(1240px, 100%); padding-inline: clamp(22px, 3vw, 42px); }
