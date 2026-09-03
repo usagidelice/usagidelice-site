@@ -2,417 +2,197 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
 import { events } from '../data/events';
-import { refPhotos } from '../data/references';
 
-const title = "Nous trouver — Usagi Délice";
-const description = "Prochaines dates, marchés et événements : retrouvez Usagi Délice à Paris & Île-de-France.";
-
+const title = "Événements — Usagi Délice";
+const description = "Retrouvez Usagi Délice sur les marchés, festivals japonais et événements à Paris et en Île-de-France.";
 const upcoming = events.filter(e => e.status === 'upcoming');
 const regular = events.filter(e => e.status === 'regular');
-// Restore the event gallery used in the earlier site version. The first six
-// images keep the same order as the former homepage carousel.
-const eventPhotos = refPhotos.slice(0, 6);
 
-const organizers = [
-  { name: 'UNIQLO Paris', kind: 'Collaboration', logo: '/images/partners/uniqlo.svg' },
-  { name: 'Tang Frères', kind: 'Collaboration' },
-  { name: 'Groupe Dadoune', kind: 'Collaboration' },
-  { name: 'Japan Fes', kind: 'Festival', logo: '/images/partners/japan-fes.svg' },
-  { name: 'Rice Market (Europe Times)', kind: 'Événement', logo: '/images/partners/rice-market.svg' },
-  { name: 'Mairie de Vincennes', kind: 'Institution' },
-  { name: 'Parc Floral / Vincennes', kind: 'Lieu' },
-  { name: 'Parc départemental de Sceaux (92)', kind: 'Lieu' },
-  { name: 'Marché de Noël — La Villette', kind: 'Événement', logo: '/images/partners/la-villette-noel.svg' },
+const pastEvents = [
+  { title: 'RICE Market', years: '2023 · 2024 · 2025', place: 'Paris 13e', note: 'Le Marché Treiz’Asiatique' },
+  { title: 'Hanami à Sceaux', years: '2024 · 2025', place: 'Sceaux', note: 'Parc départemental & Ville de Sceaux' },
+  { title: 'Japan Fes Paris', years: '2024 · 2025', place: 'Paris', note: 'Plusieurs rendez-vous dans des lieux emblématiques' },
+  { title: 'Matsuri Paris', years: '2024 · 2025', place: 'Parc Floral de Paris', note: 'Festival culturel japonais' },
+  { title: 'Pop-up Tang Frères', years: 'Fév. – mars 2025', place: 'Paris 13e', note: 'Collaboration éphémère' },
+  { title: 'Clermont Geek Convention', years: '2025', place: 'Grande Halle d’Auvergne', note: 'Convention pop culture & Japon' },
+  { title: 'Marché de Noël de La Villette', years: '2025', place: 'Paris', note: 'Marché de Noël' },
+];
+
+const eventPhotos = [
+  { src:'/images/usagi-2026/event-villette.jpg', alt:'Stand Usagi Délice au Marché de Noël de La Villette', caption:'Marché de Noël · La Villette', shape:'portrait' },
+  { src:'/images/usagi-2026/event-japanfes.jpg', alt:'Usagi Délice pendant Japan Fes Paris', caption:'Japan Fes · Paris', shape:'portrait' },
+  { src:'/images/usagi-2026/event-festival.jpg', alt:'Public devant le stand Usagi Délice lors d’un festival', caption:'Festival · Paris & Île-de-France', shape:'landscape' },
+  { src:'/images/usagi-2026/event-stand.jpg', alt:'Stand Usagi Délice installé pour un événement', caption:'Stand itinérant · Usagi Délice', shape:'portrait' },
+  { src:'/images/usagi-2026/event-service.jpg', alt:'Préparation et service des takoyaki pendant un événement', caption:'Préparé sur place', shape:'square' },
+  { src:'/images/usagi-2026/event-cooking.jpg', alt:'Cuisson des takoyaki sur la plaque Usagi Délice', caption:'Cuisson minute', shape:'landscape' },
+];
+
+const partners = [
+  { name:'Japan Fes Paris', logo:'/images/partners-official/japan-fes.png' },
+  { name:'Tang Frères', logo:'/images/partners-official/tang-freres.png' },
+  { name:'RICE Market', logo:'/images/partners-official/rice-market.jpg' },
+  { name:'Ville de Sceaux', logo:'/images/partners-official/ville-sceaux.png' },
+  { name:'Clermont Geek Convention', logo:'/images/partners-official/clermont-geek.png' },
 ];
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="apple-section events-page">
-    <div class="container">
-      <span class="badge">Nous trouver</span>
-      <h1 class="h1" style="margin-top:14px;">Nos prochaines dates</h1>
-      <p class="lead" style="max-width:72ch;">
-        Nous sommes un stand itinérant. Voici nos rendez-vous réguliers et nos prochaines dates annoncées.
-        Pour les mises à jour de dernière minute, Instagram est le plus rapide.
-      </p>
-
-      <div id="prochaines-dates" style="margin-top:26px;"></div>
-      <h2 class="h2">Prochaines dates</h2>
-      <p class="lead" style="margin-top:6px; max-width:72ch;">Événements et marchés annoncés.</p>
-      <div class="grid cols-3" style="margin-top:14px;">
-        {(upcoming.length ? upcoming : [{
-          title: 'À annoncer',
-          dateLabel: 'Prochainement',
-          location: 'Paris & Île-de-France',
-          status: 'upcoming',
-          description: "Suivez-nous sur Instagram : on publie les prochaines dates dès qu’elles sont confirmées."
-        }]).map((e) => <EventCard item={e as any} />)}
-      </div>
-
-      <div style="margin-top:26px;"></div>
-      <h2 class="h2">Rendez-vous réguliers</h2>
-      <p class="lead" style="margin-top:6px; max-width:72ch;">Nos marchés habituels.</p>
-      <div class="grid cols-3" style="margin-top:14px;">
-        {regular.map((e) => <EventCard item={e} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="event-gallery" aria-labelledby="event-gallery-title">
-      <div class="container">
-        <div class="event-section-head">
-          <span class="badge">Galerie</span>
-          <h2 id="event-gallery-title" class="h2">Ambiance, cuisine, événements</h2>
-          <p class="lead">Faites défiler les images de nos stands et événements — swipe sur mobile, ou utilisez les flèches sur ordinateur.</p>
+  <div class="events-page">
+    <section class="events-hero">
+      <div class="container events-hero__grid">
+        <div>
+          <p class="eyebrow">Événements</p>
+          <h1>Du takoyaki<br />là où Paris se retrouve.</h1>
+          <p class="events-hero__lead">Depuis 2023, Usagi Délice participe à des marchés, festivals japonais et rendez-vous culturels à Paris et en Île-de-France.</p>
+          <div class="events-hero__actions">
+            <a class="button button--primary" href="#prochaines-dates">Prochaines dates</a>
+            <a class="button button--ghost" href="/contact">Inviter Usagi Délice</a>
+          </div>
         </div>
+        <figure class="events-hero__photo">
+          <img src="/images/usagi-2026/event-festival.jpg" alt="Usagi Délice en festival" loading="eager" fetchpriority="high" />
+          <figcaption>Paris & Île-de-France · marchés · festivals · collaborations</figcaption>
+        </figure>
       </div>
+    </section>
 
-      <div class="event-gallery__rail-wrap" data-event-gallery>
-        <button class="event-gallery__arrow event-gallery__arrow--left" type="button" data-event-gallery-left aria-label="Images précédentes">←</button>
-        <button class="event-gallery__arrow event-gallery__arrow--right" type="button" data-event-gallery-right aria-label="Images suivantes">→</button>
+    <section class="agenda" id="prochaines-dates">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Agenda</p>
+          <h2>Nos prochaines dates</h2>
+          <p>Les rendez-vous confirmés. Pour les changements de dernière minute, retrouvez-nous sur Instagram.</p>
+        </div>
+        <div class="grid cols-3 agenda__grid">
+          {upcoming.map((e) => <EventCard item={e} />)}
+        </div>
+        {regular.length > 0 && (
+          <div class="regular-line">
+            <span>Rendez-vous régulier</span>
+            {regular.map((e) => <strong>{e.title} · {e.dateLabel}</strong>)}
+          </div>
+        )}
+      </div>
+    </section>
 
-        <div class="event-gallery__rail" id="event-photos" data-event-gallery-rail>
-          {eventPhotos.map((photo) => {
-            const shape = photo.shape ?? 'landscape';
-            return (
-              <figure class={`event-shot ${shape}`}>
-                <img src={photo.src} alt={photo.alt} loading="lazy" width="1400" height="900" />
-                <figcaption class="event-shot__tag">{photo.caption}</figcaption>
-              </figure>
-            );
-          })}
+    <section class="past-events" data-snap-long>
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="eyebrow">Depuis 2023</p>
+            <h2>Quelques événements marquants</h2>
+          </div>
+          <p>Une sélection de rendez-vous qui racontent le mieux notre parcours — sans transformer la page en longue liste d’archives.</p>
+        </div>
+        <div class="past-events__grid">
+          {pastEvents.map((item, index) => (
+            <article class="past-event">
+              <span class="past-event__index">{String(index + 1).padStart(2,'0')}</span>
+              <div>
+                <p class="past-event__years">{item.years}</p>
+                <h3>{item.title}</h3>
+                <p>{item.note}</p>
+              </div>
+              <span class="past-event__place">{item.place}</span>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
-    <section class="event-organizers" aria-labelledby="event-organizers-title">
+    <section class="event-gallery" aria-labelledby="event-gallery-title">
       <div class="container">
-        <div class="event-section-head">
-          <span class="badge">Nos participations</span>
-          <h2 id="event-organizers-title" class="h2">Organisateurs & partenaires</h2>
-          <p class="lead">Quelques organisateurs, lieux et événements auxquels Usagi Délice a participé.</p>
+        <div class="section-head">
+          <p class="eyebrow">Sur le terrain</p>
+          <h2 id="event-gallery-title">Notre stand en images</h2>
+          <p>Quelques scènes de service, de cuisson et d’événements.</p>
         </div>
+      </div>
+      <div class="event-gallery__rail-wrap" data-event-gallery>
+        <button class="event-gallery__arrow event-gallery__arrow--left" type="button" data-event-gallery-left aria-label="Images précédentes">←</button>
+        <div class="event-gallery__rail" data-event-gallery-rail>
+          {eventPhotos.map(photo => (
+            <figure class={`event-shot ${photo.shape}`}>
+              <img src={photo.src} alt={photo.alt} loading="lazy" />
+              <figcaption>{photo.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <button class="event-gallery__arrow event-gallery__arrow--right" type="button" data-event-gallery-right aria-label="Images suivantes">→</button>
+      </div>
+    </section>
 
-        <div class="event-organizers__grid" role="list">
-          {organizers.map((organizer) => (
-            <div class="event-organizer" role="listitem">
-              {organizer.logo ? (
-                <img src={organizer.logo} alt={organizer.name} loading="lazy" />
-              ) : (
-                <span class="event-organizer__name">{organizer.name}</span>
-              )}
-              <span class="event-organizer__kind">{organizer.kind}</span>
+    <section class="partners" aria-labelledby="partners-title">
+      <div class="container">
+        <div class="section-head partners__head">
+          <div>
+            <p class="eyebrow">Références</p>
+            <h2 id="partners-title">Événements & partenaires</h2>
+          </div>
+          <p>Quelques noms parmi les organisateurs, événements et partenaires avec lesquels nous avons travaillé.</p>
+        </div>
+        <div class="logo-wall" role="list">
+          {partners.map(partner => (
+            <div class="logo-wall__item" role="listitem" title={partner.name}>
+              <img src={partner.logo} alt={partner.name} loading="lazy" />
             </div>
           ))}
         </div>
       </div>
     </section>
-  </section>
+  </main>
 </BaseLayout>
 
 <style>
-  .events-page {
-    overflow: hidden;
-  }
-
-  .event-section-head {
-    max-width: 76ch;
-  }
-
-  .event-section-head h2 {
-    margin-top: 14px;
-  }
-
-  .event-section-head .lead {
-    margin-top: 8px;
-    margin-bottom: 0;
-  }
-
-  .event-gallery {
-    padding: 36px 0 18px;
-  }
-
-  .event-gallery__rail-wrap {
-    position: relative;
-    width: min(var(--container), calc(100vw - 32px));
-    margin: 0 auto;
-  }
-
-  .event-gallery__rail {
-    display: flex;
-    gap: 18px;
-    overflow-x: auto;
-    padding: 16px 20px 30px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(42, 31, 31, 0.18) transparent;
-  }
-
-  .event-gallery__rail::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .event-gallery__rail::-webkit-scrollbar-thumb {
-    background: rgba(42, 31, 31, 0.16);
-    border-radius: 999px;
-  }
-
-  .event-shot {
-    position: relative;
-    display: block;
-    margin: 0;
-    flex: 0 0 auto;
-    height: 420px;
-    overflow: hidden;
-    border: 1px solid rgba(42, 31, 31, 0.1);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.18);
-    color: inherit;
-    scroll-snap-align: start;
-    outline: none;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, var(--event-shot-shadow, 0));
-    transform: translateY(var(--event-shot-lift, 0)) scale(var(--event-shot-scale, 1));
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-  }
-
-  .event-shot.landscape {
-    aspect-ratio: 3 / 2;
-  }
-
-  .event-shot.portrait {
-    aspect-ratio: 3 / 4;
-  }
-
-  .event-shot.square {
-    aspect-ratio: 1 / 1;
-  }
-
-  .event-shot:hover {
-    transform: translateY(calc(var(--event-shot-lift, 0px) - 2px)) scale(var(--event-shot-scale, 1));
-  }
-
-  .event-shot:focus-visible {
-    outline: 3px solid rgba(194, 59, 50, 0.32);
-    outline-offset: 3px;
-  }
-
-  .event-shot img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    transition: transform 0.35s ease;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .event-shot:hover img {
-      transform: scale(1.03);
-    }
-  }
-
-  .event-shot__tag {
-    position: absolute;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    width: fit-content;
-    max-width: calc(100% - 24px);
-    padding: 8px 12px;
-    overflow: hidden;
-    border: 1px solid rgba(42, 31, 31, 0.1);
-    border-radius: 999px;
-    background: rgba(255, 247, 239, 0.84);
-    color: rgba(42, 31, 31, 0.9);
-    backdrop-filter: blur(10px);
-    font-size: 0.88rem;
-    font-weight: 900;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .event-gallery__arrow {
-    position: absolute;
-    top: 50%;
-    z-index: 2;
-    display: inline-flex;
-    width: 44px;
-    height: 44px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(42, 31, 31, 0.14);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.72);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(-50%);
-    transition: opacity 0.18s ease, transform 0.18s ease;
-  }
-
-  .event-gallery__rail-wrap:hover .event-gallery__arrow,
-  .event-gallery__arrow:focus-visible {
-    opacity: 0.94;
-  }
-
-  .event-gallery__arrow--left {
-    left: 14px;
-  }
-
-  .event-gallery__arrow--right {
-    right: 14px;
-  }
-
-  .event-gallery__arrow.is-disabled {
-    opacity: 0 !important;
-    pointer-events: none;
-  }
-
-  .event-organizers {
-    padding: 28px 0 4px;
-  }
-
-  .event-organizers__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 20px;
-  }
-
-  .event-organizer {
-    display: flex;
-    min-height: 112px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 18px;
-    border: 1px solid rgba(42, 31, 31, 0.1);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.24);
-    text-align: center;
-    transition: transform 0.18s ease, background 0.18s ease;
-  }
-
-  .event-organizer:hover {
-    background: rgba(255, 255, 255, 0.42);
-    transform: translateY(-1px);
-  }
-
-  .event-organizer img {
-    width: auto;
-    max-width: 100%;
-    height: 46px;
-    object-fit: contain;
-  }
-
-  .event-organizer__name {
-    font-weight: 900;
-    line-height: 1.18;
-  }
-
-  .event-organizer__kind {
-    color: rgba(42, 31, 31, 0.58);
-    font-size: 0.84rem;
-  }
-
-  @media (max-width: 860px) {
-    .event-gallery__rail {
-      padding: 10px 16px 20px;
-    }
-
-    .event-gallery__arrow {
-      display: none;
-    }
-
-    .event-shot {
-      height: 320px;
-    }
-
-    .event-organizers__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (max-width: 520px) {
-    .event-gallery {
-      padding-top: 28px;
-    }
-
-    .event-organizers__grid {
-      grid-template-columns: 1fr;
-    }
-
-  }
+  .events-page{overflow:clip;background:var(--bg)}
+  .events-page :global(.container){width:min(1180px,100%);padding-inline:clamp(20px,3vw,38px)}
+  .eyebrow{margin:0 0 12px;color:var(--red);font-size:.73rem;font-weight:850;letter-spacing:.15em;text-transform:uppercase}
+  .events-hero{padding:clamp(58px,7vw,100px) 0 clamp(72px,8vw,116px);border-bottom:1px solid rgba(43,36,32,.1)}
+  .events-hero__grid{display:grid;grid-template-columns:minmax(0,.88fr) minmax(480px,1.12fr);gap:clamp(48px,6vw,86px);align-items:center}
+  .events-hero h1,.section-head h2{margin:0;color:#2b2420;letter-spacing:-.055em}
+  .events-hero h1{font-size:clamp(3.8rem,6.4vw,6.7rem);line-height:.9}
+  .events-hero__lead{max-width:52ch;margin:27px 0 0;color:rgba(43,36,32,.7);font-size:1.06rem;line-height:1.72}
+  .events-hero__actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .button{display:inline-flex;min-height:48px;align-items:center;justify-content:center;padding:12px 19px;border:1px solid rgba(43,36,32,.18);border-radius:12px;font-weight:800}
+  .button--primary{border-color:var(--red);color:#fff;background:var(--red)}
+  .button--ghost{background:rgba(255,255,255,.42)}
+  .events-hero__photo{position:relative;aspect-ratio:4/3;margin:0;overflow:hidden;border-radius:30px 86px 30px 30px;background:#dfd0c3}
+  .events-hero__photo img{width:100%;height:100%;object-fit:cover}
+  .events-hero__photo figcaption{position:absolute;left:16px;bottom:16px;padding:9px 13px;border-radius:999px;background:rgba(255,247,239,.88);font-size:.79rem;font-weight:800;backdrop-filter:blur(10px)}
+  .agenda,.past-events,.event-gallery,.partners{padding:clamp(78px,8vw,118px) 0}
+  .agenda{background:#f1e6da}
+  .section-head{max-width:720px}
+  .section-head h2{font-size:clamp(2.6rem,4.6vw,4.6rem);line-height:.96}
+  .section-head>p:last-child{max-width:62ch;margin:18px 0 0;color:rgba(43,36,32,.64);line-height:1.65}
+  .agenda__grid{margin-top:34px}
+  .regular-line{display:flex;flex-wrap:wrap;gap:9px 18px;align-items:center;margin-top:28px;padding-top:20px;border-top:1px solid rgba(43,36,32,.13);font-size:.88rem}
+  .regular-line span{color:rgba(43,36,32,.54)}
+  .past-events{background:#f7f3ec}
+  .section-head--split,.partners__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.72fr);gap:50px;max-width:none;align-items:end}
+  .section-head--split>p:last-child,.partners__head>p:last-child{margin:0}
+  .past-events__grid{display:grid;margin-top:42px;border-top:1px solid rgba(43,36,32,.15)}
+  .past-event{display:grid;grid-template-columns:54px minmax(0,1fr) minmax(160px,.35fr);gap:22px;align-items:center;padding:25px 3px;border-bottom:1px solid rgba(43,36,32,.15)}
+  .past-event__index{color:rgba(43,36,32,.38);font-size:.76rem;font-weight:850;letter-spacing:.08em}
+  .past-event__years{margin:0 0 6px;color:var(--red);font-size:.77rem;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
+  .past-event h3{margin:0;font-size:clamp(1.3rem,2vw,1.8rem);letter-spacing:-.03em}
+  .past-event div>p:last-child{margin:5px 0 0;color:rgba(43,36,32,.56);font-size:.9rem}
+  .past-event__place{justify-self:end;color:rgba(43,36,32,.58);font-size:.88rem;text-align:right}
+  .event-gallery{background:#2b2420;color:#fff7ef}
+  .event-gallery .eyebrow{color:#f1a99b}.event-gallery .section-head h2{color:#fff7ef}.event-gallery .section-head>p:last-child{color:rgba(255,247,239,.65)}
+  .event-gallery__rail-wrap{position:relative;width:min(1240px,calc(100vw - 28px));margin:26px auto 0}
+  .event-gallery__rail{display:flex;gap:14px;overflow-x:auto;padding:10px 20px 24px;scroll-snap-type:x mandatory;scrollbar-width:none}.event-gallery__rail::-webkit-scrollbar{display:none}
+  .event-shot{position:relative;flex:0 0 auto;height:390px;margin:0;overflow:hidden;border-radius:18px;background:#171311;scroll-snap-align:start}.event-shot.landscape{aspect-ratio:3/2}.event-shot.portrait{aspect-ratio:3/4}.event-shot.square{aspect-ratio:1/1}
+  .event-shot img{width:100%;height:100%;object-fit:cover}.event-shot figcaption{position:absolute;left:12px;bottom:12px;padding:8px 11px;border-radius:999px;background:rgba(255,247,239,.9);color:#2b2420;font-size:.78rem;font-weight:850}
+  .event-gallery__arrow{position:absolute;top:50%;z-index:2;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,247,239,.9);color:#2b2420;font-size:1.1rem;cursor:pointer;transform:translateY(-50%)}.event-gallery__arrow--left{left:7px}.event-gallery__arrow--right{right:7px}
+  .partners{padding-top:86px;background:#f7f3ec}
+  .logo-wall{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+  .logo-wall__item{display:flex;width:clamp(142px,17vw,188px);height:88px;align-items:center;justify-content:center;padding:17px 22px;border:1px solid rgba(43,36,32,.1);border-radius:14px;background:rgba(255,255,255,.48)}
+  .logo-wall__item img{max-width:100%;max-height:48px;object-fit:contain;filter:none}
+  @media(max-width:820px){.events-hero{padding-top:38px}.events-hero__grid{display:flex;flex-direction:column;gap:34px;align-items:stretch}.events-hero h1{font-size:clamp(3.6rem,16vw,5rem)}.events-hero__photo{aspect-ratio:1/1.02;border-radius:24px 68px 24px 24px}.section-head--split,.partners__head{display:block}.section-head--split>p:last-child,.partners__head>p:last-child{margin-top:16px}.past-event{grid-template-columns:34px 1fr;gap:14px}.past-event__place{grid-column:2;justify-self:start;margin-top:-8px;text-align:left}.event-shot{height:330px}.event-gallery__arrow{display:none}.logo-wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.logo-wall__item{width:auto;height:78px;padding:14px}.logo-wall__item img{max-height:42px}}
 </style>
 
-<script is:inline>
-  (() => {
-    const wrap = document.querySelector('[data-event-gallery]');
-    const rail = document.querySelector('[data-event-gallery-rail]');
-    if (!wrap || !rail) return;
-
-    const leftButton = wrap.querySelector('[data-event-gallery-left]');
-    const rightButton = wrap.querySelector('[data-event-gallery-right]');
-    const shots = Array.from(rail.querySelectorAll('.event-shot'));
-
-    const isScrollable = () => rail.scrollWidth > rail.clientWidth + 2;
-    const updateButtons = () => {
-      const canScroll = isScrollable();
-      wrap.classList.toggle('is-scrollable', canScroll);
-      if (!canScroll) return;
-      leftButton?.classList.toggle('is-disabled', rail.scrollLeft <= 2);
-      rightButton?.classList.toggle('is-disabled', rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2);
-    };
-
-    const step = () => rail.clientWidth * 0.84;
-    leftButton?.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
-    rightButton?.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
-
-    rail.addEventListener('wheel', (event) => {
-      if (!isScrollable()) return;
-      if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-        rail.scrollLeft += event.deltaY;
-        event.preventDefault();
-      }
-    }, { passive: false });
-
-    let depthFrame = 0;
-    const updateDepth = () => {
-      depthFrame = 0;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth < 861) {
-        shots.forEach((shot) => {
-          shot.style.removeProperty('--event-shot-lift');
-          shot.style.removeProperty('--event-shot-scale');
-          shot.style.removeProperty('--event-shot-shadow');
-        });
-        return;
-      }
-
-      const railRect = rail.getBoundingClientRect();
-      const center = railRect.left + railRect.width / 2;
-      const maxDistance = railRect.width * 0.55;
-      shots.forEach((shot) => {
-        const rect = shot.getBoundingClientRect();
-        const distance = Math.abs(center - (rect.left + rect.width / 2));
-        const t = Math.max(0, 1 - distance / maxDistance);
-        shot.style.setProperty('--event-shot-lift', `${(10 * t).toFixed(2)}px`);
-        shot.style.setProperty('--event-shot-scale', `${(1 + 0.02 * t).toFixed(4)}`);
-        shot.style.setProperty('--event-shot-shadow', `${(0.22 * t).toFixed(3)}`);
-      });
-    };
-
-    const scheduleDepth = () => {
-      if (depthFrame) return;
-      depthFrame = window.requestAnimationFrame(updateDepth);
-    };
-
-    rail.addEventListener('scroll', updateButtons, { passive: true });
-    rail.addEventListener('scroll', scheduleDepth, { passive: true });
-    window.addEventListener('resize', updateButtons, { passive: true });
-    window.addEventListener('resize', scheduleDepth, { passive: true });
-    updateButtons();
-    scheduleDepth();
-    window.setTimeout(() => { updateButtons(); scheduleDepth(); }, 120);
-  })();
+<script>
+  const rail = document.querySelector<HTMLElement>('[data-event-gallery-rail]');
+  document.querySelector('[data-event-gallery-left]')?.addEventListener('click', () => rail?.scrollBy({left:-420,behavior:'smooth'}));
+  document.querySelector('[data-event-gallery-right]')?.addEventListener('click', () => rail?.scrollBy({left:420,behavior:'smooth'}));
 </script>

@@ -25,21 +25,36 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
           </div>
         </div>
 
-        <div class="hero-collage" aria-label="Usagi Délice en images">
-          <figure class="hero-collage__main">
-            <img src="/images/references/photos/ref-photo-6.webp" alt="Préparation des takoyaki sur le stand Usagi Délice" loading="eager" fetchpriority="high" />
-          </figure>
-          <div class="hero-collage__support">
-            <figure><img src="/images/product-takoyaki.webp" alt="Takoyaki Usagi Délice prêts à déguster" loading="eager" /></figure>
-            <figure><img src="/images/home/produit-arc-triomphe.webp" alt="Takoyaki Usagi Délice devant l’Arc de Triomphe" loading="eager" /></figure>
-            <figure><img src="/images/references/photos/ref-photo-3.webp" alt="Takoyaki Usagi Délice à Paris" loading="lazy" /></figure>
-            <figure><img src="/images/references/photos/ref-photo-1.webp" alt="Stand Usagi Délice au marché de Noël" loading="lazy" /></figure>
+        <div class="hero-carousel" data-hero-carousel aria-label="Usagi Délice en images">
+          <div class="hero-carousel__viewport">
+            <div class="hero-carousel__track" data-hero-carousel-track>
+              <figure class="hero-carousel__slide is-active">
+                <img src="/images/usagi-2026/home-stand.jpg" alt="Stand Usagi Délice en service à Paris" loading="eager" fetchpriority="high" />
+              </figure>
+              <figure class="hero-carousel__slide">
+                <img src="/images/usagi-2026/home-cooking.jpg" alt="Préparation des takoyaki sur le stand Usagi Délice" loading="eager" />
+              </figure>
+              <figure class="hero-carousel__slide">
+                <img src="/images/usagi-2026/home-paris.jpg" alt="Takoyaki Usagi Délice à Paris" loading="lazy" />
+              </figure>
+              <figure class="hero-carousel__slide">
+                <img src="/images/product-takoyaki.webp" alt="Takoyaki Usagi Délice prêts à déguster" loading="lazy" />
+              </figure>
+              <figure class="hero-carousel__slide">
+                <img src="/images/usagi-2026/home-team.jpg" alt="Membre de l’équipe Usagi Délice au stand" loading="lazy" />
+              </figure>
+            </div>
+          </div>
+          <button class="hero-carousel__arrow hero-carousel__arrow--prev" type="button" data-hero-carousel-prev aria-label="Image précédente">←</button>
+          <button class="hero-carousel__arrow hero-carousel__arrow--next" type="button" data-hero-carousel-next aria-label="Image suivante">→</button>
+          <div class="hero-carousel__dots" aria-label="Choisir une image">
+            <button type="button" class="is-active" data-hero-carousel-dot="0" aria-label="Image 1" aria-current="true"></button>
+            <button type="button" data-hero-carousel-dot="1" aria-label="Image 2"></button>
+            <button type="button" data-hero-carousel-dot="2" aria-label="Image 3"></button>
+            <button type="button" data-hero-carousel-dot="3" aria-label="Image 4"></button>
+            <button type="button" data-hero-carousel-dot="4" aria-label="Image 5"></button>
           </div>
         </div>
-
-        <figure class="hero-mobile-image">
-          <img src="/images/product-takoyaki.webp" alt="Takoyaki artisanaux Usagi Délice" loading="eager" fetchpriority="high" />
-        </figure>
       </div>
     </section>
 
@@ -65,7 +80,7 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
           </ul>
         </div>
         <figure class="takoyaki-section__image">
-          <img src="/images/references/photos/ref-photo-2.webp" alt="Une portion de takoyaki faite maison" loading="lazy" />
+          <img src="/images/usagi-2026/home-takoyaki.jpg" alt="Une portion de takoyaki faite maison" loading="lazy" />
         </figure>
       </div>
     </section>
@@ -86,83 +101,16 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
     </section>
 
     <section class="story-section" id="notre-histoire" aria-labelledby="story-title">
-      <div class="container">
-        <div class="section-heading story-section__heading">
+      <div class="container story-compact">
+        <div class="story-compact__copy">
           <p class="eyebrow">Notre histoire</p>
-          <h2 id="story-title">De l’esprit d’Osaka<br />aux marchés de Paris</h2>
-          <p>
-            Depuis août 2023, Usagi Délice fait découvrir une spécialité japonaise authentique au fil des marchés,
-            des festivals et des rencontres.
-          </p>
+          <h2 id="story-title">D’Osaka aux marchés de Paris</h2>
+          <p>Depuis 2023, nous préparons nos takoyaki devant le public, sur les marchés, festivals et événements. Une recette simple à comprendre : du goût, du geste et le plaisir de voir la cuisson en direct.</p>
+          <a class="text-link" href="/evenements">Découvrir nos événements <span aria-hidden="true">→</span></a>
         </div>
-
-        <div class="story-section__grid">
-          <article class="story-card story-card--feature">
-            <figure class="story-card__media">
-              <img
-                src="/images/notre-histoire-1.jpg"
-                alt="Le stand Usagi Délice entouré de clients sur un marché"
-                width="2000"
-                height="1333"
-                loading="lazy"
-              />
-            </figure>
-            <div class="story-card__copy">
-              <p class="story-card__number">01</p>
-              <h3>Une aventure née sur les marchés</h3>
-              <p>
-                Après des années de pratique et d’ajustements, nous avons lancé Usagi Délice avec une idée simple :
-                préparer des takoyaki maison, sous les yeux du public, et retrouver l’ambiance vivante des rues d’Osaka.
-              </p>
-              <p>
-                Chaque service est un moment de partage : la plaque chauffe, les boules prennent forme et la recette
-                se découvre autant avec les yeux qu’avec le goût.
-              </p>
-            </div>
-          </article>
-
-          <article class="story-card story-card--reverse">
-            <div class="story-card__copy">
-              <p class="story-card__number">02</p>
-              <h3>Une cuisine qui se partage</h3>
-              <p>
-                Marchés japonais et asiatiques, festivals, marchés de Noël ou collaborations : notre stand itinérant
-                rencontre des publics différents à Paris et en Île-de-France.
-              </p>
-              <p>
-                Nous cuisinons devant vous, servons dès la sortie de la plaque et transmettons une part de la culture
-                street food d’Osaka, simplement et généreusement.
-              </p>
-              <a class="text-link" href="/evenements">Voir nos événements <span aria-hidden="true">→</span></a>
-            </div>
-            <figure class="story-card__media">
-              <img
-                src="/images/notre-histoire-5.jpg"
-                alt="Le stand Usagi Délice lors d’un événement en plein air"
-                width="1707"
-                height="1280"
-                loading="lazy"
-              />
-            </figure>
-          </article>
-        </div>
-
-        <div class="story-timeline" aria-label="Les étapes d’Usagi Délice">
-          <div><strong>1935</strong><span>Le takoyaki apparaît à Osaka</span></div>
-          <div><strong>2023</strong><span>Naissance d’Usagi Délice à Paris</span></div>
-          <div><strong>Aujourd’hui</strong><span>Marchés, festivals et événements</span></div>
-        </div>
-
-        <div class="story-promise">
-          <div>
-            <p class="eyebrow">Notre promesse</p>
-            <h3>Le goût du vrai, sans compromis</h3>
-          </div>
-          <p>
-            Une recette fidèle, un vrai morceau de poulpe, des sauces japonaises et une cuisson maîtrisée :
-            chaque portion est préparée avec soin, puis servie bien chaude.
-          </p>
-        </div>
+        <figure class="story-compact__image">
+          <img src="/images/notre-histoire-1.jpg" alt="Le stand Usagi Délice entouré de clients sur un marché" loading="lazy" />
+        </figure>
       </div>
     </section>
 
@@ -219,6 +167,51 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
     };
     updateVideo();
     reducedMotion.addEventListener?.("change", updateVideo);
+
+    const carousel = document.querySelector<HTMLElement>("[data-hero-carousel]");
+    const track = carousel?.querySelector<HTMLElement>("[data-hero-carousel-track]");
+    const slides = Array.from(carousel?.querySelectorAll<HTMLElement>(".hero-carousel__slide") ?? []);
+    const dots = Array.from(carousel?.querySelectorAll<HTMLButtonElement>("[data-hero-carousel-dot]") ?? []);
+    const prev = carousel?.querySelector<HTMLButtonElement>("[data-hero-carousel-prev]");
+    const next = carousel?.querySelector<HTMLButtonElement>("[data-hero-carousel-next]");
+    let activeSlide = 0;
+    let carouselTimer: number | undefined;
+
+    const showSlide = (index: number) => {
+      if (!track || !slides.length) return;
+      activeSlide = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${activeSlide * 100}%)`;
+      slides.forEach((slide, i) => slide.classList.toggle("is-active", i === activeSlide));
+      dots.forEach((dot, i) => {
+        const active = i === activeSlide;
+        dot.classList.toggle("is-active", active);
+        if (active) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+    };
+
+    const stopCarousel = () => {
+      if (carouselTimer !== undefined) window.clearInterval(carouselTimer);
+      carouselTimer = undefined;
+    };
+
+    const startCarousel = () => {
+      stopCarousel();
+      if (reducedMotion.matches || slides.length < 2) return;
+      carouselTimer = window.setInterval(() => showSlide(activeSlide + 1), 4500);
+    };
+
+    prev?.addEventListener("click", () => { showSlide(activeSlide - 1); startCarousel(); });
+    next?.addEventListener("click", () => { showSlide(activeSlide + 1); startCarousel(); });
+    dots.forEach((dot) => dot.addEventListener("click", () => {
+      showSlide(Number(dot.dataset.heroCarouselDot ?? 0));
+      startCarousel();
+    }));
+    carousel?.addEventListener("mouseenter", stopCarousel);
+    carousel?.addEventListener("mouseleave", startCarousel);
+    reducedMotion.addEventListener?.("change", startCarousel);
+    showSlide(0);
+    startCarousel();
   </script>
 
 
@@ -237,22 +230,27 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
     .hero-home { padding: clamp(64px, 7vw, 104px) 0 clamp(84px, 8vw, 126px); border-bottom: 1px solid rgba(43, 36, 32, .09); }
     .hero-home__grid { display: grid; grid-template-columns: minmax(350px, .78fr) minmax(620px, 1.22fr); gap: clamp(48px, 6vw, 88px); align-items: center; }
     .hero-home__copy { max-width: 430px; transform: translateY(-10px); }
-    .hero-home__copy h1 { margin: 0; color: #2b2420; font-size: clamp(5.2rem, 7.4vw, 7.6rem); line-height: .76; letter-spacing: -.078em; }
+    .hero-home__copy h1 { margin: 0; color: #2b2420; font-size: clamp(5.2rem, 7.4vw, 7.6rem); line-height: .95; letter-spacing: -.078em; }
     .hero-home__lead { margin: 27px 0 0; color: #3a312d; font-size: clamp(1.15rem, 1.55vw, 1.38rem); font-weight: 650; line-height: 1.48; }
     .hero-home__places { margin: 9px 0 0; color: rgba(43, 36, 32, .6); font-size: .88rem; }
     .hero-home__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-    .hero-collage { display: grid; grid-template-columns: 66fr 34fr; gap: 10px; height: clamp(550px, 46vw, 670px); }
-    .hero-collage figure, .hero-mobile-image, .takoyaki-section__image { margin: 0; overflow: hidden; }
-    .hero-collage__main { border-radius: 32px 96px 32px 32px; }
-    .hero-collage__support { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1.08fr .92fr; gap: 10px; }
-    .hero-collage__support figure { border-radius: 20px; }
-    .hero-collage__support figure:nth-child(2) { border-radius: 20px 64px 20px 20px; }
-    .hero-collage__support figure:nth-child(3) { border-radius: 20px 20px 20px 56px; }
-    .hero-collage img, .hero-mobile-image img, .takoyaki-section__image img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-collage__main img { object-position: 50% 45%; }
-    .hero-collage__support figure:nth-child(1) img { object-position: 50% 46%; }
-    .hero-collage__support figure:nth-child(2) img { object-position: 50% 44%; }
-    .hero-mobile-image { display: none; }
+    .hero-carousel { position: relative; min-width: 0; }
+    .hero-carousel__viewport { height: clamp(550px, 46vw, 670px); overflow: hidden; border-radius: 32px 96px 32px 32px; background: #dfd0c3; box-shadow: 0 20px 48px rgba(63, 42, 30, .1); }
+    .hero-carousel__track { display: flex; width: 100%; height: 100%; transition: transform .62s cubic-bezier(.22,.7,.28,1); will-change: transform; }
+    .hero-carousel__slide { flex: 0 0 100%; width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    .hero-carousel__slide img, .takoyaki-section__image img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .hero-carousel__slide:nth-child(1) img { object-position: 50% 45%; }
+    .hero-carousel__slide:nth-child(2) img { object-position: 50% 48%; }
+    .hero-carousel__slide:nth-child(3) img { object-position: 50% 48%; }
+    .hero-carousel__slide:nth-child(4) img { object-position: 50% 50%; }
+    .hero-carousel__slide:nth-child(5) img { object-position: 50% 42%; }
+    .hero-carousel__arrow { position: absolute; top: 50%; z-index: 2; display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid rgba(43,36,32,.1); border-radius: 50%; color: #2b2420; background: rgba(255,247,239,.86); box-shadow: 0 8px 22px rgba(43,36,32,.13); cursor: pointer; opacity: 0; transform: translateY(-50%); transition: opacity .2s ease, transform .2s ease; backdrop-filter: blur(8px); }
+    .hero-carousel:hover .hero-carousel__arrow, .hero-carousel__arrow:focus-visible { opacity: .96; }
+    .hero-carousel__arrow--prev { left: 14px; }
+    .hero-carousel__arrow--next { right: 14px; }
+    .hero-carousel__dots { position: absolute; right: 0; bottom: -26px; left: 0; z-index: 2; display: flex; justify-content: center; gap: 8px; }
+    .hero-carousel__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: rgba(43,36,32,.22); cursor: pointer; transition: width .2s ease, border-radius .2s ease, background .2s ease; }
+    .hero-carousel__dots button.is-active { width: 22px; border-radius: 999px; background: var(--red); }
     .takoyaki-section { padding: clamp(98px, 9vw, 142px) 0; background: #f1e6da; }
     .takoyaki-section__grid { display: grid; grid-template-columns: minmax(0, .88fr) minmax(460px, 1.12fr); gap: clamp(55px, 8vw, 115px); align-items: center; }
     .takoyaki-section__copy { max-width: 520px; }
@@ -350,9 +348,15 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
       .event-card:hover > a { border-color: var(--red); color: #fff; background: var(--red); transform: translateX(2px); }
       .contact-band .home-button--primary:hover { border-color: #fff7ef; color: #2b2420; background: #fff7ef; transform: translateY(-2px); }
     }
+    .story-compact { display:grid; grid-template-columns:minmax(0,.82fr) minmax(430px,1.18fr); gap:clamp(52px,7vw,96px); align-items:center; }
+    .story-compact__copy { max-width:560px; }
+    .story-compact__copy h2 { margin:0; color:#2b2420; font-size:clamp(2.8rem,4.7vw,4.7rem); line-height:.95; letter-spacing:-.05em; }
+    .story-compact__copy > p:not(.eyebrow) { margin:24px 0 0; color:rgba(43,36,32,.68); font-size:1.02rem; line-height:1.72; }
+    .story-compact__image { height:480px; margin:0; overflow:hidden; border-radius:30px 84px 30px 30px; }
+    .story-compact__image img { width:100%; height:100%; object-fit:cover; }
     @media (max-width: 1050px) {
       .hero-home__grid { grid-template-columns: minmax(290px, .7fr) minmax(530px, 1.3fr); gap: 34px; }
-      .hero-collage { height: 540px; }
+      .hero-carousel__viewport { height: 540px; }
       .contact-band__inner { grid-template-columns: 110px 1fr auto; gap: 28px; }
       .contact-band img { width: 110px; height: 110px; }
     }
@@ -361,15 +365,23 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
       .home :global(.container) { padding-inline: 20px; }
       .hero-home { padding: 38px 0 76px; }
       .hero-home__grid { display: flex; flex-direction: column; gap: 30px; align-items: stretch; }
+      .story-compact { display:flex; flex-direction:column; gap:30px; }
+      .story-compact__image { height:auto; aspect-ratio:4/3; border-radius:22px 64px 22px 22px; }
       .hero-home__copy { max-width: none; transform: none; text-align: left; }
-      .hero-home__copy h1 { max-width: 5.6ch; font-size: clamp(4rem, 19vw, 5.5rem); line-height: .8; }
+      .hero-home__copy h1 { max-width: 5.6ch; font-size: clamp(4rem, 19vw, 5.5rem); line-height: .95; }
       .hero-home__lead { margin-top: 23px; font-size: 1.08rem; line-height: 1.48; }
       .desktop-break { display: none; }
       .hero-home__places { font-size: .78rem; }
       .hero-home__actions { justify-content: flex-start; margin-top: 23px; }
-      .hero-collage { display: none; }
-      .hero-mobile-image { display: block; width: 100%; aspect-ratio: 1 / 1.03; border-radius: 24px 72px 24px 24px; box-shadow: 0 16px 36px rgba(63, 42, 30, .12); }
-      .hero-mobile-image img { object-position: 50% 46%; }
+      .hero-carousel { width: 100%; margin-bottom: 22px; }
+      .hero-carousel__viewport { height: auto; aspect-ratio: 1 / 1.03; border-radius: 24px 72px 24px 24px; }
+      .hero-carousel__arrow { display: none; }
+      .hero-carousel__dots { bottom: -24px; }
+      .hero-carousel__slide:nth-child(1) img { object-position: 50% 46%; }
+      .hero-carousel__slide:nth-child(2) img { object-position: 50% 50%; }
+      .hero-carousel__slide:nth-child(3) img { object-position: 50% 50%; }
+      .hero-carousel__slide:nth-child(4) img { object-position: 50% 50%; }
+      .hero-carousel__slide:nth-child(5) img { object-position: 50% 42%; }
       .takoyaki-section { padding: 72px 0; }
       .takoyaki-section__grid { display: flex; flex-direction: column; gap: 34px; align-items: stretch; }
       .takoyaki-section__copy { display: contents; }
@@ -415,7 +427,7 @@ const nextDates = events.filter((event) => event.status === "upcoming").slice(0,
       .home :global(.container) { padding-inline: 18px; }
       .hero-home__actions { gap: 8px; }
       .home-button { min-height: 44px; padding-inline: 16px; font-size: .87rem; }
-      .hero-mobile-image { aspect-ratio: .94 / 1; }
+      .hero-carousel__viewport { aspect-ratio: .94 / 1; }
       .takoyaki-section h2, .section-heading h2 { font-size: clamp(2.65rem, 13vw, 3.35rem); }
       .story-card__media { aspect-ratio: 1.18 / 1; }
       .story-card__copy { padding-inline: 20px; }
