@@ -188,6 +188,7 @@ const structuredData = {
     <script>
       (() => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (window.innerWidth <= 820) return;
 
         const sections = Array.from(
           document.querySelectorAll<HTMLElement>("main > section, main > div > section"),
@@ -289,17 +290,13 @@ const structuredData = {
           goTo(current + direction);
         }, { passive: false });
 
-        const useNativeTouchScroll = () =>
-          window.innerWidth <= 820 && document.querySelector(".events-page") !== null;
-
         let touchStartY = 0;
         window.addEventListener("touchstart", (event) => {
-          if (useNativeTouchScroll()) return;
           touchStartY = event.touches[0]?.clientY ?? 0;
         }, { passive: true });
 
         window.addEventListener("touchend", (event) => {
-          if (useNativeTouchScroll() || snapping) return;
+          if (snapping) return;
           const endY = event.changedTouches[0]?.clientY ?? touchStartY;
           const delta = touchStartY - endY;
           if (Math.abs(delta) < 34) return;
